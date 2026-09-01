@@ -1,4 +1,15 @@
-/.opencode
+/.opencode/
+/.vscode/
 /config.json
 /model_arrays.npz
 /weights.npy
+
+# Teaching notebooks and local Python cache
+*.ipynb
+__pycache__/
+*.py[cod]
+
+# Generated data, tokenizer artifacts, evaluation outputs, and model weights
+/data/
+/artifacts/
+/checkpoints/
