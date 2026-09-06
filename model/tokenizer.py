@@ -80,3 +80,55 @@ class CharTokenizer:
     def load(cls, path: str | Path) -> "CharTokenizer":
         payload = json.loads(Path(path).read_text(encoding="utf-8"))
         return cls(payload["token_to_id"])
+
+
+class BPETokenizer:
+    """Project-facing wrapper around a trained Hugging Face BPE tokenizer."""
+
+    PAD_TOKEN = "<pad>"
+    BOS_TOKEN = "<bos>"
+    EOS_TOKEN = "<eos>"
+    UNK_TOKEN = "<unk>"
+
+    def __init__(self, tokenizer):
+        self._tokenizer = tokenizer
+        for token in (self.PAD_TOKEN, self.BOS_TOKEN, self.EOS_TOKEN, self.UNK_TOKEN):
+            if self._tokenizer.token_to_id(token) is None:
+                raise ValueError(f"missing required special token: {token}")
+
+    @classmethod
+    def load(cls, path: str | Path) -> "BPETokenizer":
+        from tokenizers import Tokenizer
+
+        return cls(Tokenizer.from_file(str(path)))
+
+    @property
+    def vocab_size(self) -> int:
+        return self._tokenizer.get_vocab_size()
+
+    @property
+    def pad_id(self) -> int:
+        return self._tokenizer.token_to_id(self.PAD_TOKEN)
+
+    @property
+    def bos_id(self) -> int:
+        return self._tokenizer.token_to_id(self.BOS_TOKEN)
+
+    @property
+    def eos_id(self) -> int:
+        return self._tokenizer.token_to_id(self.EOS_TOKEN)
+
+    @property
+    def unk_id(self) -> int:
+        return self._tokenizer.token_to_id(self.UNK_TOKEN)
+
+    def encode(self, text: str, *, add_bos: bool = False, add_eos: bool = False) -> list[int]:
+        ids = self._tokenizer.encode(text).ids
+        if add_bos:
+            ids.insert(0, self.bos_id)
+        if add_eos:
+            ids.append(self.eos_id)
+        return ids
+
+    def decode(self, ids: list[int], *, skip_special_tokens: bool = True) -> str:
+        return self._tokenizer.decode(ids, skip_special_tokens=skip_special_tokens)

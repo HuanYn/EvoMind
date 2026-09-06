@@ -1,0 +1,10 @@
+{"id":"definition_moe","category":"definition","messages":[{"role":"user","content":"请用三句话解释什么是 MoE，并说明它和 Dense MLP 的核心区别。"}]}
+{"id":"attention_explanation","category":"explanation","messages":[{"role":"user","content":"请用一个生活中的例子解释 Transformer 的注意力机制，不要使用公式。"}]}
+{"id":"structured_steps","category":"format_following","messages":[{"role":"user","content":"把训练一个小语言模型的主要流程写成 4 条编号步骤，每条不超过 20 个字。"}]}
+{"id":"concise_answer","category":"length_control","messages":[{"role":"user","content":"什么是梯度累计？请只用两句话回答。"}]}
+{"id":"compare_concepts","category":"comparison","messages":[{"role":"user","content":"对比 LayerNorm 和 RMSNorm：分别说明一个共同点和一个区别。"}]}
+{"id":"reasoning_simple","category":"reasoning","messages":[{"role":"user","content":"如果有效 batch 等于 micro batch 乘以梯度累计步数，micro batch 为 2、梯度累计为 8，有效 batch 是多少？说明计算过程。"}]}
+{"id":"summarization","category":"summarization","messages":[{"role":"user","content":"请概括：预训练学习通用文本续写，SFT 学习根据用户问题生成助手回答。"}]}
+{"id":"boundary_eos","category":"termination","messages":[{"role":"user","content":"请回复“训练完成”，不要添加任何解释。"}]}
+{"id":"longer_instruction","category":"instruction_following","messages":[{"role":"user","content":"你正在向初学者解释为什么 SFT 只监督 assistant token。先说明用户问题是否会进入模型，再说明为什么它不直接计算 loss，最后给出一句总结。"}]}
+{"id":"out_of_distribution","category":"generalization","messages":[{"role":"user","content":"请给出一个周末学习计划，包含上午、下午和晚上三个时段。"}]}

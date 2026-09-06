@@ -12,10 +12,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.minimind.config import ModelConfig
-from src.minimind.data import NextTokenDataset
-from src.minimind.model import MiniMindModel
-from src.minimind.tokenizer import CharTokenizer
+from model.config import ModelConfig
+from model.data import NextTokenDataset
+from model.model_minimind import MiniMindModel
+from model.tokenizer import CharTokenizer
 
 
 def main():

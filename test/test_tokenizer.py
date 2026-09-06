@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from src.minimind.tokenizer import CharTokenizer
+from model.tokenizer import CharTokenizer
 
 
 class TestCharTokenizer(unittest.TestCase):
