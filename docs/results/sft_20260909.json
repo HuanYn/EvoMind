@@ -1,0 +1,147 @@
+{
+  "snapshot": "2026-09-09",
+  "model": "evomind dense full_sft",
+  "protocol": "Native harness, full split, task-default fewshot, FP16, batch1, seed42, chat template on, thinking off",
+  "note": "Raw sample outputs and full contracts retained locally, not included here.",
+  "tasks": [
+    {
+      "task": "arc_easy",
+      "status": "completed",
+      "score": {
+        "name": "arc_easy",
+        "alias": "arc_easy",
+        "sample_len": 2376,
+        "acc,none": 0.29924242424242425,
+        "acc_stderr,none": 0.009396447162309822,
+        "acc_norm,none": 0.3106060606060606,
+        "acc_norm_stderr,none": 0.009495260551195607
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "16675b2288db13380bced56ea154dca60d8698d108dc9391e512fc1765e98db3"
+    },
+    {
+      "task": "ceval-valid",
+      "status": "completed",
+      "score": {
+        "alias": "ceval-valid",
+        "name": "ceval-valid",
+        "sample_len": 1346,
+        "acc,none": 0.22808320950965824,
+        "acc_stderr,none": 0.011469152327237575,
+        "acc_norm,none": 0.22808320950965824,
+        "acc_norm_stderr,none": 0.011469152327237575,
+        "sample_count": {
+          "acc,none": 1346,
+          "acc_norm,none": 1346
+        }
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "e1deed91fb26789cd5c3d01a727e7b1fd8277d663626db4e95ce4e811b053e4a"
+    },
+    {
+      "task": "cmmlu",
+      "status": "completed",
+      "score": {
+        "alias": "cmmlu",
+        "name": "cmmlu",
+        "sample_len": 11582,
+        "acc,none": 0.2502158521844241,
+        "acc_stderr,none": 0.004032156172101383,
+        "acc_norm,none": 0.2502158521844241,
+        "acc_norm_stderr,none": 0.004032156172101383,
+        "sample_count": {
+          "acc,none": 11582,
+          "acc_norm,none": 11582
+        }
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "f86b3f33a83e2425224bd6df59c90234793879ed25afaa2c9fc65f04619902f1"
+    },
+    {
+      "task": "hellaswag",
+      "status": "completed",
+      "score": {
+        "name": "hellaswag",
+        "alias": "hellaswag",
+        "sample_len": 10042,
+        "acc,none": 0.26976697868950406,
+        "acc_stderr,none": 0.00442931578831048,
+        "acc_norm,none": 0.2758414658434575,
+        "acc_norm_stderr,none": 0.004460238879247387
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "d28c4558cc1686e778d5186398a68bec0250931295f3b80f5d9b0c57858faa34"
+    },
+    {
+      "task": "openbookqa",
+      "status": "completed",
+      "score": {
+        "name": "openbookqa",
+        "alias": "openbookqa",
+        "sample_len": 500,
+        "acc,none": 0.152,
+        "acc_stderr,none": 0.016071982367911755,
+        "acc_norm,none": 0.296,
+        "acc_norm_stderr,none": 0.020435342091896132
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "d27b164bc09c2519ed827d7ee1f3c4f0216724c5ff12353c8e9c9e3e09864713"
+    },
+    {
+      "task": "piqa",
+      "status": "completed",
+      "score": {
+        "name": "piqa",
+        "alias": "piqa",
+        "sample_len": 1838,
+        "acc,none": 0.5408052230685527,
+        "acc_stderr,none": 0.011626910523588569,
+        "acc_norm,none": 0.5244831338411317,
+        "acc_norm_stderr,none": 0.011651830225709979
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "93e36a8787e410daa2c3c90aa0a668bc1feb54b37de5f57285fc341bb4ca77f8"
+    },
+    {
+      "task": "social_iqa",
+      "status": "completed",
+      "score": {
+        "name": "social_iqa",
+        "alias": "social_iqa",
+        "sample_len": 1954,
+        "acc,none": 0.34646878198567044,
+        "acc_stderr,none": 0.010767480698921767
+      },
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "harness": {
+        "version": "0.4.13",
+        "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+      },
+      "raw_results_sha256": "2cb14e5fa6caebba4aa7263fdfd1f9d3afcc317eddde9c05f93b6b3456b445a0"
+    }
+  ]
+}
