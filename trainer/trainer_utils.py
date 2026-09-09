@@ -97,6 +97,26 @@ def init_vlm_model(vlm_config, from_weight='pretrain_vlm', tokenizer_path='../mo
     return model.to(device), tokenizer, preprocess
 
 
+def save_vlm_training_checkpoint(model, optimizer, scaler, vlm_config, args, epoch, step, wandb=None):
+    """evomind serialization fix: export only after the optimizer update.
+
+    Preserve upstream FP16 exports, encoder exclusion, and resume format.
+    """
+    if not is_main_process():
+        return
+    raw_model = model.module if isinstance(model, DistributedDataParallel) else model
+    raw_model = getattr(raw_model, '_orig_mod', raw_model)
+    suffix = '_moe' if vlm_config.use_moe else ''
+    path = f'{args.save_dir}/{args.save_weight}_{vlm_config.hidden_size}{suffix}.pth'
+    temporary = path + '.tmp'
+    torch.save({key: value.half().cpu() for key, value in raw_model.state_dict().items()
+                if not key.startswith('vision_encoder.')}, temporary)
+    os.replace(temporary, path)
+    vlm_checkpoint(vlm_config, weight=args.save_weight, model=model, optimizer=optimizer,
+                   scaler=scaler, epoch=epoch, step=step, wandb=wandb, save_dir='../checkpoints')
+    Logger(f'Checkpoint saved after optimizer update: epoch={epoch + 1}, microstep={step}, path={path}')
+
+
 def vlm_checkpoint(vlm_config, weight='pretrain_vlm', model=None, optimizer=None, epoch=0, step=0, wandb=None, save_dir='../checkpoints', **kwargs):
     os.makedirs(save_dir, exist_ok=True)
     moe_path = '_moe' if vlm_config.use_moe else ''

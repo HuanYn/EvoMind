@@ -18,6 +18,7 @@ from transformers import AutoTokenizer
 from model.model_vlm import MiniMindVLM, VLMConfig
 from dataset.lm_dataset import VLMDataset
 from trainer.trainer_utils import get_lr, Logger, is_main_process, init_distributed_mode, setup_seed, init_vlm_model, vlm_checkpoint, SkipBatchSampler, vlm_collate_fn
+from trainer.trainer_utils import save_vlm_training_checkpoint
 
 warnings.filterwarnings('ignore')
 
@@ -39,6 +40,8 @@ def train_epoch(epoch, loader, iters, start_step=0, wandb=None):
             loss = res.loss + res.aux_loss
             loss = loss / args.accumulation_steps
 
+        if not torch.isfinite(loss):
+            raise FloatingPointError(f'Nonfinite loss at epoch={epoch + 1}, microstep={step}; no optimizer update applied.')
         scaler.scale(loss).backward()
 
         if step % args.accumulation_steps == 0:
@@ -60,22 +63,8 @@ def train_epoch(epoch, loader, iters, start_step=0, wandb=None):
             Logger(f'Epoch:[{epoch + 1}/{args.epochs}]({step}/{iters}), loss: {current_loss:.4f}, logits_loss: {current_logits_loss:.4f}, aux_loss: {current_aux_loss:.4f}, lr: {current_lr:.8f}, epoch_time: {eta_min:.1f}min')
             if wandb: wandb.log({"loss": current_loss, "logits_loss": current_logits_loss, "aux_loss": current_aux_loss, "learning_rate": current_lr, "epoch_time": eta_min})
 
-        if (step % args.save_interval == 0 or step == iters) and is_main_process():
-            model.eval()
-            moe_suffix = '_moe' if vlm_config.use_moe else ''
-            ckp = f'{args.save_dir}/{args.save_weight}_{vlm_config.hidden_size}{moe_suffix}.pth'
-            raw_model = model.module if isinstance(model, DistributedDataParallel) else model
-            raw_model = getattr(raw_model, '_orig_mod', raw_model)
-            state_dict = raw_model.state_dict()
-            clean_state_dict = {
-                key: value for key, value in state_dict.items() if not key.startswith('vision_encoder.')
-            }
-            clean_state_dict = {k: v.half().cpu() for k, v in clean_state_dict.items()}  # 半精度保存并移到CPU
-            torch.save(clean_state_dict, ckp)
-            vlm_checkpoint(vlm_config, weight=args.save_weight, model=model, optimizer=optimizer, 
-                         epoch=epoch, step=step, wandb=wandb, save_dir='../checkpoints', scaler=scaler)
-            model.train()
-            del state_dict, clean_state_dict
+        if (step % args.save_interval == 0 or step == iters) and step % args.accumulation_steps == 0:
+            save_vlm_training_checkpoint(model, optimizer, scaler, vlm_config, args, epoch, step, wandb)
 
         del input_ids, labels, pixel_values, res, loss
 
@@ -85,6 +74,7 @@ def train_epoch(epoch, loader, iters, start_step=0, wandb=None):
         scaler.step(optimizer)
         scaler.update()
         optimizer.zero_grad(set_to_none=True)
+        save_vlm_training_checkpoint(model, optimizer, scaler, vlm_config, args, epoch, last_step, wandb)
 
 
 if __name__ == "__main__":

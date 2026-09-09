@@ -1,5 +1,13 @@
 model/__pycache__
 __pycache__/
+artifacts/
+checkpoints/
+dataset/*.parquet
+dataset/*.parquet.tmp
+dataset/.*.lock
+dataset/evomind_*/
+model/siglip2-base-p32-256-ve/
+.cache/
 *.py[cod]
 .DS_Store
 out
