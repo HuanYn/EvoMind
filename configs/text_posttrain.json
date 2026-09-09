@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "6fc918beb68a0d8c40452338df6319fe168014ba",
+  "base_run": "E:\\project\\Learning\\evomind\\artifacts\\runs\\text_official_mini_20260908",
+  "run_dir": "E:\\project\\Learning\\evomind\\artifacts\\runs\\text_posttrain_20260908",
+  "branches": [
+    {
+      "name": "dpo",
+      "script": "train_dpo.py",
+      "runtime": "offline",
+      "data": "dataset/dpo.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 4e-8,
+        "max_seq_len": 1024,
+        "beta": 0.15,
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 4,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 2,
+          "accumulation_steps": 2
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 4
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim"
+      ]
+    },
+    {
+      "name": "lora",
+      "script": "train_lora.py",
+      "runtime": "offline",
+      "data": "dataset/lora_medical.jsonl",
+      "options": {
+        "epochs": 10,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 0.0001,
+        "max_seq_len": 340,
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 32,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 8,
+          "accumulation_steps": 4
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 32
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim"
+      ]
+    },
+    {
+      "name": "grpo",
+      "script": "train_grpo.py",
+      "runtime": "rl",
+      "data": "dataset/rlaif.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 3e-7,
+        "max_seq_len": 768,
+        "max_gen_len": 1024,
+        "num_generations": 6,
+        "beta": 0.1,
+        "epsilon": 0.2,
+        "epsilon_high": 5,
+        "thinking_ratio": 0.9,
+        "loss_type": "grpo",
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft",
+        "reward_model_path": "E:\\project\\Learning\\evomind\\models\\internlm2-1_8b-reward",
+        "reward_device": "cpu",
+        "reward_dtype": "float32",
+        "rollout_engine": "torch"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 2,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 2
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim",
+        "RM CPU float32 offload; unchanged upstream reward formula; numerical/runtime deviation"
+      ]
+    },
+    {
+      "name": "cispo",
+      "script": "train_grpo.py",
+      "runtime": "rl",
+      "data": "dataset/rlaif.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 3e-7,
+        "max_seq_len": 768,
+        "max_gen_len": 1024,
+        "num_generations": 6,
+        "beta": 0.1,
+        "epsilon": 0.2,
+        "epsilon_high": 5,
+        "thinking_ratio": 0.9,
+        "loss_type": "cispo",
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft",
+        "reward_model_path": "E:\\project\\Learning\\evomind\\models\\internlm2-1_8b-reward",
+        "reward_device": "cpu",
+        "reward_dtype": "float32",
+        "rollout_engine": "torch"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 2,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 2
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim",
+        "RM CPU float32 offload; unchanged upstream reward formula; numerical/runtime deviation"
+      ]
+    },
+    {
+      "name": "agent_cispo",
+      "script": "train_agent.py",
+      "runtime": "agent",
+      "data": "dataset/agent_rl.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 3e-7,
+        "max_seq_len": 1024,
+        "max_gen_len": 768,
+        "max_total_len": 2500,
+        "max_turns": 3,
+        "num_generations": 4,
+        "beta": 0.1,
+        "epsilon": 0.2,
+        "epsilon_high": 5,
+        "thinking_ratio": 0.1,
+        "loss_type": "cispo",
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft",
+        "reward_model_path": "E:\\project\\Learning\\evomind\\models\\internlm2-1_8b-reward",
+        "reward_device": "cpu",
+        "reward_dtype": "float32",
+        "rollout_engine": "torch"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 2,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 2
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim",
+        "RM CPU float32 offload; unchanged upstream reward formula; numerical/runtime deviation"
+      ]
+    },
+    {
+      "name": "distillation",
+      "script": "train_distillation.py",
+      "runtime": "offline",
+      "data": "dataset/sft_t2t_mini.jsonl",
+      "options": {
+        "epochs": 6,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 0.000005,
+        "max_seq_len": 340,
+        "alpha": 0.5,
+        "temperature": 1.5,
+        "student_hidden_size": 768,
+        "student_num_layers": 8,
+        "teacher_hidden_size": 768,
+        "teacher_num_layers": 8,
+        "student_use_moe": 0,
+        "teacher_use_moe": 1,
+        "from_student_weight": "full_sft",
+        "from_teacher_weight": "full_sft",
+        "teacher_autocast": 1,
+        "teacher_init_dir": "E:\\project\\Learning\\evomind\\models\\teacher_official"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 32,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 8,
+          "accumulation_steps": 4
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 32
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim",
+        "Public pinned MoE teacher; teacher autocast BF16; NOT a self-trained teacher"
+      ]
+    }
+  ],
+  "weight_lineage": "All branches independently initialize from verified full_sft; not serial branch outputs",
+  "probe_rule": "At least two complete updates on full source data; proof of integration only, not full length coverage or model quality",
+  "acceptance_rule": "All configured full branches plus upstream question/tool tests and seven harness benchmarks; human review cancelled by user; pending is never success"
+}

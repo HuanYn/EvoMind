@@ -18,6 +18,7 @@ from model.model_minimind import MiniMindConfig
 from dataset.lm_dataset import SFTDataset
 from model.model_lora import save_lora, apply_lora
 from trainer.trainer_utils import get_lr, Logger, is_main_process, lm_checkpoint, init_distributed_mode, setup_seed, init_model, SkipBatchSampler
+from trainer.evomind_offline_runtime import OfflineRuntime, OfflineAdamW, add_offline_arguments
 
 warnings.filterwarnings('ignore')
 
@@ -38,16 +39,13 @@ def train_epoch(epoch, loader, iters, lora_params, start_step=0, wandb=None):
             loss = res.loss + res.aux_loss
             loss = loss / args.accumulation_steps
 
+        runtime.check_loss(loss)
         scaler.scale(loss).backward()
 
         if step % args.accumulation_steps == 0:
-            scaler.unscale_(optimizer)
-            torch.nn.utils.clip_grad_norm_(lora_params, args.grad_clip)
-            scaler.step(optimizer)
-            scaler.update()
-            optimizer.zero_grad(set_to_none=True)
+            runtime.update(model, optimizer, scaler, lora_params, epoch, step, iters)
 
-        if step % args.log_interval == 0 or step == iters:
+        if step % args.log_interval == 0 or step == iters or runtime.probe_complete:
             spend_time = time.time() - start_time
             current_loss = loss.item() * args.accumulation_steps
             current_aux_loss = res.aux_loss.item() if res.aux_loss is not None else 0.0
@@ -57,23 +55,16 @@ def train_epoch(epoch, loader, iters, lora_params, start_step=0, wandb=None):
             Logger(f'Epoch:[{epoch + 1}/{args.epochs}]({step}/{iters}), loss: {current_loss:.4f}, logits_loss: {current_logits_loss:.4f}, aux_loss: {current_aux_loss:.4f}, lr: {current_lr:.8f}, epoch_time: {eta_min:.1f}min')
             if wandb: wandb.log({"loss": current_loss, "logits_loss": current_logits_loss, "aux_loss": current_aux_loss, "learning_rate": current_lr, "epoch_time": eta_min})
 
-        if (step % args.save_interval == 0 or step == iters) and is_main_process():
-            model.eval()
-            moe_suffix = '_moe' if lm_config.use_moe else ''
-            lora_save_path = f'{args.save_dir}/{args.lora_name}_{lm_config.hidden_size}{moe_suffix}.pth'
-            # LoRA只保存LoRA权重
-            save_lora(model, lora_save_path)
-            lm_checkpoint(lm_config, weight=args.lora_name, model=model, optimizer=optimizer, scaler=scaler, epoch=epoch, step=step, wandb=wandb, save_dir='../checkpoints')
-            model.train()
+        if (step % args.save_interval == 0 or step == iters or runtime.probe_complete) and step % args.accumulation_steps == 0:
+            runtime.save(model, optimizer, scaler, epoch, step, iters, adapter_only=True)
+        if runtime.probe_complete:
+            return
 
         del input_ids, labels, res, loss
 
     if last_step > start_step and last_step % args.accumulation_steps != 0:
-        scaler.unscale_(optimizer)
-        torch.nn.utils.clip_grad_norm_(lora_params, args.grad_clip)
-        scaler.step(optimizer)
-        scaler.update()
-        optimizer.zero_grad(set_to_none=True)
+        runtime.update(model, optimizer, scaler, lora_params, epoch, last_step, iters)
+        runtime.save(model, optimizer, scaler, epoch, last_step, iters, adapter_only=True)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="MiniMind LoRA Fine-tuning")
@@ -99,17 +90,19 @@ if __name__ == "__main__":
     parser.add_argument("--use_wandb", action="store_true", help="是否使用wandb")
     parser.add_argument("--wandb_project", type=str, default="MiniMind-LoRA", help="wandb项目名")
     parser.add_argument("--use_compile", default=0, type=int, choices=[0, 1], help="是否使用torch.compile加速（0=否，1=是）")
+    add_offline_arguments(parser)
     args = parser.parse_args()
 
     # ========== 1. 初始化环境和随机种子 ==========
     local_rank = init_distributed_mode()
     if dist.is_initialized(): args.device = f"cuda:{local_rank}"
-    setup_seed(42 + (dist.get_rank() if dist.is_initialized() else 0))
+    setup_seed(args.seed + (dist.get_rank() if dist.is_initialized() else 0))
     
     # ========== 2. 配置目录、模型参数、检查ckp ==========
     os.makedirs(args.save_dir, exist_ok=True)
     lm_config = MiniMindConfig(hidden_size=args.hidden_size, num_hidden_layers=args.num_hidden_layers, use_moe=bool(args.use_moe))
-    ckp_data = lm_checkpoint(lm_config, weight=args.lora_name, save_dir='../checkpoints') if args.from_resume==1 else None
+    runtime = OfflineRuntime(args, lm_config, 'lora', args.lora_name, [('base', lm_config, args.from_weight)])
+    ckp_data = runtime.load_resume()
     
     # ========== 3. 设置混合精度 ==========
     device_type = "cuda" if "cuda" in args.device else "cpu"
@@ -126,7 +119,7 @@ if __name__ == "__main__":
         wandb.init(project=args.wandb_project, name=wandb_run_name, id=wandb_id, resume=resume)
     
     # ========== 5. 定义模型、应用LoRA、冻结非LoRA参数 ==========
-    model, tokenizer = init_model(lm_config, args.from_weight, device=args.device)
+    model, tokenizer = init_model(lm_config, args.from_weight, save_dir=args.init_dir, device=args.device)
     apply_lora(model)
     
     # 统计参数
@@ -149,16 +142,11 @@ if __name__ == "__main__":
     train_ds = SFTDataset(args.data_path, tokenizer, max_length=args.max_seq_len)
     train_sampler = DistributedSampler(train_ds) if dist.is_initialized() else None
     scaler = torch.cuda.amp.GradScaler(enabled=(args.dtype == 'float16'))
-    optimizer = optim.AdamW(lora_params, lr=args.learning_rate)
+    optimizer = OfflineAdamW(lora_params, lr=args.learning_rate)
     
     # ========== 7. 从ckp恢复状态 ==========
-    start_epoch, start_step = 0, 0
-    if ckp_data:
-        model.load_state_dict(ckp_data['model'], strict=False)
-        optimizer.load_state_dict(ckp_data['optimizer'])
-        scaler.load_state_dict(ckp_data['scaler'])
-        start_epoch = ckp_data['epoch']
-        start_step = ckp_data.get('step', 0)
+    start_epoch, start_step = runtime.restore(model, optimizer, scaler, ckp_data, len(train_ds))
+    del ckp_data
     
     # ========== 8. 编译和分布式包装 ==========
     if args.use_compile == 1:
@@ -168,9 +156,10 @@ if __name__ == "__main__":
         model = DistributedDataParallel(model, device_ids=[local_rank])
     
     # ========== 9. 开始训练 ==========
+    runtime.start_training()
     for epoch in range(start_epoch, args.epochs):
         train_sampler and train_sampler.set_epoch(epoch)
-        setup_seed(42 + epoch); indices = torch.randperm(len(train_ds)).tolist()
+        setup_seed(args.seed + epoch); indices = torch.randperm(len(train_ds)).tolist()
         skip = start_step if (epoch == start_epoch and start_step > 0) else 0
         batch_sampler = SkipBatchSampler(train_sampler or indices, args.batch_size, skip)
         loader = DataLoader(train_ds, batch_sampler=batch_sampler, num_workers=args.num_workers, pin_memory=True)
@@ -179,6 +168,9 @@ if __name__ == "__main__":
             train_epoch(epoch, loader, len(loader) + skip, lora_params, start_step, wandb)
         else:
             train_epoch(epoch, loader, len(loader), lora_params, 0, wandb)
+        if runtime.probe_complete:
+            break
+    runtime.finish()
     
     # ========== 10. 清理分布进程 ==========
     if dist.is_initialized():

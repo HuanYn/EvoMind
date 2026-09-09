@@ -124,11 +124,31 @@ def init_model(lm_config, from_weight='pretrain', tokenizer_path='../model', sav
         moe_suffix = '_moe' if lm_config.use_moe else ''
         weight_path = f'{save_dir}/{from_weight}_{lm_config.hidden_size}{moe_suffix}.pth'
         weights = torch.load(weight_path, map_location=device)
-        model.load_state_dict(weights, strict=False)
+        model.load_state_dict(weights, strict=True)
 
     get_model_params(model, lm_config)
     Logger(f'Trainable Params: {sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6:.3f}M')
     return model.to(device), tokenizer
+
+
+def save_training_checkpoint(model, optimizer, scaler, lm_config, args, epoch, step, wandb=None):
+    """evomind serialization fix: call only AFTER an optimizer update.
+
+    Keep official FP16 weight export and original optimization semantics.
+    Resume remains upstream-style (not a promise of bitwise RNG replay).
+    """
+    if not is_main_process():
+        return
+    raw = model.module if isinstance(model, torch.nn.parallel.DistributedDataParallel) else model
+    raw = getattr(raw, '_orig_mod', raw)
+    suffix = '_moe' if lm_config.use_moe else ''
+    path = f'{args.save_dir}/{args.save_weight}_{lm_config.hidden_size}{suffix}.pth'
+    temporary = path + '.tmp'
+    torch.save({key: value.half().cpu() for key, value in raw.state_dict().items()}, temporary)
+    os.replace(temporary, path)
+    lm_checkpoint(lm_config, weight=args.save_weight, model=model, optimizer=optimizer,
+                  scaler=scaler, epoch=epoch, step=step, wandb=wandb, save_dir='../checkpoints')
+    Logger(f'Checkpoint saved after optimizer update: epoch={epoch + 1}, microstep={step}, path={path}')
 
 
 class SkipBatchSampler(Sampler):

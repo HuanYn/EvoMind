@@ -4,3 +4,12 @@ __pycache__/
 out
 website/
 docs-minimind/
+.venv/
+.cache/
+artifacts/
+checkpoints/
+models/
+dataset/*.jsonl
+dataset/*.parquet
+vision/
+.opencode

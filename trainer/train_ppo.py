@@ -350,7 +350,14 @@ if __name__ == "__main__":
     parser.add_argument("--sglang_base_url", type=str, default="http://localhost:8998", help="SGLang服务器URL")
     parser.add_argument("--sglang_model_path", type=str, default="../model", help="SGLang tokenizer路径")
     parser.add_argument("--sglang_shared_path", type=str, default="./sglang_ckpt_ppo", help="SGLang共享存储路径")
+    from trainer.evomind_rl_runtime import add_runtime_arguments, run_local
+    add_runtime_arguments(parser)
     args = parser.parse_args()
+    if args.evomind_runtime:
+        run_local(args, sys.modules[__name__], "ppo")
+        raise SystemExit(0)
+    if args.max_steps or args.resume or args.resume_dir or args.reward_device:
+        parser.error("Local probe/resume/reward-device flags require --evomind_runtime")
 
     # ========== 1. 初始化环境和随机种子 ==========
     local_rank = init_distributed_mode()

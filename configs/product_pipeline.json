@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "route_id": "evomind_product_20260909",
+  "upstream_commit": "6fc918beb68a0d8c40452338df6319fe168014ba",
+  "recipe": "evomind custom staged lineage; NOT upstream default independent branches",
+  "run_dir": "artifacts/runs/text_product_20260909",
+  "eval_dir": "artifacts/evaluation/text_product_20260909",
+  "stages": [
+    {
+      "name": "dpo",
+      "script": "train_dpo.py",
+      "runtime": "offline",
+      "data": "dataset/dpo.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 4e-8,
+        "max_seq_len": 1024,
+        "beta": 0.15,
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 4,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 2,
+          "accumulation_steps": 2
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 4
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim"
+      ]
+    },
+    {
+      "name": "cispo",
+      "script": "train_grpo.py",
+      "runtime": "rl",
+      "data": "dataset/rlaif.jsonl",
+      "options": {
+        "epochs": 1,
+        "dtype": "bfloat16",
+        "num_workers": 0,
+        "grad_clip": 1,
+        "use_compile": 0,
+        "seed": 42,
+        "learning_rate": 3e-7,
+        "max_seq_len": 768,
+        "max_gen_len": 1024,
+        "num_generations": 6,
+        "beta": 0.1,
+        "epsilon": 0.2,
+        "epsilon_high": 5,
+        "thinking_ratio": 0.9,
+        "loss_type": "cispo",
+        "hidden_size": 768,
+        "num_hidden_layers": 8,
+        "use_moe": 0,
+        "from_weight": "full_sft",
+        "reward_model_path": "E:\\project\\Learning\\evomind\\models\\internlm2-1_8b-reward",
+        "reward_device": "cpu",
+        "reward_dtype": "float32",
+        "rollout_engine": "torch"
+      },
+      "batch_candidates": [
+        {
+          "batch_size": 2,
+          "accumulation_steps": 1
+        },
+        {
+          "batch_size": 1,
+          "accumulation_steps": 2
+        }
+      ],
+      "probe_optimizer_updates": 2,
+      "adaptations": [
+        "Windows workers=0; no compile",
+        "OOM-only batch/accumulation fallback; no bitwise-equivalence claim",
+        "RM CPU float32 offload; unchanged upstream reward formula; numerical/runtime deviation"
+      ]
+    }
+  ],
+  "selection": {
+    "rule": "candidate promoted only with non-regression on every benchmark (1 percentage point tolerance), no EOS/repetition regression, and at least one measured improvement; heuristic, not statistical significance",
+    "benchmark_max_drop": 0.01,
+    "minimum_improvement": 0.001,
+    "repeat_max_increase": 0,
+    "eos_max_drop": 0,
+    "baseline_min_eos": 0.5,
+    "baseline_max_repeat4": 0.5,
+    "scope": "Official 8 example prompts are only a degeneration screening gate; seven objective tasks are not proof of video ability."
+  },
+  "agent": {
+    "status": "deferred_extension",
+    "from": "selected_text_checkpoint",
+    "blocks_vision": false,
+    "trigger": "After video baseline and a concrete tool-task contract; preserve official Agent-CISPO recipe as reference, not evidence of video-agent capability"
+  },
+  "deferred": [
+    "lora",
+    "grpo",
+    "distillation"
+  ],
+  "cancelled": [
+    "ppo",
+    "agent_grpo"
+  ],
+  "rlaif_rows": 19502,
+  "human_review_required": false,
+  "video": {
+    "status": "pending_implementation_and_data_contract",
+    "image_completion_is_project_completion": false
+  },
+  "weight_lineage": "SFT -> DPO -> evaluated selection of SFT/DPO -> CISPO -> evaluated selection -> vision/video; Agent is a separate extension"
+}

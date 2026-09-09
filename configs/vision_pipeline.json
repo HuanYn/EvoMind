@@ -1,0 +1,329 @@
+{
+  "run_dir": "artifacts/runs/vision_pipeline_20260908",
+  "description": "Official 2-epoch image-disjoint reference plus fixed-budget 20k A/B/C, three training seeds. Human review cancelled by user; upstream example evaluation only, no quality-win claim.",
+  "stages": [
+    {
+      "name": "verify_assets_and_transfer_base",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "setup"
+      ]
+    },
+    {
+      "name": "prepare_image_disjoint_data",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "prepare"
+      ]
+    },
+    {
+      "name": "official_memory_probe",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "probe"
+      ]
+    },
+    {
+      "name": "real_encoder_cache_parity",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "parity"
+      ]
+    },
+    {
+      "name": "prepare_frozen_feature_cache",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "cache"
+      ]
+    },
+    {
+      "name": "smoke_A",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "A",
+        "--seed",
+        "42",
+        "--smoke"
+      ]
+    },
+    {
+      "name": "smoke_B",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "B",
+        "--seed",
+        "42",
+        "--smoke"
+      ]
+    },
+    {
+      "name": "smoke_C",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "C",
+        "--seed",
+        "42",
+        "--smoke"
+      ]
+    },
+    {
+      "name": "official_v_two_epochs",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "official"
+      ]
+    },
+    {
+      "name": "official_v_test",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "official",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "full_A_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "A",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "test_A_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "A",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "full_B_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "B",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "test_B_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "B",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "full_C_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "C",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "test_C_seed42",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "C",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "name": "full_A_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "A",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "test_A_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "A",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "full_B_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "B",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "test_B_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "B",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "full_C_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "C",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "test_C_seed123",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "C",
+        "--seed",
+        "123"
+      ]
+    },
+    {
+      "name": "full_A_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "A",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "test_A_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "A",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "full_B_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "B",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "test_B_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "B",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "full_C_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "train",
+        "--variant",
+        "C",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "test_C_seed2026",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "evaluate",
+        "--variant",
+        "C",
+        "--seed",
+        "2026"
+      ]
+    },
+    {
+      "name": "aggregate_report",
+      "cwd": ".",
+      "argv": [
+        "scripts/evomind_pipeline_step.py",
+        "finalize"
+      ]
+    }
+  ]
+}

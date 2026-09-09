@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "requested_on": "2026-09-08",
+  "scope_amendment": "2026-09-09 user confirmed product mainline; supersedes six independent branch coverage",
+  "scope": "Product mainline: SFT -> DPO -> selection -> CISPO -> selection -> vision/video; Agent deferred, not a vision prerequisite",
+  "upstream_commit": "6fc918beb68a0d8c40452338df6319fe168014ba",
+  "vision_enabled": false,
+  "vision_cpu_preparation_enabled": true,
+  "parallel_preparation_policy": "User approved vision code and CPU data preparation alongside text training. Keep GPU vision training gated; low-priority, bounded-memory preprocessing, no duplicate extraction or silent data reduction.",
+  "reason": "Vision starts only after verified text product selection, not after all algorithm branches.",
+  "required_coverage": [
+    "pretrain",
+    "full_sft",
+    "dpo",
+    "post_dpo_selection",
+    "cispo",
+    "final_text_selection",
+    "official_text_evaluation"
+  ],
+  "weight_policy": "SFT -> DPO -> evaluated selection of SFT/DPO -> CISPO -> evaluated selection -> vision/video; Agent is a separate extension",
+  "execution_policy": "Keep the active pretrain/SFT run unchanged. Each new branch requires source/data/model verification and a local memory smoke test before its full official epoch budget.",
+  "deviation_policy": "Record all hardware adaptations. Do not silently reduce model, epochs, data, generation length or group size and call it full alignment.",
+  "human_review_required": false,
+  "evaluation_scope": {
+    "text_prompts": "pinned eval_llm.py automatic 8 prompts",
+    "toolcall": "pinned scripts/eval_toolcall.py automatic 8 cases",
+    "benchmarks": [
+      "ceval-valid",
+      "cmmlu",
+      "arc_easy",
+      "piqa",
+      "openbookqa",
+      "hellaswag",
+      "social_iqa"
+    ],
+    "vision": "pinned MiniMind-V eval_vlm.py six bundled images and description prompt",
+    "custom_diagnostic_20": false,
+    "custom_vision_500": false
+  },
+  "route_config": "configs/product_pipeline.json"
+}
