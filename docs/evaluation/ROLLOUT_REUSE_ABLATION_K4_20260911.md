@@ -8,9 +8,11 @@
 
 本实验复现已有的 rollout-reuse 与剪裁机制，不将其作为本项目提出的新方法。正式文本分支每个 rollout 只更新一次（`updates_per_rollout=1`）。在这种设置中，当前策略与生成时冻结的旧策略几乎相同，重要性比率
 
-$$
-r_t=\exp(\log\pi_\theta(y_t)-\log\pi_{\mathrm{old}}(y_t))
-$$
+```math
+r_t=\exp\!\left(\log\pi_\theta(y_t\mid h_t)-\log\pi_{\mathrm{old}}(y_t\mid h_t)\right)
+```
+
+其中 `h_t` 是 prompt 与此前回答 token 构成的上下文。
 
 接近 1，GRPO 的窄裁剪和 CISPO 的宽上限基本不会介入。
 
@@ -34,16 +36,16 @@ $$
 
 对于正 advantage，GRPO 在 `r_t>1.2` 后的 policy 项成为常数；对负 advantage，`r_t<0.8` 后成为常数。这些位置的 GRPO policy gradient 被抑制（KL 项仍存在）：
 
-$$
+```math
 \mathrm{GRPO\ suppressed}=
-\mathbb{1}[A>0,r>1.2]\ \lor\ \mathbb{1}[A<0,r<0.8].
-$$
+\mathbb{1}[A\gt0,r\gt1.2]\ \lor\ \mathbb{1}[A\lt0,r\lt0.8].
+```
 
 CISPO 只在 `r_t>5` 时停止提高重要性权重：
 
-$$
-\mathrm{CISPO\ capped}=\mathbb{1}[r>5].
-$$
+```math
+\mathrm{CISPO\ capped}=\mathbb{1}[r\gt5].
+```
 
 `native_intervention_rate` 取各自损失真正使用的那个统计：GRPO 取 suppressed rate；CISPO 取 capped rate。
 

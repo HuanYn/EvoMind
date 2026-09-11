@@ -1,0 +1,978 @@
+{
+  "snapshot": "2026-09-11",
+  "scope": "Readout of six existing README curve images from recorded training observations; no training or evaluation was rerun.",
+  "aggregation": "Unweighted arithmetic mean and median of logged scalar observations, not an epoch loss or token-weighted corpus average. The images remain unsmoothed raw lines. Window sizes and x ranges are explicit per stage.",
+  "limits": [
+    "One training seed; windows within a run are not independent experimental seeds.",
+    "Training loss and reward are not validation accuracy or evidence of generalization.",
+    "CISPO and GRPO objectives have different scalar scales; their loss magnitudes are not directly comparable.",
+    "Observed trends do not isolate causes such as learning-rate decay, data order, or sample difficulty."
+  ],
+  "scalar_definitions": {
+    "pretrain_sft_loss": "Current logged training microbatch cross-entropy; loss and logits_loss coincide for this Dense run. SFT only supervises its assistant-labelled positions.",
+    "dpo_loss": "Current logged preference microbatch loss; loss and dpo_loss coincide. Only 43 observations were logged across 4292 optimizer updates.",
+    "rl_loss": "The final microbatch's policy objective plus auxiliary loss at an optimizer boundary; it is not the mean over the two gradient-accumulation microbatches.",
+    "rl_policy_loss": "Surrogate policy loss already includes beta times the reference KL estimator. Dense auxiliary loss is zero, so the loss and policy_loss lines overlap.",
+    "rl_reward": "Mean configured reward over G=6 responses for the final microbatch of the optimizer update; not mean reward over both accumulated microbatches and not accuracy.",
+    "k4_ratio_p95": "95th percentile of importance ratios over valid completion tokens at each update.",
+    "k4_ratio_max": "Maximum importance ratio over valid completion tokens at each update; the average of these values differs from the global maximum.",
+    "k4_native_intervention_rate": "Fraction of valid completion tokens affected by the loss's own intervention: directional GRPO suppression, or ratio>5 for CISPO.",
+    "k4_kl_penalty": "Mean over valid completion tokens of exp(delta)-delta-1, where delta=log pi_ref-log pi_theta. An unscaled sampled estimator, not exact distribution KL; the optimized objective uses beta=0.1 with its own sequence averaging."
+  },
+  "stages": {
+    "pretrain": {
+      "source": {
+        "path": "artifacts/runs/text_official_mini_20260908/metrics/pretrain.jsonl",
+        "sha256": "a5c7ef1347ba2648fefb8b1540d27079c02ba6b5d62974e87df4dc7820771821",
+        "bytes": 271008
+      },
+      "curve": "docs/assets/pretrain_20260909.png",
+      "plotted_x": "global_microstep",
+      "raw_records": 797,
+      "first_observed_training_x": 100,
+      "last_observed_training_x": 79390,
+      "window_n": 50,
+      "window_selection": "First and last N raw logged observations; these are disjoint descriptive windows, not repeated seeds.",
+      "first_window_x": [
+        100,
+        4700
+      ],
+      "last_window_x": [
+        74495,
+        79390
+      ],
+      "stats": {
+        "loss": {
+          "all": {
+            "mean": 2.2213227101631117,
+            "median": 2.0613,
+            "min": 1.6379,
+            "max": 7.5218,
+            "first": 7.5218,
+            "last": 1.6464
+          },
+          "first_window": {
+            "mean": 4.013098,
+            "median": 3.65025,
+            "min": 2.7513,
+            "max": 7.5218,
+            "first": 7.5218,
+            "last": 2.767
+          },
+          "last_window": {
+            "mean": 1.8880240000000001,
+            "median": 1.8645,
+            "min": 1.6379,
+            "max": 2.0869,
+            "first": 1.8352,
+            "last": 1.6464
+          },
+          "descriptive_relative_mean_change": -0.5295345391515482
+        },
+        "learning_rate": {
+          "all": {
+            "mean": 0.0002755389209535759,
+            "median": 0.00027585,
+            "min": 0.00005,
+            "max": 0.0005,
+            "first": 0.0005,
+            "last": 0.00005
+          },
+          "first_window": {
+            "mean": 0.000498558,
+            "median": 0.0004988550000000001,
+            "min": 0.00049612,
+            "max": 0.0005,
+            "first": 0.0005,
+            "last": 0.00049612
+          },
+          "last_window": {
+            "mean": 0.00005141760000000001,
+            "median": 0.000051055000000000005,
+            "min": 0.00005,
+            "max": 0.00005421,
+            "first": 0.00005421,
+            "last": 0.00005
+          },
+          "descriptive_relative_mean_change": -0.8968673654820503
+        }
+      },
+      "loss_lines_identical": true,
+      "nonzero_aux_observations": 0,
+      "relative_change_note": "(last-window mean-first-window mean)/abs(first-window mean). Descriptive scalar change only; for signed objectives or rewards this is not a quality-improvement percentage.",
+      "attempts": {
+        "1": {
+          "count": 43,
+          "first_x": 100,
+          "last_x": 4300
+        },
+        "2": {
+          "count": 754,
+          "first_x": 4100,
+          "last_x": 79390
+        }
+      },
+      "duplicate_training_x_count": 3,
+      "final_trajectory_sensitivity": {
+        "records": 794,
+        "first50_loss_mean": 4.016382,
+        "first50_loss_median": 3.65025,
+        "first50_x": [
+          100,
+          5000
+        ],
+        "last50_x": [
+          74495,
+          79390
+        ],
+        "discarded_records": [
+          {
+            "attempt": 1,
+            "global_microstep": 4100,
+            "loss": 2.8367
+          },
+          {
+            "attempt": 1,
+            "global_microstep": 4200,
+            "loss": 2.7513
+          },
+          {
+            "attempt": 1,
+            "global_microstep": 4300,
+            "loss": 2.9782
+          }
+        ],
+        "retention_rule": "Keep attempt1 through global_microstep4000, then attempt2 from4100; three superseded logged attempt1 observations are excluded.",
+        "last50_loss_mean": 1.8880240000000001,
+        "last50_loss_median": 1.8645,
+        "first_to_last_mean_relative_change": -0.5299192158514803
+      }
+    },
+    "full_sft": {
+      "source": {
+        "path": "artifacts/runs/text_official_mini_20260908/metrics/full_sft.jsonl",
+        "sha256": "f76dd0f9230ac52965c4248e242ca9f1dd8fd915996e83bd0b4f409f9f9f0857",
+        "bytes": 385716
+      },
+      "curve": "docs/assets/full_sft_20260909.png",
+      "plotted_x": "global_microstep",
+      "raw_records": 1134,
+      "first_observed_training_x": 200,
+      "last_observed_training_x": 226430,
+      "window_n": 50,
+      "window_selection": "First and last N raw logged observations; these are disjoint descriptive windows, not repeated seeds.",
+      "first_window_x": [
+        200,
+        10000
+      ],
+      "last_window_x": [
+        216815,
+        226430
+      ],
+      "stats": {
+        "loss": {
+          "all": {
+            "mean": 1.5962340388007055,
+            "median": 1.59665,
+            "min": 0.9884,
+            "max": 2.3793,
+            "first": 2.0371,
+            "last": 1.7177
+          },
+          "first_window": {
+            "mean": 1.8282820000000002,
+            "median": 1.8214000000000001,
+            "min": 1.3401,
+            "max": 2.3793,
+            "first": 2.0371,
+            "last": 2.0051
+          },
+          "last_window": {
+            "mean": 1.512674,
+            "median": 1.5536500000000002,
+            "min": 0.9884,
+            "max": 1.8505,
+            "first": 1.0961,
+            "last": 1.7177
+          },
+          "descriptive_relative_mean_change": -0.17262544837175015
+        },
+        "learning_rate": {
+          "all": {
+            "mean": 0.000005492416225749559,
+            "median": 0.000005495,
+            "min": 0.000001,
+            "max": 0.00001,
+            "first": 0.00001,
+            "last": 0.000001
+          },
+          "first_window": {
+            "mean": 0.000009985400000000001,
+            "median": 0.00000999,
+            "min": 0.00000996,
+            "max": 0.00001,
+            "first": 0.00001,
+            "last": 0.00000996
+          },
+          "last_window": {
+            "mean": 0.0000010131999999999999,
+            "median": 0.00000101,
+            "min": 0.000001,
+            "max": 0.00000104,
+            "first": 0.00000104,
+            "last": 0.000001
+          },
+          "descriptive_relative_mean_change": -0.8985318565105055
+        }
+      },
+      "loss_lines_identical": true,
+      "nonzero_aux_observations": 0,
+      "relative_change_note": "(last-window mean-first-window mean)/abs(first-window mean). Descriptive scalar change only; for signed objectives or rewards this is not a quality-improvement percentage.",
+      "attempts": {
+        "1": {
+          "count": 1134,
+          "first_x": 200,
+          "last_x": 226430
+        }
+      },
+      "duplicate_training_x_count": 0
+    },
+    "dpo": {
+      "source": {
+        "path": "artifacts/runs/text_product_20260909/dpo/full/observed.metrics.jsonl",
+        "sha256": "ef5d5d14843d80a732cc0102fcd38cc00c6544c4632fec6c69c7335f72043e36",
+        "bytes": 12117
+      },
+      "curve": "docs/assets/dpo_20260909.png",
+      "plotted_x": "1-based logged observation index",
+      "raw_records": 43,
+      "first_observed_training_x": 100,
+      "last_observed_training_x": 4292,
+      "window_n": 10,
+      "window_selection": "First and last N raw logged observations; these are disjoint descriptive windows, not repeated seeds.",
+      "first_window_x": [
+        100,
+        1000
+      ],
+      "last_window_x": [
+        3400,
+        4292
+      ],
+      "stats": {
+        "loss": {
+          "all": {
+            "mean": 0.6094116279069767,
+            "median": 0.6045,
+            "min": 0.4029,
+            "max": 0.8503,
+            "first": 0.7061,
+            "last": 0.4321
+          },
+          "first_window": {
+            "mean": 0.61929,
+            "median": 0.5871999999999999,
+            "min": 0.5481,
+            "max": 0.8033,
+            "first": 0.7061,
+            "last": 0.5751
+          },
+          "last_window": {
+            "mean": 0.56289,
+            "median": 0.6011,
+            "min": 0.4029,
+            "max": 0.6852,
+            "first": 0.6045,
+            "last": 0.4321
+          },
+          "descriptive_relative_mean_change": -0.09107203410357023
+        },
+        "learning_rate": {
+          "all": {
+            "mean": 2.1627906976744185e-8,
+            "median": 2e-8,
+            "min": 0,
+            "max": 4e-8,
+            "first": 4e-8,
+            "last": 0
+          },
+          "first_window": {
+            "mean": 4e-8,
+            "median": 4e-8,
+            "min": 4e-8,
+            "max": 4e-8,
+            "first": 4e-8,
+            "last": 4e-8
+          },
+          "last_window": {
+            "mean": 5e-9,
+            "median": 5e-9,
+            "min": 0,
+            "max": 1e-8,
+            "first": 1e-8,
+            "last": 0
+          },
+          "descriptive_relative_mean_change": -0.875
+        }
+      },
+      "loss_lines_identical": true,
+      "nonzero_aux_observations": 0,
+      "relative_change_note": "(last-window mean-first-window mean)/abs(first-window mean). Descriptive scalar change only; for signed objectives or rewards this is not a quality-improvement percentage.",
+      "attempts": {
+        "1": {
+          "count": 43,
+          "first_x": 100,
+          "last_x": 4292
+        }
+      },
+      "duplicate_training_x_count": 0,
+      "learning_rate_logging": {
+        "initial_lr": 4e-8,
+        "last_planned_lr": 4e-9,
+        "logged_last_lr": 0,
+        "last_formula_lr": 4e-9,
+        "format": "current_lr:.8f",
+        "interpretation": "Rounded to eight digits after the decimal point before log parsing. The plotted steps and final0 are formatting quantization; the implemented cosine schedule ends at4e-9, not0.",
+        "code": "trainer/train_dpo.py:102",
+        "schedule_code": "trainer/trainer_utils.py:get_lr"
+      }
+    },
+    "cispo": {
+      "source": {
+        "path": "artifacts/remote_evidence_20260911/cispo/observed.metrics.jsonl",
+        "sha256": "1f76da289330db16c2fb91be68f5ff47519e562a0afed5a34753c1a599348eb6",
+        "bytes": 6412400
+      },
+      "curve": "docs/assets/cispo_20260911.png",
+      "plotted_x": "1-based logged observation index",
+      "raw_records": 9762,
+      "first_observed_training_x": 1,
+      "last_observed_training_x": 9751,
+      "window_n": 500,
+      "window_selection": "First and last N raw logged observations; these are disjoint descriptive windows, not repeated seeds.",
+      "first_window_x": [
+        1,
+        500
+      ],
+      "last_window_x": [
+        9252,
+        9751
+      ],
+      "stats": {
+        "policy_loss": {
+          "all": {
+            "mean": 0.024355934649198878,
+            "median": 0.015203719958662987,
+            "min": -0.501369833946228,
+            "max": 0.4995012879371643,
+            "first": 0.059529922902584076,
+            "last": -0.008077383041381836
+          },
+          "first_window": {
+            "mean": 0.05281757163326256,
+            "median": 0.036088140681385994,
+            "min": -0.314508855342865,
+            "max": 0.4503043591976166,
+            "first": 0.059529922902584076,
+            "last": -0.005752543918788433
+          },
+          "last_window": {
+            "mean": 0.015596989036178456,
+            "median": 0.010665938258171082,
+            "min": -0.2600230276584625,
+            "max": 0.3684954047203064,
+            "first": 0.025624573230743408,
+            "last": -0.008077383041381836
+          },
+          "descriptive_relative_mean_change": -0.7047007548079691
+        },
+        "reward": {
+          "all": {
+            "mean": -0.10132367242033428,
+            "median": 0.017824839800596237,
+            "min": -4.228294849395752,
+            "max": 3.6248888969421387,
+            "first": -3.0169339179992676,
+            "last": 3.197594404220581
+          },
+          "first_window": {
+            "mean": -1.387993097972125,
+            "median": -1.3771395683288574,
+            "min": -4.112513065338135,
+            "max": 1.6023509502410889,
+            "first": -3.0169339179992676,
+            "last": -0.4520030915737152
+          },
+          "last_window": {
+            "mean": 0.13365194247779436,
+            "median": 0.2260417565703392,
+            "min": -3.0768802165985107,
+            "max": 3.381331443786621,
+            "first": 0.6040022373199463,
+            "last": 3.197594404220581
+          },
+          "descriptive_relative_mean_change": 1.0962915036631389
+        },
+        "response_length": {
+          "all": {
+            "mean": 249.95257836979596,
+            "median": 240.83334350585938,
+            "min": 6,
+            "max": 1024,
+            "first": 428.16668701171875,
+            "last": 211.6666717529297
+          },
+          "first_window": {
+            "mean": 258.3666740779877,
+            "median": 220.08333587646484,
+            "min": 6.6666669845581055,
+            "max": 957,
+            "first": 428.16668701171875,
+            "last": 85
+          },
+          "last_window": {
+            "mean": 250.9193406944275,
+            "median": 249.33334350585938,
+            "min": 22,
+            "max": 671.1666870117188,
+            "first": 231,
+            "last": 211.6666717529297
+          },
+          "descriptive_relative_mean_change": -0.028824667152359686
+        }
+      },
+      "loss_lines_identical": true,
+      "nonzero_aux_observations": 0,
+      "relative_change_note": "(last-window mean-first-window mean)/abs(first-window mean). Descriptive scalar change only; for signed objectives or rewards this is not a quality-improvement percentage.",
+      "invocations": [
+        {
+          "invocation_id": "1788946259418218414",
+          "start_logged_index": 1,
+          "resume_start": 0,
+          "first_update": 1,
+          "count": 2911,
+          "last_update": 2911,
+          "last_logged_index": 2911
+        },
+        {
+          "invocation_id": "1789034867549645501",
+          "start_logged_index": 2912,
+          "resume_start": 2900,
+          "first_update": 2901,
+          "count": 6851,
+          "last_update": 9751,
+          "last_logged_index": 9762
+        }
+      ],
+      "retained_final_trajectory_records": 9751,
+      "discarded_historical_records": 11,
+      "retained_trajectory_is_exact_updates_1_to_9751": true,
+      "retention_rule": "On each new invocation, retain preceding trajectory only through resume_start_optimizer_update, then append the new invocation. Raw append-only records are never deleted.",
+      "window_resume_note": "The first500 and last500 raw observations contain no superseded updates and exactly match first500 /last500 retained trajectory updates."
+    },
+    "grpo": {
+      "source": {
+        "path": "artifacts/remote_evidence_20260911/grpo/observed.metrics.jsonl",
+        "sha256": "cfad13f2eab0fe17b7d8bee79d10ff2dbd73fd60904e79ff741d2fc6b8cc027d",
+        "bytes": 6451760
+      },
+      "curve": "docs/assets/grpo_20260911.png",
+      "plotted_x": "1-based logged observation index",
+      "raw_records": 9790,
+      "first_observed_training_x": 1,
+      "last_observed_training_x": 9751,
+      "window_n": 500,
+      "window_selection": "First and last N raw logged observations; these are disjoint descriptive windows, not repeated seeds.",
+      "first_window_x": [
+        1,
+        500
+      ],
+      "last_window_x": [
+        9252,
+        9751
+      ],
+      "stats": {
+        "policy_loss": {
+          "all": {
+            "mean": 0.0032936933973162406,
+            "median": 0.003336618421599269,
+            "min": -0.0021464950405061245,
+            "max": 0.018162589520215988,
+            "first": 0.000005543231964111328,
+            "last": 0.004366686102002859
+          },
+          "first_window": {
+            "mean": 0.00023529617211897857,
+            "median": 0.00016225378203671426,
+            "min": -0.0015161435585469007,
+            "max": 0.0017434756737202406,
+            "first": 0.000005543231964111328,
+            "last": 0.00034071505069732666
+          },
+          "last_window": {
+            "mean": 0.003971748386509716,
+            "median": 0.003914952510967851,
+            "min": 0.0005259911413304508,
+            "max": 0.008916577324271202,
+            "first": 0.005245844833552837,
+            "last": 0.004366686102002859
+          },
+          "descriptive_relative_mean_change": 15.879783256743266
+        },
+        "reward": {
+          "all": {
+            "mean": -0.10324084117856228,
+            "median": 0.010626502800732851,
+            "min": -4.083333492279053,
+            "max": 4.047843933105469,
+            "first": -3.0169339179992676,
+            "last": 3.2473068237304688
+          },
+          "first_window": {
+            "mean": -1.3375422382475808,
+            "median": -1.363190770149231,
+            "min": -3.768599510192871,
+            "max": 1.8583062887191772,
+            "first": -3.0169339179992676,
+            "last": -0.7654284238815308
+          },
+          "last_window": {
+            "mean": 0.12119949042610824,
+            "median": 0.12796852737665176,
+            "min": -3.202613353729248,
+            "max": 3.2473068237304688,
+            "first": -0.24147772789001465,
+            "last": 3.2473068237304688
+          },
+          "descriptive_relative_mean_change": 1.0906135798633927
+        },
+        "response_length": {
+          "all": {
+            "mean": 249.745240392042,
+            "median": 239.83334350585938,
+            "min": 6,
+            "max": 1024,
+            "first": 428.16668701171875,
+            "last": 236.33334350585938
+          },
+          "first_window": {
+            "mean": 264.8600080823898,
+            "median": 247.75,
+            "min": 6.333333492279053,
+            "max": 900.3333740234375,
+            "first": 428.16668701171875,
+            "last": 84.16667175292969
+          },
+          "last_window": {
+            "mean": 249.8773406486511,
+            "median": 247.25,
+            "min": 20.5,
+            "max": 762.3333740234375,
+            "first": 236,
+            "last": 236.33334350585938
+          },
+          "descriptive_relative_mean_change": -0.05656825106294662
+        }
+      },
+      "loss_lines_identical": true,
+      "nonzero_aux_observations": 0,
+      "relative_change_note": "(last-window mean-first-window mean)/abs(first-window mean). Descriptive scalar change only; for signed objectives or rewards this is not a quality-improvement percentage.",
+      "invocations": [
+        {
+          "invocation_id": "1788948256334558126",
+          "start_logged_index": 1,
+          "resume_start": 0,
+          "first_update": 1,
+          "count": 500,
+          "last_update": 500,
+          "last_logged_index": 500
+        },
+        {
+          "invocation_id": "1788955429158389059",
+          "start_logged_index": 501,
+          "resume_start": 500,
+          "first_update": 501,
+          "count": 2139,
+          "last_update": 2639,
+          "last_logged_index": 2639
+        },
+        {
+          "invocation_id": "1789034867550277235",
+          "start_logged_index": 2640,
+          "resume_start": 2600,
+          "first_update": 2601,
+          "count": 7151,
+          "last_update": 9751,
+          "last_logged_index": 9790
+        }
+      ],
+      "retained_final_trajectory_records": 9751,
+      "discarded_historical_records": 39,
+      "retained_trajectory_is_exact_updates_1_to_9751": true,
+      "retention_rule": "On each new invocation, retain preceding trajectory only through resume_start_optimizer_update, then append the new invocation. Raw append-only records are never deleted.",
+      "window_resume_note": "The first500 and last500 raw observations contain no superseded updates and exactly match first500 /last500 retained trajectory updates."
+    }
+  },
+  "k4": {
+    "source": {
+      "path": "docs/results/ratio_reuse_k4_20260911.jsonl",
+      "sha256": "3f2615fe6b91e77c8421162995369e959cfb16c243ed56c3af09ea410c999b7d",
+      "summary": "docs/results/ratio_reuse_k4_20260911.json",
+      "curve": "docs/assets/ratio_reuse_k4_20260911.png"
+    },
+    "window_note": "Each branch has 120 optimizer updates = 30 rollout batches ×4 replays. 'Excluding first rollout' is explicitly a sensitivity readout of updates5–120, not replacement of the full-run result.",
+    "branches": {
+      "cispo": {
+        "first": {
+          "loss_type": "cispo",
+          "optimizer_update": 1,
+          "batch": 1,
+          "rollout_reuse_index": 1,
+          "rollout_reuse_total": 4,
+          "ratio_mean": 1,
+          "ratio_p95": 1,
+          "ratio_max": 1,
+          "grpo_suppressed_rate": 0,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.00009871841029962525,
+          "reward": -0.5455505847930908
+        },
+        "last": {
+          "loss_type": "cispo",
+          "optimizer_update": 120,
+          "batch": 30,
+          "rollout_reuse_index": 4,
+          "rollout_reuse_total": 4,
+          "ratio_mean": 1.002104640007019,
+          "ratio_p95": 1.0568090677261353,
+          "ratio_max": 1.3209699392318726,
+          "grpo_suppressed_rate": 0.0021645021624863148,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.009390474297106266,
+          "reward": -1.5684869289398193
+        },
+        "stats": {
+          "ratio_p95": {
+            "mean": 1.036989551782608,
+            "median": 1.0317856073379517,
+            "min": 1,
+            "max": 1.468691110610962,
+            "first": 1,
+            "last": 1.0568090677261353
+          },
+          "ratio_max": {
+            "mean": 1.1700005640586217,
+            "median": 1.1139169335365295,
+            "min": 1,
+            "max": 3.9660351276397705,
+            "first": 1,
+            "last": 1.3209699392318726
+          },
+          "native_intervention_rate": {
+            "mean": 0,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "kl_penalty": {
+            "mean": 0.002980714627422761,
+            "median": 0.0011062239645980299,
+            "min": 0.00003973755883635022,
+            "max": 0.053096652030944824,
+            "first": 0.00009871841029962525,
+            "last": 0.009390474297106266
+          },
+          "grpo_suppressed_rate": {
+            "mean": 0.005210572476304757,
+            "median": 0,
+            "min": 0,
+            "max": 0.18860511481761932,
+            "first": 0,
+            "last": 0.0021645021624863148
+          },
+          "cispo_capped_rate": {
+            "mean": 0,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          }
+        },
+        "nonzero_native_updates": 0,
+        "peaks": {
+          "ratio_p95": {
+            "update": 4,
+            "value": 1.468691110610962
+          },
+          "ratio_max": {
+            "update": 4,
+            "value": 3.9660351276397705
+          },
+          "native_intervention_rate": {
+            "update": 1,
+            "value": 0
+          },
+          "kl_penalty": {
+            "update": 3,
+            "value": 0.053096652030944824
+          },
+          "grpo_suppressed_rate": {
+            "update": 4,
+            "value": 0.18860511481761932
+          },
+          "cispo_capped_rate": {
+            "update": 1,
+            "value": 0
+          }
+        },
+        "by_replay": {
+          "1": {
+            "ratio_p95": 1,
+            "ratio_max": 1.0000003019968668,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.001723491716014299,
+            "grpo_suppressed_rate": 0,
+            "cispo_capped_rate": 0
+          },
+          "2": {
+            "ratio_p95": 1.0414190928141276,
+            "ratio_max": 1.163119868437449,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.0034113594689794504,
+            "grpo_suppressed_rate": 0.006155860920747121,
+            "cispo_capped_rate": 0
+          },
+          "3": {
+            "ratio_p95": 1.047461990515391,
+            "ratio_max": 1.2071490009625754,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.003599945223443986,
+            "grpo_suppressed_rate": 0.006486541386887742,
+            "cispo_capped_rate": 0
+          },
+          "4": {
+            "ratio_p95": 1.0590771238009136,
+            "ratio_max": 1.3097330848375957,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.0031880621012533084,
+            "grpo_suppressed_rate": 0.008199887597584166,
+            "cispo_capped_rate": 0
+          }
+        },
+        "first_rollout_means": {
+          "ratio_p95": 1.3208234906196594,
+          "ratio_max": 2.7584717869758606,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.035257503875982366,
+          "grpo_suppressed_rate": 0.13998035341501236,
+          "cispo_capped_rate": 0
+        },
+        "excluding_first_rollout": {
+          "n": 116,
+          "means": {
+            "ratio_p95": 1.0272021745813305,
+            "ratio_max": 1.115225694302855,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.001867721894713809,
+            "grpo_suppressed_rate": 0.0005633386508320812,
+            "cispo_capped_rate": 0
+          },
+          "max": {
+            "ratio_p95": 1.0992177724838257,
+            "ratio_max": 1.5168620347976685,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.010143822990357876,
+            "grpo_suppressed_rate": 0.03488372266292572,
+            "cispo_capped_rate": 0
+          }
+        },
+        "early_native_sum_fraction": null
+      },
+      "grpo": {
+        "first": {
+          "loss_type": "grpo",
+          "optimizer_update": 1,
+          "batch": 1,
+          "rollout_reuse_index": 1,
+          "rollout_reuse_total": 4,
+          "ratio_mean": 1,
+          "ratio_p95": 1,
+          "ratio_max": 1,
+          "grpo_suppressed_rate": 0,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.00009871841029962525,
+          "reward": -0.5455505847930908
+        },
+        "last": {
+          "loss_type": "grpo",
+          "optimizer_update": 120,
+          "batch": 30,
+          "rollout_reuse_index": 4,
+          "rollout_reuse_total": 4,
+          "ratio_mean": 0.9987276792526245,
+          "ratio_p95": 1.0808892250061035,
+          "ratio_max": 1.2864261865615845,
+          "grpo_suppressed_rate": 0.027397260069847107,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0.027397260069847107,
+          "kl_penalty": 0.02463715337216854,
+          "reward": -1.8696588277816772
+        },
+        "stats": {
+          "ratio_p95": {
+            "mean": 1.0371333837509156,
+            "median": 1.0318123698234558,
+            "min": 1,
+            "max": 1.4136360883712769,
+            "first": 1,
+            "last": 1.0808892250061035
+          },
+          "ratio_max": {
+            "mean": 1.1555817812681197,
+            "median": 1.1120988130569458,
+            "min": 1,
+            "max": 3.0448312759399414,
+            "first": 1,
+            "last": 1.2864261865615845
+          },
+          "native_intervention_rate": {
+            "mean": 0.00550692728429567,
+            "median": 0,
+            "min": 0,
+            "max": 0.20628683269023895,
+            "first": 0,
+            "last": 0.027397260069847107
+          },
+          "kl_penalty": {
+            "mean": 0.002916842644966285,
+            "median": 0.0006401966675184667,
+            "min": 0.00005548419721890241,
+            "max": 0.05244701728224754,
+            "first": 0.00009871841029962525,
+            "last": 0.02463715337216854
+          },
+          "grpo_suppressed_rate": {
+            "mean": 0.00550692728429567,
+            "median": 0,
+            "min": 0,
+            "max": 0.20628683269023895,
+            "first": 0,
+            "last": 0.027397260069847107
+          },
+          "cispo_capped_rate": {
+            "mean": 0,
+            "median": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          }
+        },
+        "nonzero_native_updates": 19,
+        "peaks": {
+          "ratio_p95": {
+            "update": 2,
+            "value": 1.4136360883712769
+          },
+          "ratio_max": {
+            "update": 2,
+            "value": 3.0448312759399414
+          },
+          "native_intervention_rate": {
+            "update": 4,
+            "value": 0.20628683269023895
+          },
+          "kl_penalty": {
+            "update": 3,
+            "value": 0.05244701728224754
+          },
+          "grpo_suppressed_rate": {
+            "update": 4,
+            "value": 0.20628683269023895
+          },
+          "cispo_capped_rate": {
+            "update": 1,
+            "value": 0
+          }
+        },
+        "by_replay": {
+          "1": {
+            "ratio_p95": 1.0013802766799926,
+            "ratio_max": 1.0045064091682434,
+            "native_intervention_rate": 0,
+            "kl_penalty": 0.0016584274848961893,
+            "grpo_suppressed_rate": 0,
+            "cispo_capped_rate": 0
+          },
+          "2": {
+            "ratio_p95": 1.0418944358825684,
+            "ratio_max": 1.1724136273066204,
+            "native_intervention_rate": 0.006024885177612305,
+            "kl_penalty": 0.003501417296259509,
+            "grpo_suppressed_rate": 0.006024885177612305,
+            "cispo_capped_rate": 0
+          },
+          "3": {
+            "ratio_p95": 1.0480705181757608,
+            "ratio_max": 1.1973007837931315,
+            "native_intervention_rate": 0.006201827149682989,
+            "kl_penalty": 0.003635604304630154,
+            "grpo_suppressed_rate": 0.006201827149682989,
+            "cispo_capped_rate": 0
+          },
+          "4": {
+            "ratio_p95": 1.0571883042653403,
+            "ratio_max": 1.248106304804484,
+            "native_intervention_rate": 0.009800996809887389,
+            "kl_penalty": 0.0028719214940792883,
+            "grpo_suppressed_rate": 0.009800996809887389,
+            "cispo_capped_rate": 0
+          }
+        },
+        "first_rollout_means": {
+          "ratio_p95": 1.2858397662639618,
+          "ratio_max": 2.331001102924347,
+          "native_intervention_rate": 0.14292730391025543,
+          "kl_penalty": 0.03137494951624831,
+          "grpo_suppressed_rate": 0.14292730391025543,
+          "cispo_capped_rate": 0
+        },
+        "excluding_first_rollout": {
+          "n": 116,
+          "means": {
+            "ratio_p95": 1.0285573015952933,
+            "ratio_max": 1.1150500805213535,
+            "native_intervention_rate": 0.0007682936075384375,
+            "kl_penalty": 0.0019355286149220774,
+            "grpo_suppressed_rate": 0.0007682936075384375,
+            "cispo_capped_rate": 0
+          },
+          "max": {
+            "ratio_p95": 1.1102218627929688,
+            "ratio_max": 1.4913625717163086,
+            "native_intervention_rate": 0.03333333507180214,
+            "kl_penalty": 0.02463715337216854,
+            "grpo_suppressed_rate": 0.03333333507180214,
+            "cispo_capped_rate": 0
+          }
+        },
+        "early_native_sum_fraction": 0.8651364395643226
+      }
+    },
+    "early_native_sum_note": "GRPO first-rollout contribution is the sum of its four per-update token suppression fractions divided by the sum over120 updates. This is86.51% of that unweighted sum, not the fraction of pooled suppressed tokens."
+  },
+  "interpretations": {
+    "pretrain": "Loss drops steeply early and then more slowly, while the logged cosine learning rate decays. This demonstrates fitting the training objective, not heldout quality. Three superseded observations remain in the image.",
+    "full_sft": "The mean loss is lower late in training but individual microbatches remain noisy. The last loss is above the final-window mean, so a single endpoint is a poor summary.",
+    "dpo": "The final ten-observation mean is lower, but the final median is slightly higher and the curve is not monotonic. Sparse changing preference microbatches do not establish a smooth convergence trajectory. The apparent learning-rate staircase and zeros come from eight-decimal logging.",
+    "cispo": "The late reward window is higher and the surrogate-loss mean lower, but reward retains substantial positive and negative variation. This is progress on the configured training reward, not proof of task correctness.",
+    "grpo": "Reward shifts upward while the recorded objective rises from near zero and settles at a small positive scale. At K=1 the mean-zero group advantages can cancel much of the scalar surrogate value when ratios are near1, while the KL term remains and the gradient need not vanish. The rising scalar alone is not evidence of degradation or divergence.",
+    "k4": "Repeated optimization of frozen rollouts moves importance ratios from near1; later fresh rollouts reset old-policy comparisons. The first rollout dominates observed extreme ratios and much of GRPO suppression. CISPO's cap is never reached in these samples. The measured average KL is similar, while individual peaks and endpoints differ; neither implies quality superiority."
+  },
+  "suggested_next_experiments": "None required for this figure readout. Testing generalization or an algorithm advantage would require separately scoped fixed-heldout evaluation and independent training seeds; no such result is inferred here."
+}
