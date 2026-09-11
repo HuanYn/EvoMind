@@ -1,0 +1,6 @@
+-r requirements-minimal.txt
+# Additional dependencies for the pinned local InternLM reward-model code.
+# SentencePiece 0.2.1 was used by the recorded remote reward-tokenizer workaround.
+sentencepiece==0.2.1
+protobuf>=6.33.5,<7
+einops>=0.8.1,<0.9

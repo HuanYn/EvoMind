@@ -1,0 +1,1588 @@
+{
+  "snapshot": "2026-09-11",
+  "scope": "Recorded full-split text benchmark results; one training seed and evaluation seed 42; no significance or published-score equivalence claim",
+  "metric_definitions": {
+    "acc,none": "Accuracy using unnormalized continuation log likelihood.",
+    "acc_norm,none": "Harness length-normalized continuation accuracy, when provided; not interchangeable with acc,none.",
+    "*_stderr,none": "Original harness standard errors, not across-training-seed uncertainty."
+  },
+  "protocol_caveat": "SFT/DPO ran locally; CISPO/GRPO ran on a server. Harness version, evaluator, loader, model and tokenizer hashes agree, but installed harness source hashes differ. No bitwise environment-equivalence claim.",
+  "models": {
+    "full_sft": {
+      "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+      "training_parent": "pretrain",
+      "tasks": {
+        "ceval-valid": {
+          "status": "completed",
+          "score": {
+            "alias": "ceval-valid",
+            "name": "ceval-valid",
+            "sample_len": 1346,
+            "acc,none": 0.22808320950965824,
+            "acc_stderr,none": 0.011469152327237575,
+            "acc_norm,none": 0.22808320950965824,
+            "acc_norm_stderr,none": 0.011469152327237575,
+            "sample_count": {
+              "acc,none": 1346,
+              "acc_norm,none": 1346
+            }
+          },
+          "split": "val",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "ceval/ceval-exam",
+                "revision": "3923b519fd180e689d0961bf3a032ece929742f3",
+                "filename": "ceval-exam.zip",
+                "version": "2023-08-31 CSV archive",
+                "sha256": "68786deeea68ff089c56563ee48fab8160da857b77b913437bb504d681fd8e20",
+                "bytes": 1548171,
+                "split": "val",
+                "subjects": 52,
+                "rows": 1346,
+                "license": "CC-BY-NC-SA-4.0",
+                "member_suffix": "_val.csv",
+                "upstream": "https://github.com/hkust-nlp/ceval"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/ceval-ceval-exam.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "ceval-valid",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_ceval-valid_v2/summary.json",
+          "original_summary_sha256": "a07ad4ff9fa70339f59bdb18718381b425066e33d9c7614628959a32c0d7fda9",
+          "original_results_sha256": "e1deed91fb26789cd5c3d01a727e7b1fd8277d663626db4e95ce4e811b053e4a",
+          "raw_results_hash_verified": true
+        },
+        "cmmlu": {
+          "status": "completed",
+          "score": {
+            "alias": "cmmlu",
+            "name": "cmmlu",
+            "sample_len": 11582,
+            "acc,none": 0.2502158521844241,
+            "acc_stderr,none": 0.004032156172101383,
+            "acc_norm,none": 0.2502158521844241,
+            "acc_norm_stderr,none": 0.004032156172101383,
+            "sample_count": {
+              "acc,none": 11582,
+              "acc_norm,none": 11582
+            }
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "haonan-li/cmmlu",
+                "resolved_repository": "lmlmcat/cmmlu",
+                "revision": "efcc940752ea4a1ea94d2727f11f83858d64fc8e",
+                "filename": "cmmlu_v1_0_1.zip",
+                "version": "1.0.1",
+                "sha256": "22ecf70b28bef447ee7d8aa5fe144f56996762f901a8537b03b7693773c672a6",
+                "bytes": 1078656,
+                "split": "test",
+                "subjects": 67,
+                "rows": 11582,
+                "license": "CC-BY-NC-4.0",
+                "member_suffix": ".csv",
+                "upstream": "https://github.com/haonan-li/CMMLU"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/cmmlu-cmmlu_v1_0_1.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "cmmlu",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_cmmlu_v2/summary.json",
+          "original_summary_sha256": "a813e091ddad7690e921e350b6c2f79c780da1655025cd3ed379bffba82e85d3",
+          "original_results_sha256": "f86b3f33a83e2425224bd6df59c90234793879ed25afaa2c9fc65f04619902f1",
+          "raw_results_hash_verified": true
+        },
+        "arc_easy": {
+          "status": "completed",
+          "score": {
+            "name": "arc_easy",
+            "alias": "arc_easy",
+            "sample_len": 2376,
+            "acc,none": 0.29924242424242425,
+            "acc_stderr,none": 0.009396447162309822,
+            "acc_norm,none": 0.3106060606060606,
+            "acc_norm_stderr,none": 0.009495260551195607
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "arc_easy",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_arc_easy_v2/summary.json",
+          "original_summary_sha256": "4dee4cab30c731c0df0af7d22d99e91c799e0cfefa9bdbe4f56a6f6cbdbbc94d",
+          "original_results_sha256": "16675b2288db13380bced56ea154dca60d8698d108dc9391e512fc1765e98db3",
+          "raw_results_hash_verified": true
+        },
+        "piqa": {
+          "status": "completed",
+          "score": {
+            "name": "piqa",
+            "alias": "piqa",
+            "sample_len": 1838,
+            "acc,none": 0.5408052230685527,
+            "acc_stderr,none": 0.011626910523588569,
+            "acc_norm,none": 0.5244831338411317,
+            "acc_norm_stderr,none": 0.011651830225709979
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "piqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_piqa_v2/summary.json",
+          "original_summary_sha256": "f9b2d34b13b060573b900e36baa0214acf48977ee8f60f39a1b01caabd31553a",
+          "original_results_sha256": "93e36a8787e410daa2c3c90aa0a668bc1feb54b37de5f57285fc341bb4ca77f8",
+          "raw_results_hash_verified": true
+        },
+        "openbookqa": {
+          "status": "completed",
+          "score": {
+            "name": "openbookqa",
+            "alias": "openbookqa",
+            "sample_len": 500,
+            "acc,none": 0.152,
+            "acc_stderr,none": 0.016071982367911755,
+            "acc_norm,none": 0.296,
+            "acc_norm_stderr,none": 0.020435342091896132
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "openbookqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_openbookqa_v2/summary.json",
+          "original_summary_sha256": "79b64c8f4208c307f46f7b2c5936160bff989a09ff7a52162608d4f1de5d79e9",
+          "original_results_sha256": "d27b164bc09c2519ed827d7ee1f3c4f0216724c5ff12353c8e9c9e3e09864713",
+          "raw_results_hash_verified": true
+        },
+        "hellaswag": {
+          "status": "completed",
+          "score": {
+            "name": "hellaswag",
+            "alias": "hellaswag",
+            "sample_len": 10042,
+            "acc,none": 0.26976697868950406,
+            "acc_stderr,none": 0.00442931578831048,
+            "acc_norm,none": 0.2758414658434575,
+            "acc_norm_stderr,none": 0.004460238879247387
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "hellaswag",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_hellaswag_v2/summary.json",
+          "original_summary_sha256": "3479ef855763d8e624968429bd3b1423e1ef96231f489b9f3afe7155fc33069a",
+          "original_results_sha256": "d28c4558cc1686e778d5186398a68bec0250931295f3b80f5d9b0c57858faa34",
+          "raw_results_hash_verified": true
+        },
+        "social_iqa": {
+          "status": "completed",
+          "score": {
+            "name": "social_iqa",
+            "alias": "social_iqa",
+            "sample_len": 1954,
+            "acc,none": 0.34646878198567044,
+            "acc_stderr,none": 0.010767480698921767
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "d99e5a37c6d61e2fbde64b595a2310751f35dfbb3fc66912de2f746e1c8eab8d",
+            "lora_sha256": null,
+            "task": "social_iqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/full_sft/harness_social_iqa_v2/summary.json",
+          "original_summary_sha256": "04535c87ed163c6112d0385aa8f4ed81f2b7be5c8bb89cf223e58448e0f6c43c",
+          "original_results_sha256": "2cb14e5fa6caebba4aa7263fdfd1f9d3afcc317eddde9c05f93b6b3456b445a0",
+          "raw_results_hash_verified": true
+        }
+      }
+    },
+    "dpo": {
+      "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+      "training_parent": "full_sft",
+      "tasks": {
+        "ceval-valid": {
+          "status": "completed",
+          "score": {
+            "alias": "ceval-valid",
+            "name": "ceval-valid",
+            "sample_len": 1346,
+            "acc,none": 0.22734026745913818,
+            "acc_stderr,none": 0.011453817638925355,
+            "acc_norm,none": 0.22734026745913818,
+            "acc_norm_stderr,none": 0.011453817638925355,
+            "sample_count": {
+              "acc,none": 1346,
+              "acc_norm,none": 1346
+            }
+          },
+          "split": "val",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "ceval/ceval-exam",
+                "revision": "3923b519fd180e689d0961bf3a032ece929742f3",
+                "filename": "ceval-exam.zip",
+                "version": "2023-08-31 CSV archive",
+                "sha256": "68786deeea68ff089c56563ee48fab8160da857b77b913437bb504d681fd8e20",
+                "bytes": 1548171,
+                "split": "val",
+                "subjects": 52,
+                "rows": 1346,
+                "license": "CC-BY-NC-SA-4.0",
+                "member_suffix": "_val.csv",
+                "upstream": "https://github.com/hkust-nlp/ceval"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/ceval-ceval-exam.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "ceval-valid",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_ceval-valid_v2/summary.json",
+          "original_summary_sha256": "d2ac7767d7f08a3611cd14a5d5d8b0fa8ff2d69ca70fe0dd610935eb75cc80e6",
+          "original_results_sha256": "8625c9c38f1268f6ebed149172e2803e5dcf6b651d4366c84b2b4a0e859d545e",
+          "raw_results_hash_verified": true
+        },
+        "cmmlu": {
+          "status": "completed",
+          "score": {
+            "alias": "cmmlu",
+            "name": "cmmlu",
+            "sample_len": 11582,
+            "acc,none": 0.2502158521844241,
+            "acc_stderr,none": 0.004032059879993103,
+            "acc_norm,none": 0.2502158521844241,
+            "acc_norm_stderr,none": 0.004032059879993103,
+            "sample_count": {
+              "acc,none": 11582,
+              "acc_norm,none": 11582
+            }
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "haonan-li/cmmlu",
+                "resolved_repository": "lmlmcat/cmmlu",
+                "revision": "efcc940752ea4a1ea94d2727f11f83858d64fc8e",
+                "filename": "cmmlu_v1_0_1.zip",
+                "version": "1.0.1",
+                "sha256": "22ecf70b28bef447ee7d8aa5fe144f56996762f901a8537b03b7693773c672a6",
+                "bytes": 1078656,
+                "split": "test",
+                "subjects": 67,
+                "rows": 11582,
+                "license": "CC-BY-NC-4.0",
+                "member_suffix": ".csv",
+                "upstream": "https://github.com/haonan-li/CMMLU"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/cmmlu-cmmlu_v1_0_1.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "cmmlu",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_cmmlu_v2/summary.json",
+          "original_summary_sha256": "3bd501e76e962a36b8c0d26741b1e0ad1eef178f8e5e1b04e1c6efeeaacf6d98",
+          "original_results_sha256": "f5a8afc39ea446ada148688338dec3850124a21c19f464bcbcb6e49409741505",
+          "raw_results_hash_verified": true
+        },
+        "arc_easy": {
+          "status": "completed",
+          "score": {
+            "name": "arc_easy",
+            "alias": "arc_easy",
+            "sample_len": 2376,
+            "acc,none": 0.30008417508417506,
+            "acc_stderr,none": 0.009404000558513351,
+            "acc_norm,none": 0.31102693602693604,
+            "acc_norm_stderr,none": 0.009498790639757606
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "arc_easy",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_arc_easy_v2/summary.json",
+          "original_summary_sha256": "648f7d5660a214a1287ca3fe6ab00328c33a6f88eaad74c285ff6fb947b2eec8",
+          "original_results_sha256": "5d0b2b3f982e46177002c3060ca1ed67779c129219d5a11fd5808e18989f6f81",
+          "raw_results_hash_verified": true
+        },
+        "piqa": {
+          "status": "completed",
+          "score": {
+            "name": "piqa",
+            "alias": "piqa",
+            "sample_len": 1838,
+            "acc,none": 0.5402611534276387,
+            "acc_stderr,none": 0.01162794298181717,
+            "acc_norm,none": 0.5255712731229597,
+            "acc_norm_stderr,none": 0.011650557844573578
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "piqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_piqa_v2/summary.json",
+          "original_summary_sha256": "6dea6fc8ad309007e92a8e38f3a2f99bd177a5c324f840a2e03d07d82ddd8079",
+          "original_results_sha256": "c1b8ec075f3a8a947b5708fe01965383835db0bff496a41c0d732dffa5b5ca78",
+          "raw_results_hash_verified": true
+        },
+        "openbookqa": {
+          "status": "completed",
+          "score": {
+            "name": "openbookqa",
+            "alias": "openbookqa",
+            "sample_len": 500,
+            "acc,none": 0.152,
+            "acc_stderr,none": 0.016071982367911755,
+            "acc_norm,none": 0.296,
+            "acc_norm_stderr,none": 0.020435342091896132
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "openbookqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_openbookqa_v2/summary.json",
+          "original_summary_sha256": "df6305086e21bf9aa448499287566e7308b47542721b11f3dab2d8fd282c5393",
+          "original_results_sha256": "60d4760d43988806ea30a6fba2eefebe9d615d6324f952b72df6380be77d1754",
+          "raw_results_hash_verified": true
+        },
+        "hellaswag": {
+          "status": "completed",
+          "score": {
+            "name": "hellaswag",
+            "alias": "hellaswag",
+            "sample_len": 10042,
+            "acc,none": 0.26976697868950406,
+            "acc_stderr,none": 0.00442931578831048,
+            "acc_norm,none": 0.2758414658434575,
+            "acc_norm_stderr,none": 0.004460238879247387
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "hellaswag",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_hellaswag_v2/summary.json",
+          "original_summary_sha256": "748e00c246a8e6285fbc905312b2b52fa9cce090d4a19d0c472336828ef8bce5",
+          "original_results_sha256": "c1cd45225c4d4a34e8b31b142a3460ecdeba7788293c225ec4f080f2bd1ca7e3",
+          "raw_results_hash_verified": true
+        },
+        "social_iqa": {
+          "status": "completed",
+          "score": {
+            "name": "social_iqa",
+            "alias": "social_iqa",
+            "sample_len": 1954,
+            "acc,none": 0.345957011258956,
+            "acc_stderr,none": 0.010763737399994288
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+            "lora_sha256": null,
+            "task": "social_iqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "f8c624744f8c1df7dd80a1c3ce27fffe76bbe632981fd0e91dd5f6b632886f49"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/evaluation/text_product_20260909/dpo/harness_social_iqa_v2/summary.json",
+          "original_summary_sha256": "7ff5a95706d30f7e3134ece9c005f094479b0020bbc3ed185ff9875d6471b3f3",
+          "original_results_sha256": "bbdc39509cfc33de5844ed0c7efca191d3290c7ad230c040ec70f31d103ed14f",
+          "raw_results_hash_verified": true
+        }
+      }
+    },
+    "cispo": {
+      "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+      "training_parent": "dpo",
+      "tasks": {
+        "ceval-valid": {
+          "status": "completed",
+          "score": {
+            "alias": "ceval-valid",
+            "name": "ceval-valid",
+            "sample_len": 1346,
+            "acc,none": 0.2288261515601783,
+            "acc_stderr,none": 0.011483069814149812,
+            "acc_norm,none": 0.2288261515601783,
+            "acc_norm_stderr,none": 0.011483069814149812,
+            "sample_count": {
+              "acc,none": 1346,
+              "acc_norm,none": 1346
+            }
+          },
+          "split": "val",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "ceval/ceval-exam",
+                "revision": "3923b519fd180e689d0961bf3a032ece929742f3",
+                "filename": "ceval-exam.zip",
+                "version": "2023-08-31 CSV archive",
+                "sha256": "68786deeea68ff089c56563ee48fab8160da857b77b913437bb504d681fd8e20",
+                "bytes": 1548171,
+                "split": "val",
+                "subjects": 52,
+                "rows": 1346,
+                "license": "CC-BY-NC-SA-4.0",
+                "member_suffix": "_val.csv",
+                "upstream": "https://github.com/hkust-nlp/ceval"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/ceval-ceval-exam.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "ceval-valid",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/ceval-valid/summary.json",
+          "original_summary_sha256": "aa10c103644f5e88c2772b0b543ce31cef2ee075ce954cb9b1076df8fd168070",
+          "original_results_sha256": "86231ed611152efdbed49c04426bb5241ae9d5965d72fb96436802b1f1effd21",
+          "raw_results_hash_verified": true
+        },
+        "cmmlu": {
+          "status": "completed",
+          "score": {
+            "alias": "cmmlu",
+            "name": "cmmlu",
+            "sample_len": 11582,
+            "acc,none": 0.24926610257295803,
+            "acc_stderr,none": 0.004028052402054942,
+            "acc_norm,none": 0.24926610257295803,
+            "acc_norm_stderr,none": 0.004028052402054942,
+            "sample_count": {
+              "acc,none": 11582,
+              "acc_norm,none": 11582
+            }
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "haonan-li/cmmlu",
+                "resolved_repository": "lmlmcat/cmmlu",
+                "revision": "efcc940752ea4a1ea94d2727f11f83858d64fc8e",
+                "filename": "cmmlu_v1_0_1.zip",
+                "version": "1.0.1",
+                "sha256": "22ecf70b28bef447ee7d8aa5fe144f56996762f901a8537b03b7693773c672a6",
+                "bytes": 1078656,
+                "split": "test",
+                "subjects": 67,
+                "rows": 11582,
+                "license": "CC-BY-NC-4.0",
+                "member_suffix": ".csv",
+                "upstream": "https://github.com/haonan-li/CMMLU"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/cmmlu-cmmlu_v1_0_1.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "cmmlu",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/cmmlu/summary.json",
+          "original_summary_sha256": "0328bb77c4654a14d54af2668f57f592e0ed98fee3e796a7f7c6eafd5d59d0f3",
+          "original_results_sha256": "e065884f3f071beb6872b3f70831ae8bcd993158e9a5bf98f9189bbdc2e7d754",
+          "raw_results_hash_verified": true
+        },
+        "arc_easy": {
+          "status": "completed",
+          "score": {
+            "name": "arc_easy",
+            "alias": "arc_easy",
+            "sample_len": 2376,
+            "acc,none": 0.30092592592592593,
+            "acc_stderr,none": 0.009411516193787045,
+            "acc_norm,none": 0.30723905723905726,
+            "acc_norm_stderr,none": 0.009466688832475192
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "arc_easy",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/arc_easy/summary.json",
+          "original_summary_sha256": "02fe37621bff37469e962e30489ff5220713f6f4d488ec1f9c46d5e6667f58b2",
+          "original_results_sha256": "e2b5e4591b0344c4508ef361e95b4163c311ed96711d9bb876f159243594ccc4",
+          "raw_results_hash_verified": true
+        },
+        "piqa": {
+          "status": "completed",
+          "score": {
+            "name": "piqa",
+            "alias": "piqa",
+            "sample_len": 1838,
+            "acc,none": 0.544613710554951,
+            "acc_stderr,none": 0.011619292444156876,
+            "acc_norm,none": 0.5337323177366703,
+            "acc_norm_stderr,none": 0.01163924552241405
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "piqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/piqa/summary.json",
+          "original_summary_sha256": "91fb65399e8d40ee07b99faf69d1f469b0add31ebfaecef8c5fba49fb722785e",
+          "original_results_sha256": "b15fd6b2f87f783d7c59fea868c650f312a407325b83fb4280585954ba1c15ea",
+          "raw_results_hash_verified": true
+        },
+        "openbookqa": {
+          "status": "completed",
+          "score": {
+            "name": "openbookqa",
+            "alias": "openbookqa",
+            "sample_len": 500,
+            "acc,none": 0.154,
+            "acc_stderr,none": 0.016158285192455334,
+            "acc_norm,none": 0.292,
+            "acc_norm_stderr,none": 0.020354375480530096
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "openbookqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/openbookqa/summary.json",
+          "original_summary_sha256": "90aff57bffee142c5db291cb729a5a66877fc989649929e4e2d8aef661b159e1",
+          "original_results_sha256": "d8d3f66c8383d7980bad8b67a368d34645b0bcb9cfb4e8591fe232fad6b3dafa",
+          "raw_results_hash_verified": true
+        },
+        "hellaswag": {
+          "status": "completed",
+          "score": {
+            "name": "hellaswag",
+            "alias": "hellaswag",
+            "sample_len": 10042,
+            "acc,none": 0.26946823341963755,
+            "acc_stderr,none": 0.0044277679963018075,
+            "acc_norm,none": 0.27614021111332404,
+            "acc_norm_stderr,none": 0.004461732908157097
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "hellaswag",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/hellaswag/summary.json",
+          "original_summary_sha256": "5540cd10337e29a222783676dd5ac53a1f6de2635479d72cff29e7ff4a83687e",
+          "original_results_sha256": "2473e4328a5da0e7c8646c801d36028eb9a4968699a26dd2137190c7d69390ae",
+          "raw_results_hash_verified": true
+        },
+        "social_iqa": {
+          "status": "completed",
+          "score": {
+            "name": "social_iqa",
+            "alias": "social_iqa",
+            "sample_len": 1954,
+            "acc,none": 0.3500511770726714,
+            "acc_stderr,none": 0.010793299549144226
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "171d23ad98338540617532ca101c47045210203c798547e781141dcb77d0f1ed",
+            "lora_sha256": null,
+            "task": "social_iqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/cispo/harness/social_iqa/summary.json",
+          "original_summary_sha256": "77e96fa511c0b2390d452445193dba0bbc8e472ce54e3d32767760f37fb52e89",
+          "original_results_sha256": "48192717136a0d6991f47fe43467a480841095318aa805ec62d95ab8ad7205ed",
+          "raw_results_hash_verified": true
+        }
+      }
+    },
+    "grpo": {
+      "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+      "training_parent": "dpo",
+      "tasks": {
+        "ceval-valid": {
+          "status": "completed",
+          "score": {
+            "alias": "ceval-valid",
+            "name": "ceval-valid",
+            "sample_len": 1346,
+            "acc,none": 0.23179791976225855,
+            "acc_stderr,none": 0.011532706330297446,
+            "acc_norm,none": 0.23179791976225855,
+            "acc_norm_stderr,none": 0.011532706330297446,
+            "sample_count": {
+              "acc,none": 1346,
+              "acc_norm,none": 1346
+            }
+          },
+          "split": "val",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "ceval/ceval-exam",
+                "revision": "3923b519fd180e689d0961bf3a032ece929742f3",
+                "filename": "ceval-exam.zip",
+                "version": "2023-08-31 CSV archive",
+                "sha256": "68786deeea68ff089c56563ee48fab8160da857b77b913437bb504d681fd8e20",
+                "bytes": 1548171,
+                "split": "val",
+                "subjects": 52,
+                "rows": 1346,
+                "license": "CC-BY-NC-SA-4.0",
+                "member_suffix": "_val.csv",
+                "upstream": "https://github.com/hkust-nlp/ceval"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/ceval-ceval-exam.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "ceval-valid",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/ceval-valid/summary.json",
+          "original_summary_sha256": "20439ad9f820e8c07cf77b3d63011a5baeb915bccafe5be3c43ddbd2744f30de",
+          "original_results_sha256": "4a9eb85ee05629801774d2d1d9c58e838546939ceb191a29945d5f7f5dee6bae",
+          "raw_results_hash_verified": true
+        },
+        "cmmlu": {
+          "status": "completed",
+          "score": {
+            "alias": "cmmlu",
+            "name": "cmmlu",
+            "sample_len": 11582,
+            "acc,none": 0.24987048868934553,
+            "acc_stderr,none": 0.004031137980099565,
+            "acc_norm,none": 0.24987048868934553,
+            "acc_norm_stderr,none": 0.004031137980099565,
+            "sample_count": {
+              "acc,none": 11582,
+              "acc_norm,none": 11582
+            }
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "pinned_local_original_csv",
+              "source": {
+                "repository": "haonan-li/cmmlu",
+                "resolved_repository": "lmlmcat/cmmlu",
+                "revision": "efcc940752ea4a1ea94d2727f11f83858d64fc8e",
+                "filename": "cmmlu_v1_0_1.zip",
+                "version": "1.0.1",
+                "sha256": "22ecf70b28bef447ee7d8aa5fe144f56996762f901a8537b03b7693773c672a6",
+                "bytes": 1078656,
+                "split": "test",
+                "subjects": 67,
+                "rows": 11582,
+                "license": "CC-BY-NC-4.0",
+                "member_suffix": ".csv",
+                "upstream": "https://github.com/haonan-li/CMMLU"
+              },
+              "archive": "artifacts/benchmarks/chinese_public/sources/cmmlu-cmmlu_v1_0_1.zip",
+              "adapter_sha256": "20c1224f6fc2736753468d9aff692b5af957e4f80e6f7c25052df614f7e2297b",
+              "source_spec_sha256": "7d85946e3435638bc6a503a995fdb9e1ffe5db9dc9b74123e15b13aa8f6e83d5",
+              "normalization": "none; upstream pandas read_csv and datasets feature conversion",
+              "remote_dataset_code_executed": false
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "cmmlu",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/cmmlu/summary.json",
+          "original_summary_sha256": "1e06039f0fb05b53c2a5308ee091adaa84cf88e17725142e229b2e5bedd756a5",
+          "original_results_sha256": "4cba14c14f57140152158a69a0b30650dfa53f7ae29741c00d96efb3346cb020",
+          "raw_results_hash_verified": true
+        },
+        "arc_easy": {
+          "status": "completed",
+          "score": {
+            "name": "arc_easy",
+            "alias": "arc_easy",
+            "sample_len": 2376,
+            "acc,none": 0.30134680134680136,
+            "acc_stderr,none": 0.009415259879351578,
+            "acc_norm,none": 0.30765993265993263,
+            "acc_norm_stderr,none": 0.009470292575830977
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "arc_easy",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/arc_easy/summary.json",
+          "original_summary_sha256": "3824b8e512f84fbae061d1d66287eba854d15028df64f2c475f48f59f3d275e2",
+          "original_results_sha256": "19290cfe7876092edbc2618061c1c8be1bb96a5ed7d3f9dd1f72c651aa0e2cfa",
+          "raw_results_hash_verified": true
+        },
+        "piqa": {
+          "status": "completed",
+          "score": {
+            "name": "piqa",
+            "alias": "piqa",
+            "sample_len": 1838,
+            "acc,none": 0.5462459194776932,
+            "acc_stderr,none": 0.011615817940161513,
+            "acc_norm,none": 0.5348204570184983,
+            "acc_norm_stderr,none": 0.011637500993816005
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "piqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/piqa/summary.json",
+          "original_summary_sha256": "a96597295b44365b6cd147700ce86225cb454fbd50668f83f9e9d5159391c255",
+          "original_results_sha256": "7fc5d8d2681d1008c7bcb03839b4798903fd638c34ce51ba5930d9985ed297c2",
+          "raw_results_hash_verified": true
+        },
+        "openbookqa": {
+          "status": "completed",
+          "score": {
+            "name": "openbookqa",
+            "alias": "openbookqa",
+            "sample_len": 500,
+            "acc,none": 0.154,
+            "acc_stderr,none": 0.016158285192455334,
+            "acc_norm,none": 0.292,
+            "acc_norm_stderr,none": 0.020354375480530096
+          },
+          "split": "test",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "openbookqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/openbookqa/summary.json",
+          "original_summary_sha256": "07f3ec5792b34328e9ececc2ee2940d0abcd82295fbe2468ee7f7f676ca72cbf",
+          "original_results_sha256": "b70535ef65545cfa4a9d2c349b2103d21d270dd1f302a6a640a5c697b58df9fd",
+          "raw_results_hash_verified": true
+        },
+        "hellaswag": {
+          "status": "completed",
+          "score": {
+            "name": "hellaswag",
+            "alias": "hellaswag",
+            "sample_len": 10042,
+            "acc,none": 0.2693686516630153,
+            "acc_stderr,none": 0.0044272514992366,
+            "acc_norm,none": 0.276638119896435,
+            "acc_norm_stderr,none": 0.004464217420693715
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "hellaswag",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/hellaswag/summary.json",
+          "original_summary_sha256": "c183e43f499e254989c9fb1fcef253558dd568d0045f7ce9e6c5f508df02e58d",
+          "original_results_sha256": "74781dbffd71741140e33bc27e5d9aab3bb0b629a9c25e90ec4455986e4043d1",
+          "raw_results_hash_verified": true
+        },
+        "social_iqa": {
+          "status": "completed",
+          "score": {
+            "name": "social_iqa",
+            "alias": "social_iqa",
+            "sample_len": 1954,
+            "acc,none": 0.35056294779938585,
+            "acc_stderr,none": 0.010796933233333169
+          },
+          "split": "validation",
+          "resolved_num_fewshot": 0,
+          "contract": {
+            "schema_version": 2,
+            "dataset_loading": {
+              "transport": "native_huggingface"
+            },
+            "checkpoint_sha256": "da9aad270fe765855e98de0123b9812b0d05b850e2b47f2af586e11ac2023fa1",
+            "lora_sha256": null,
+            "task": "social_iqa",
+            "harness": {
+              "version": "0.4.13",
+              "source_sha256": "14d2b8f660cef39d4537ab53c1e80082100272b781eb1a79529cd2ade5668cbf"
+            },
+            "limit": null,
+            "num_fewshot": "task_default",
+            "apply_chat_template": true,
+            "chat_template_args": {
+              "open_thinking": false
+            },
+            "batch_size": 1,
+            "dtype": "float16",
+            "backend": "hf_preinitialized_causal",
+            "seed": 42,
+            "bootstrap_iters": 100000,
+            "evaluator_sha256": "ba745b5d0e3ec7094f4323e971e1db61d960620eaa58201aa6335c8c8930fc1a",
+            "loader_sha256": "347532e13d91c27e276eeceb5a9362c1a47a1ba5e313fc805278e84f66aa8d9a",
+            "model_sha256": "8188a3165e9c9b8c1eac4c5889fbd67732cc0db54b10701d1a21a0526deb2c12",
+            "tokenizer_sha256": {
+              "tokenizer.json": "8bf5868abfc7ea919186b57e2b411adefe3b0922b53052c5839937e166b9d395",
+              "tokenizer_config.json": "e42b762555734279158ca292431c831fa387c48c35d9b1b205f4fc6c83b79d34"
+            }
+          },
+          "original_summary": "artifacts/remote_evidence_20260911/grpo/harness/social_iqa/summary.json",
+          "original_summary_sha256": "7fab0bdae38992e68e69cc26ce3348582a5216ceb883ca3b58929ceaf694a73c",
+          "original_results_sha256": "4b7e4e625ddc75c181d230fd2eb76b82b9864fba87c2dcbc5c475783104db061",
+          "raw_results_hash_verified": true
+        }
+      }
+    }
+  }
+}

@@ -428,6 +428,8 @@ def verify_teacher_mapping():
 def run_branch(branch, state, persist, base, execute_fn=execute):
     name = branch["name"]
     row = state["branches"].setdefault(name, {"status": "pending", "probes": []})
+    if row.get("remote_dispatch") and row.get("status") != "completed":
+        raise RuntimeError("Stage is assigned to a remote supervisor; verify/import that run before any local restart")
     if row.get("status") == "completed":
         verify_record(row["output"])
         return

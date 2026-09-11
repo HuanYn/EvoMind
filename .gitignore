@@ -13,3 +13,6 @@ dataset/*.jsonl
 dataset/*.parquet
 vision/
 .opencode
+profile_output/
+AGENTS.md
+EVOMIND_STATUS.md

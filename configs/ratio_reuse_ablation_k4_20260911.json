@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ratio_reuse_k4_lr1e6_20260911",
+  "scope": "mechanism ablation only; never a product-base selection or an upstream-recipe replacement",
+  "question": "After reusing one frozen rollout for multiple actor updates, when do GRPO's narrow clipping and CISPO's wide detached importance cap intervene?",
+  "parent_checkpoint": "artifacts/runs/text_product_20260909/dpo/full/weights/dpo_768.pth",
+  "data": "dataset/rlaif.jsonl",
+  "controlled_settings": {
+    "loss_types": ["grpo", "cispo"],
+    "num_generations": 6,
+    "max_seq_len": 768,
+    "max_gen_len": 1024,
+    "batch_size": 1,
+    "accumulation_steps": 1,
+    "updates_per_rollout": 4,
+    "max_optimizer_updates": 120,
+    "learning_rate": 1e-06,
+    "beta": 0.1,
+    "epsilon": 0.2,
+    "epsilon_high": 5.0,
+    "reward_model_dtype": "float32",
+    "seed": 42
+  },
+  "interpretation": {
+    "first_replay": "importance ratio is 1 before the first update in exact arithmetic; numerical evaluation may differ",
+    "grpo_intervention": "positive advantage with ratio > 1.2, or negative advantage with ratio < 0.8",
+    "cispo_intervention": "ratio > 5.0",
+    "claim_boundary": "The run tests optimization-mechanism behavior only. It does not establish a general-quality improvement."
+  }
+}

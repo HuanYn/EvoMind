@@ -1,0 +1,189 @@
+{
+  "snapshot": "2026-09-11",
+  "scope": "mechanism ablation only; not a product quality benchmark",
+  "cispo": {
+    "loss_type": "cispo",
+    "updates": 120,
+    "replay_total": 4,
+    "overall_mean": {
+      "ratio_mean": 1.001161304116249,
+      "ratio_p95": 1.036989551782608,
+      "ratio_max": 1.1700005640586217,
+      "grpo_suppressed_rate": 0.005210572476304757,
+      "cispo_capped_rate": 0,
+      "native_intervention_rate": 0,
+      "kl_penalty": 0.002980714627422761,
+      "reward": -1.5868513559301693
+    },
+    "by_replay_index": {
+      "1": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1,
+          "ratio_p95": 1,
+          "ratio_max": 1.0000003019968668,
+          "grpo_suppressed_rate": 0,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.001723491716014299,
+          "reward": -1.5868513559301693
+        }
+      },
+      "2": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.0010661085446675,
+          "ratio_p95": 1.0414190928141276,
+          "ratio_max": 1.163119868437449,
+          "grpo_suppressed_rate": 0.006155860920747121,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.0034113594689794504,
+          "reward": -1.5868513559301693
+        }
+      },
+      "3": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.0013495643933614,
+          "ratio_p95": 1.047461990515391,
+          "ratio_max": 1.2071490009625754,
+          "grpo_suppressed_rate": 0.006486541386887742,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.003599945223443986,
+          "reward": -1.5868513559301693
+        }
+      },
+      "4": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.0022295435269675,
+          "ratio_p95": 1.0590771238009136,
+          "ratio_max": 1.3097330848375957,
+          "grpo_suppressed_rate": 0.008199887597584166,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.0031880621012533084,
+          "reward": -1.5868513559301693
+        }
+      }
+    },
+    "interpretation": {
+      "grpo_suppressed_rate": "Counterfactual fraction outside GRPO's directional 1±epsilon clip rule.",
+      "cispo_capped_rate": "Fraction beyond CISPO's wide epsilon_high cap.",
+      "native_intervention_rate": "The intervention rate of the loss actually optimized in this run."
+    }
+  },
+  "grpo": {
+    "loss_type": "grpo",
+    "updates": 120,
+    "replay_total": 4,
+    "overall_mean": {
+      "ratio_mean": 1.0012506539622943,
+      "ratio_p95": 1.0371333837509156,
+      "ratio_max": 1.1555817812681197,
+      "grpo_suppressed_rate": 0.00550692728429567,
+      "cispo_capped_rate": 0,
+      "native_intervention_rate": 0.00550692728429567,
+      "kl_penalty": 0.002916842644966285,
+      "reward": -1.5855492422978084
+    },
+    "by_replay_index": {
+      "1": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.000027416149775,
+          "ratio_p95": 1.0013802766799926,
+          "ratio_max": 1.0045064091682434,
+          "grpo_suppressed_rate": 0,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0,
+          "kl_penalty": 0.0016584274848961893,
+          "reward": -1.5855492422978084
+        }
+      },
+      "2": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.0013618350028992,
+          "ratio_p95": 1.0418944358825684,
+          "ratio_max": 1.1724136273066204,
+          "grpo_suppressed_rate": 0.006024885177612305,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0.006024885177612305,
+          "kl_penalty": 0.003501417296259509,
+          "reward": -1.5855492422978084
+        }
+      },
+      "3": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.001878523826599,
+          "ratio_p95": 1.0480705181757608,
+          "ratio_max": 1.1973007837931315,
+          "grpo_suppressed_rate": 0.006201827149682989,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0.006201827149682989,
+          "kl_penalty": 0.003635604304630154,
+          "reward": -1.5855492422978084
+        }
+      },
+      "4": {
+        "updates": 30,
+        "mean": {
+          "ratio_mean": 1.0017348408699036,
+          "ratio_p95": 1.0571883042653403,
+          "ratio_max": 1.248106304804484,
+          "grpo_suppressed_rate": 0.009800996809887389,
+          "cispo_capped_rate": 0,
+          "native_intervention_rate": 0.009800996809887389,
+          "kl_penalty": 0.0028719214940792883,
+          "reward": -1.5855492422978084
+        }
+      }
+    },
+    "interpretation": {
+      "grpo_suppressed_rate": "Counterfactual fraction outside GRPO's directional 1±epsilon clip rule.",
+      "cispo_capped_rate": "Fraction beyond CISPO's wide epsilon_high cap.",
+      "native_intervention_rate": "The intervention rate of the loss actually optimized in this run."
+    }
+  },
+  "protocol": {
+    "rollout_batches_per_branch": 30,
+    "generations_per_prompt": 6,
+    "updates_per_rollout": 4,
+    "optimizer_updates_per_branch": 120,
+    "seed": 42,
+    "learning_rate": 0.000001,
+    "batch_size": 1,
+    "accumulation_steps": 1,
+    "prompt_token_cap": 768,
+    "generation_token_cap": 1024,
+    "policy_dtype": "bfloat16",
+    "reward_dtype": "float32",
+    "initial_checkpoint_sha256": "ccba444524c69d19a936646f296b89c13c3ee5bdc3f6cd30a037925a5b15ca2a",
+    "formal_training_difference": "Isolated 120-update probe, K=4, LR=1e-6, accumulation=1; not the full-run K=1, LR=3e-7, accumulation=2 recipe.",
+    "aggregation": "Unweighted means across the 120 recorded updates, or 30 updates at each replay index. ratio_p95 is mean per-update p95; ratio_max is mean per-update max, not a pooled quantile or global maximum.",
+    "raw_projection": "ratio_reuse_k4_20260911.jsonl preserves selected numeric fields for all 240 updates; original full metrics retained.",
+    "summary_validation": "Each published overall mean recomputed from the retained raw metric rows."
+  },
+  "receipts": {
+    "cispo": {
+      "status": "probe_complete",
+      "probe_only": true,
+      "stop_reason": "max_steps",
+      "checkpoint_optimizer_update": 120,
+      "original_metrics_sha256": "4ee3887231df03f67591016472edf9d3bb0a1ed0b216ebaaa226f5dea9ae1810",
+      "contract_sha256": "e7473bc58deeb6523bb0d5e4210c739002d949124f804eb368ca0fd16cfab1bd"
+    },
+    "grpo": {
+      "status": "probe_complete",
+      "probe_only": true,
+      "stop_reason": "max_steps",
+      "checkpoint_optimizer_update": 120,
+      "original_metrics_sha256": "add75bf400f7dee5e6f0597c257316661613eda57d6cc9471460d8c76d0074b4",
+      "contract_sha256": "d558e426195fe02315c7c1d854ac54f6c0872f247a448bcd8792c453c366b06f"
+    }
+  }
+}

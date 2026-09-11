@@ -1,0 +1,7 @@
+# Install PyTorch separately for your OS/device before using this file.
+# Text model, tokenizer, datasets and direct pretrain/SFT/DPO/torch-rollout imports.
+# This is a small dependency set, not a complete platform lockfile.
+datasets==3.6.0
+transformers==4.57.6
+numpy>=1.26.4,<3
+requests>=2.32.2,<3

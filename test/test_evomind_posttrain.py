@@ -1,10 +1,11 @@
 """CPU/stdlib orchestration contracts; no model imports or GPU discovery."""
+import copy
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import evomind_posttrain as pipeline
@@ -12,6 +13,27 @@ import evomind_continue as continuation
 import evomind_posttrain_evaluate as evaluation
 from evomind_run import atomic_json, sha256
 from test_evomind_runtime_receipts import emit_receipt_fixture
+
+
+def repository_relative_plan(plan):
+    """Compare frozen recipes across checkouts without changing their targets."""
+    # The checked-in historical plan has Windows paths even in a Linux clone.
+    # Pure paths parse that syntax without consulting the host filesystem.
+    path_type = PureWindowsPath if PureWindowsPath(plan["base_run"]).drive else PurePosixPath
+    repository = path_type(plan["base_run"]).parents[2]  # artifacts/runs/<run>
+
+    def normalize(value):
+        if isinstance(value, dict):
+            return {key: normalize(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [normalize(item) for item in value]
+        if isinstance(value, str):
+            path = path_type(value)
+            if path.is_absolute() and path.is_relative_to(repository):
+                return "<repository>/" + path.relative_to(repository).as_posix()
+        return value
+
+    return normalize(plan)
 
 
 class PosttrainTests(unittest.TestCase):
@@ -33,7 +55,8 @@ class PosttrainTests(unittest.TestCase):
         plan = pipeline.build_plan()
         branches = {b["name"]: b for b in plan["branches"]}
         self.assertEqual(set(branches), {"dpo", "grpo", "cispo", "agent_cispo", "lora", "distillation"})
-        self.assertEqual(json.loads(pipeline.PLAN.read_text(encoding="utf-8")), plan)
+        stored = json.loads(pipeline.PLAN.read_text(encoding="utf-8"))
+        self.assertEqual(repository_relative_plan(stored), repository_relative_plan(plan))
         scope = json.loads((pipeline.ROOT / "configs/text_alignment_scope.json").read_text(encoding="utf-8"))
         self.assertNotIn("agent_grpo", scope["required_coverage"])
         self.assertEqual(branches["agent_cispo"]["options"]["loss_type"], "cispo")
@@ -49,6 +72,32 @@ class PosttrainTests(unittest.TestCase):
         self.assertFalse(scope["human_review_required"])
         self.assertEqual(branches["grpo"]["data"], "dataset/rlaif.jsonl")
         self.assertEqual(branches["cispo"]["data"], "dataset/rlaif.jsonl")
+
+    def test_plan_relocation_preserves_recipe_values_and_relative_targets(self):
+        windows = {"base_run": r"E:\old\evomind\artifacts\runs\base",
+                   "run_dir": r"E:\old\evomind\artifacts\runs\posttrain",
+                   "branches": [{"data": "dataset/rlaif.jsonl", "options": {
+                       "epochs": 1, "num_generations": 6,
+                       "reward_model_path": r"E:\old\evomind\models\reward"}}]}
+        linux = {"base_run": "/tmp/clone/artifacts/runs/base",
+                 "run_dir": "/tmp/clone/artifacts/runs/posttrain",
+                 "branches": [{"data": "dataset/rlaif.jsonl", "options": {
+                     "epochs": 1, "num_generations": 6,
+                     "reward_model_path": "/tmp/clone/models/reward"}}]}
+        original = copy.deepcopy(windows)
+        self.assertEqual(repository_relative_plan(windows), repository_relative_plan(linux))
+        self.assertEqual(windows, original)
+        for changed_value in ("/tmp/clone/models/other_reward", "/tmp/external/models/reward"):
+            changed = copy.deepcopy(linux)
+            changed["branches"][0]["options"]["reward_model_path"] = changed_value
+            self.assertNotEqual(repository_relative_plan(windows), repository_relative_plan(changed))
+        for key, value in (("epochs", 2), ("num_generations", 4)):
+            changed = copy.deepcopy(linux)
+            changed["branches"][0]["options"][key] = value
+            self.assertNotEqual(repository_relative_plan(windows), repository_relative_plan(changed))
+        changed = copy.deepcopy(linux)
+        changed["run_dir"] = "/tmp/clone/artifacts/runs/other_run"
+        self.assertNotEqual(repository_relative_plan(windows), repository_relative_plan(changed))
 
     def test_probe_and_full_commands_are_isolated_and_base_not_chained(self):
         b = self.branch
@@ -116,6 +165,23 @@ class PosttrainTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(calls[1][calls[1].index("--from_resume")+1], "0")
         self.assertEqual(state["branches"]["dpo"]["status"], "completed")
+
+    def test_remote_dispatch_blocks_local_restart_before_any_work(self):
+        for status in ("remote_pending", "training", "failed"):
+            with self.subTest(status=status):
+                state = {"branches": {"dpo": {"status": status, "probes": [],
+                                               "remote_dispatch": {"run": "remote/formal"}}}}
+                original = copy.deepcopy(state)
+                execute, persist = Mock(), Mock()
+                with patch.object(pipeline, "RUN", self.root / "run"), \
+                     patch.object(pipeline, "validate_assets") as validate:
+                    with self.assertRaisesRegex(RuntimeError, "remote supervisor"):
+                        pipeline.run_branch(self.branch, state, persist, self.base, execute)
+                validate.assert_not_called()
+                execute.assert_not_called()
+                persist.assert_not_called()
+                self.assertEqual(state, original)
+                self.assertFalse((self.root / "run").exists())
 
     def test_non_oom_does_not_trigger_batch_fallback(self):
         calls = []

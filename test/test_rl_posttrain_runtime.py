@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from unittest import mock
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 from transformers import BatchEncoding
@@ -92,7 +93,7 @@ def arguments(directory, **changes):
                  save_dir=str(directory), save_weight="test", hidden_size=6, use_moe=0,
                  resume=None, from_resume=0, seed=42, epochs=1, batch_size=2,
                  accumulation_steps=1, max_steps=0, max_seq_len=3, max_gen_len=4, num_generations=3,
-                 save_interval=1,
+                 save_interval=1, ratio_diagnostics=False, updates_per_rollout=1,
                  beta=.1, loss_type="grpo", epsilon=.2, epsilon_high=5., grad_clip=1.,
                  gamma=1., lam=.95, mini_batch_size=1, ppo_update_iters=2,
                  clip_epsilon=.2, kl_coef=.02, cliprange_value=.2, vf_coef=.5, early_stop_kl=10.,
@@ -112,7 +113,9 @@ def prepared(args, algorithm, count=4):
     schedulers = {name: torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=20, eta_min=.0001)
                   for name, opt in optimizers.items()}
     session = runtime.TrainingSession(args, algorithm, models, optimizers, schedulers,
-                                      {"fixture": 1, "loss_type": args.loss_type}, total_batches=(count + args.batch_size - 1) // args.batch_size)
+                                      {"fixture": 1, "loss_type": args.loss_type,
+                                       "updates_per_rollout": getattr(args, "updates_per_rollout", 1)},
+                                      total_batches=(count + args.batch_size - 1) // args.batch_size)
     engine = TinyEngine(actor)
     components = dict(actor=actor, reference=reference, tokenizer=TinyTokenizer(), dataset=TinyDataset(count),
                       engine=engine, reward_fn=lambda prompts, responses: torch.tensor([
@@ -204,6 +207,99 @@ class RuntimeTests(unittest.TestCase):
             for key, value in full.models["actor"].state_dict().items():
                 self.assertTrue(torch.equal(value, resumed.models["actor"].state_dict()[key]), key)
             self.assertEqual(resumed.schedulers["actor"].state_dict(), full.schedulers["actor"].state_dict())
+
+    def test_legacy_prepared_arguments_preserve_explicit_k1_behavior(self):
+        directory = self.temporary()
+        for kind in ("grpo", "cispo"):
+            options = dict(loss_type=kind, accumulation_steps=2)
+            explicit, components = prepared(arguments(directory / f"explicit_{kind}", **options), "grpo", count=5)
+            runtime.run_grpo_prepared(explicit, **components)
+            legacy_args = arguments(directory / f"legacy_{kind}", **options)
+            del legacy_args.updates_per_rollout
+            del legacy_args.ratio_diagnostics
+            legacy, components = prepared(legacy_args, "grpo", count=5)
+            runtime.run_grpo_prepared(legacy, **components)
+            self.assertEqual(legacy.updates, explicit.updates)
+            torch.testing.assert_close(legacy.models["actor"].state_dict(), explicit.models["actor"].state_dict(),
+                                       rtol=0, atol=0)
+            torch.testing.assert_close(legacy.optimizers["actor"].state_dict(), explicit.optimizers["actor"].state_dict(),
+                                       rtol=0, atol=0)
+            self.assertEqual(legacy.schedulers["actor"].state_dict(), explicit.schedulers["actor"].state_dict())
+
+    def test_k4_resume_reuses_frozen_rollout_and_matches_uninterrupted_run(self):
+        directory = self.temporary()
+
+        def instrument_rewards(components):
+            original = components["reward_fn"]
+
+            def stochastic_rewards(prompts, responses):
+                rewards = original(prompts, responses)
+                # Exercise both RNG streams and make accidental rescoring visible.
+                return rewards + torch.rand_like(rewards) / 10 + random.random() / 10
+
+            components["reward_fn"] = mock.Mock(side_effect=stochastic_rewards)
+            return components["reward_fn"]
+
+        def metrics(session):
+            records = [json.loads(line) for line in (session.directory / "metrics.jsonl").read_text().splitlines()]
+            invocation_fields = {"invocation_id", "invocation_update", "resume_start_optimizer_update", "elapsed_seconds"}
+            return [{key: value for key, value in row.items() if key not in invocation_fields} for row in records]
+
+        for kind in ("grpo", "cispo"):
+            with self.subTest(loss_type=kind):
+                # Two batches (one short tail), two epochs, four updates per batch.
+                options = dict(loss_type=kind, epochs=2, updates_per_rollout=4, ratio_diagnostics=True)
+                full, components = prepared(arguments(directory / f"full_{kind}", **options), "grpo", count=3)
+                full_rewards = instrument_rewards(components)
+                runtime.run_grpo_prepared(full, **components)
+                self.assertEqual(components["engine"].calls, 4)
+                self.assertEqual(full_rewards.call_count, 4)
+                full_state = torch.load(full.path, map_location="cpu", weights_only=False)
+
+                split_dir = directory / f"split_{kind}"
+                first, components = prepared(arguments(split_dir, max_steps=2, **options), "grpo", count=3)
+                first_rewards = instrument_rewards(components)
+                runtime.run_grpo_prepared(first, **components)
+                self.assertEqual(components["engine"].calls, 1)
+                self.assertEqual(first_rewards.call_count, 1)
+                first_state = torch.load(first.path, map_location="cpu", weights_only=False)
+                pending = first_state["cursor"]["pending"]
+                self.assertEqual(pending["replay_index"], 2)
+                self.assertEqual(pending["replay_total"], 4)
+                self.assertEqual(first_state["cursor"]["next_batch"], 1)
+                summary = json.loads((split_dir / "summary.json").read_text())
+                self.assertTrue(summary["pending_rollout"])
+                self.assertFalse(summary["pending_ppo_rollout"])
+
+                # Resume for only replay 3: neither rollout sampling nor reward
+                # scoring is permitted while the saved group is still pending.
+                middle, components = prepared(arguments(split_dir, from_resume=1, max_steps=1, **options), "grpo", count=3)
+                components["engine"].rollout = mock.Mock(side_effect=AssertionError("Pending rollout resampled"))
+                components["reward_fn"] = mock.Mock(side_effect=AssertionError("Pending reward rescored"))
+                runtime.run_grpo_prepared(middle, **components)
+                components["engine"].rollout.assert_not_called()
+                components["reward_fn"].assert_not_called()
+                middle_state = torch.load(middle.path, map_location="cpu", weights_only=False)
+                self.assertEqual(middle_state["cursor"]["pending"]["replay_index"], 3)
+                for key in ("outputs", "positions", "mask", "old_logps", "ref_logps", "rewards", "advantages"):
+                    self.assertTrue(torch.equal(pending[key], middle_state["cursor"]["pending"][key]), key)
+
+                resumed, components = prepared(arguments(split_dir, from_resume=1, max_steps=100, **options), "grpo", count=3)
+                resumed_rewards = instrument_rewards(components)
+                runtime.run_grpo_prepared(resumed, **components)
+                self.assertEqual(components["engine"].calls, 3)
+                self.assertEqual(resumed_rewards.call_count, 3)
+                self.assertEqual(resumed.updates, 16)
+                self.assertTrue(resumed.exhausted())
+                resumed_state = torch.load(resumed.path, map_location="cpu", weights_only=False)
+                self.assertIsNone(resumed_state["cursor"]["pending"])
+                for key in ("models", "optimizers", "schedulers"):
+                    torch.testing.assert_close(resumed_state[key], full_state[key], rtol=0, atol=0)
+                self.assertEqual(resumed_state["cursor"], full_state["cursor"])
+                self.assertTrue(torch.equal(resumed_state["rng"]["torch"], full_state["rng"]["torch"]))
+                self.assertEqual(resumed_state["rng"]["python"], full_state["rng"]["python"])
+                np.testing.assert_equal(resumed_state["rng"]["numpy"], full_state["rng"]["numpy"])
+                self.assertEqual(metrics(resumed), metrics(full))
 
     def test_ppo_resume_inside_rollout_preserves_actor_critic_rng_and_cursor(self):
         directory = self.temporary()

@@ -1,8 +1,8 @@
 """Opt-in, single-process local execution for the unchanged MiniMind RL objectives.
 
 No changes to the official rollout engine, rewards, G, lengths or epoch defaults.
-Checkpoints are committed only after complete optimizer updates. PPO additionally
-persists its sampled rollout and minibatch cursor; resuming never resamples it.
+Checkpoints are committed only after complete optimizer updates. PPO and opt-in
+GRPO/CISPO rollout reuse persist sampled data and cursors for exact continuation.
 """
 from __future__ import annotations
 
@@ -174,6 +174,10 @@ def add_runtime_arguments(parser):
     parser.add_argument("--reward_device", default=None, help="Independent reward device; defaults to --device")
     parser.add_argument("--reward_dtype", choices=["float16", "bfloat16", "float32"], default="float16")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--ratio_diagnostics", action="store_true",
+                        help="Record GRPO suppression and CISPO importance-cap rates for an isolated comparison")
+    parser.add_argument("--updates_per_rollout", type=int, default=1,
+                        help="Experimental only: optimizer updates that reuse one frozen rollout; 1 preserves the main recipe")
 
 
 def masked_completion_logps(model, outputs, full_mask, positions):
@@ -199,6 +203,33 @@ def grpo_objective(logps, old_logps, ref_logps, rewards, mask, *, generations,
                                     ratio.clamp(1 - epsilon, 1 + epsilon) * advantages[:, None]) - beta * kl)
     loss = ((token_loss * mask).sum(1) / mask.sum(1).clamp(min=1)).mean()
     return loss, advantages
+
+
+def grpo_cispo_ratio_statistics(logps, old_logps, ref_logps, advantages, mask, *, epsilon, epsilon_high):
+    """Calculate comparable token-level GRPO/CISPO update-utilization metrics."""
+    valid = mask.bool()
+    if not valid.any().item():
+        raise ValueError("Ratio diagnostics require at least one valid completion token")
+    # Select before exponentiation/reduction: padding must not contribute,
+    # including padding sentinels whose exponentials would overflow.
+    selected_logps = logps.masked_select(valid)
+    ratio = (selected_logps - old_logps.masked_select(valid)).exp()
+    selected_advantages = advantages[:, None].expand_as(mask).masked_select(valid)
+    grpo_suppressed = ((selected_advantages > 0) & (ratio > 1 + epsilon)) | (
+        (selected_advantages < 0) & (ratio < 1 - epsilon))
+    cispo_capped = ratio > epsilon_high
+    delta = ref_logps.masked_select(valid) - selected_logps
+    kl_penalty = delta.exp() - delta - 1
+    selected_ratio = ratio.float()
+    return {
+        "grpo_suppressed_rate": float(grpo_suppressed.float().mean()),
+        "cispo_capped_rate": float(cispo_capped.float().mean()),
+        "ratio_mean": float(selected_ratio.mean()),
+        "ratio_p95": float(torch.quantile(selected_ratio, 0.95)),
+        "ratio_max": float(selected_ratio.max()),
+        "reference_logp_gap": float(delta.mean()),
+        "kl_penalty": float(kl_penalty.mean()),
+    }
 
 
 def ppo_objective(logps, old_logps, ref_logps, values, old_values, advantages, returns,
@@ -396,11 +427,12 @@ class TrainingSession:
                  "resume_start_optimizer_update": self.resume_start_optimizer_update,
                  "checkpoint_optimizer_update": self.checkpoint_optimizer_update,
                  "save_interval_optimizer_updates": self.args.save_interval,
-                 "recovery_policy": "Resume the last saved complete update only; a crash can lose up to save_interval-1 updates. PPO restores its saved pending rollout.",
+                 "recovery_policy": "Resume the last saved complete update only; a crash can lose up to save_interval-1 updates. PPO and opt-in GRPO/CISPO reuse restore their saved pending rollout.",
                  "metrics_policy": "Append-only invocation records. On resume, prior tail above resume_start_optimizer_update is historical/discarded, not part of the final model trajectory.",
                  "requested_max_steps": self.args.max_steps, "configured_epochs": self.args.epochs,
                  "cursor_epoch": self.cursor["epoch"], "cursor_next_batch": self.cursor["next_batch"],
-                 "pending_ppo_rollout": self.cursor["pending"] is not None,
+                 "pending_rollout": self.cursor["pending"] is not None,
+                 "pending_ppo_rollout": self.algorithm == "ppo" and self.cursor["pending"] is not None,
                  "resume_checkpoint": str(self.path) if self.path.exists() else None,
                  "final_checkpoint": final_checkpoint, "elapsed_seconds": self.elapsed(),
                  "elapsed_scope": "training-loop wall time including checkpoints; excludes initial model/input loading",
@@ -439,6 +471,14 @@ def run_grpo_prepared(session, *, actor, reference, tokenizer, dataset, engine, 
     args = session.args
     actor.train()
     reference.eval()
+    # The production recipe deliberately consumes a new rollout per update.  This
+    # opt-in branch is a mechanism ablation: it replays the *same* frozen
+    # rollout after the actor changes, so GRPO clipping / CISPO capping can be
+    # observed.  Pending state is checkpointed so a resume cannot resample an
+    # unfinished replay group.
+    if getattr(args, "updates_per_rollout", 1) > 1:
+        return run_grpo_rollout_reuse(session, actor=actor, reference=reference, tokenizer=tokenizer,
+                                      dataset=dataset, engine=engine, reward_fn=reward_fn)
     microsteps = 0
     while not session.exhausted():
         epoch = session.cursor["epoch"]
@@ -472,6 +512,14 @@ def run_grpo_prepared(session, *, actor, reference, tokenizer, dataset, engine, 
                   "policy_loss": float(policy.detach()), "aux_loss": float(aux.detach()),
                   "reward": float(rewards.mean()), "response_length": float(state["mask"].sum(1).mean()),
                   "advantage_population_std": float(advantages.std(unbiased=False))}
+        if getattr(args, "ratio_diagnostics", False):
+            ratio_stats = grpo_cispo_ratio_statistics(
+                logps.detach(), state["old_logps"], ref_logps.detach(), advantages.detach(), state["mask"],
+                epsilon=args.epsilon, epsilon_high=args.epsilon_high)
+            metric.update(ratio_stats)
+            metric["native_intervention_rate"] = (
+                ratio_stats["cispo_capped_rate"] if args.loss_type == "cispo"
+                else ratio_stats["grpo_suppressed_rate"])
         end_epoch = session.cursor["next_batch"] == session.total_batches
         # Preserve upstream tail scaling (/ accumulation_steps), including a short final window.
         if microsteps % args.accumulation_steps == 0 or end_epoch:
@@ -483,6 +531,92 @@ def run_grpo_prepared(session, *, actor, reference, tokenizer, dataset, engine, 
             microsteps = 0
         # Torch engine holds the same actor object. No stale remote snapshot exists.
         del result, state, inputs, logps, ref_logps, loss, policy, advantages, rewards, aux
+
+
+def _prepare_grpo_rollout_reuse(session, *, tokenizer, dataset, engine, reward_fn, reference):
+    """Sample, score and freeze one complete group for a multi-update ablation."""
+    args = session.args
+    epoch = session.cursor["epoch"]
+    prompts = _next_batch(session, dataset)
+    inputs = tokenizer(prompts, return_tensors="pt", padding=True, return_token_type_ids=False,
+                       padding_side="left", add_special_tokens=False).to(args.device)
+    if args.max_seq_len:
+        inputs["input_ids"] = inputs["input_ids"][:, -args.max_seq_len:]
+        inputs["attention_mask"] = inputs["attention_mask"][:, -args.max_seq_len:]
+    result = engine.rollout(prompt_ids=inputs["input_ids"], attention_mask=inputs["attention_mask"],
+                            num_generations=args.num_generations, max_new_tokens=args.max_gen_len, temperature=0.8)
+    state = completion_state(result, tokenizer, args.device)
+    expected = len(prompts) * args.num_generations
+    if len(result.completions) != expected or state["outputs"].size(0) != expected:
+        raise ValueError("Rollout did not preserve all generations in every reward group")
+    rewards = reward_fn(prompts, result.completions).to(args.device)
+    assert_finite("rollout-reuse log probabilities/rewards", state["old_logps"], rewards)
+    with torch.no_grad():
+        ref_logps, _ = masked_completion_logps(reference, state["outputs"], state["full_mask"], state["positions"])
+    grouped = rewards.view(-1, args.num_generations)
+    means = grouped.mean(dim=1).repeat_interleave(args.num_generations)
+    stds = grouped.std(dim=1, unbiased=False).repeat_interleave(args.num_generations)
+    advantages = (rewards - means) / (stds + 1e-4)
+    assert_finite("rollout-reuse frozen state", ref_logps, advantages)
+    state.update(epoch=epoch, prompts=prompts, rewards=rewards.detach(), ref_logps=ref_logps.detach(),
+                 advantages=advantages.detach(), replay_index=0,
+                 replay_total=args.updates_per_rollout)
+    # Cursor.pending blocks epoch advancement in TrainingSession.commit and is
+    # serialized at each optimizer boundary for exact replay-group recovery.
+    session.cursor["pending"] = state
+    del result, inputs, rewards, ref_logps, advantages
+
+
+def run_grpo_rollout_reuse(session, *, actor, reference, tokenizer, dataset, engine, reward_fn):
+    """Mechanism-only GRPO/CISPO comparison with K optimizer updates per rollout."""
+    args = session.args
+    while not session.exhausted():
+        if session.cursor["pending"] is None:
+            _prepare_grpo_rollout_reuse(session, tokenizer=tokenizer, dataset=dataset, engine=engine,
+                                        reward_fn=reward_fn, reference=reference)
+        state = session.cursor["pending"]
+        if state.get("replay_total") != args.updates_per_rollout:
+            raise ValueError("Resume rollout-reuse count differs from this invocation")
+        replay_index = int(state["replay_index"]) + 1
+        if replay_index < 1 or replay_index > args.updates_per_rollout:
+            raise RuntimeError("Invalid stored rollout-reuse cursor")
+        with _context(args):
+            logps, aux = masked_completion_logps(actor, state["outputs"], state["full_mask"], state["positions"])
+        aux = aux if args.use_moe else logps.new_zeros(())
+        policy, advantages = grpo_objective(
+            logps, state["old_logps"], state["ref_logps"], state["rewards"], state["mask"],
+            generations=args.num_generations, beta=args.beta, loss_type=args.loss_type,
+            epsilon=args.epsilon, epsilon_high=args.epsilon_high)
+        loss = policy + aux
+        assert_finite("rollout-reuse GRPO/CISPO loss", loss, logps, advantages)
+        loss.backward()
+        ratio_stats = grpo_cispo_ratio_statistics(
+            logps.detach(), state["old_logps"], state["ref_logps"], advantages.detach(), state["mask"],
+            epsilon=args.epsilon, epsilon_high=args.epsilon_high)
+        metric = {
+            "epoch": state["epoch"], "batch": session.cursor["next_batch"],
+            "loss": float(policy.detach() + aux.detach()), "policy_loss": float(policy.detach()),
+            "aux_loss": float(aux.detach()), "reward": float(state["rewards"].mean()),
+            "response_length": float(state["mask"].sum(1).mean()),
+            "advantage_population_std": float(advantages.std(unbiased=False)),
+            "rollout_reuse_total": args.updates_per_rollout,
+            "rollout_reuse_index": replay_index,
+            **ratio_stats,
+            "native_intervention_rate": (ratio_stats["cispo_capped_rate"] if args.loss_type == "cispo"
+                                         else ratio_stats["grpo_suppressed_rate"]),
+        }
+        final_replay = replay_index == args.updates_per_rollout
+        if final_replay:
+            # This exact replay has been consumed.  The checkpoint may now
+            # advance the dataset cursor and does not retain its rollout.
+            session.cursor["pending"] = None
+        else:
+            state["replay_index"] = replay_index
+        checked_update([actor], list(session.optimizers.values()), list(session.schedulers.values()), args.grad_clip)
+        session.commit(metric)
+        if session.limit_reached():
+            return
+        del logps, aux, policy, advantages, loss
 
 
 def _prepare_ppo_rollout(session, *, actor, critic, reference, tokenizer, dataset, engine, reward_fn):
@@ -583,6 +717,10 @@ def _validate_runtime(args, algorithm):
         raise ValueError("Invalid positive training dimensions or negative --max_steps")
     if algorithm == "grpo" and args.num_generations < 2:
         raise ValueError("GRPO/CISPO requires complete groups with G >= 2")
+    if algorithm == "grpo" and args.updates_per_rollout < 1:
+        raise ValueError("--updates_per_rollout must be positive")
+    if algorithm == "grpo" and args.updates_per_rollout > 1 and args.accumulation_steps != 1:
+        raise ValueError("rollout-reuse requires --accumulation_steps 1 so every replay observes an updated actor")
     if algorithm == "ppo" and min(args.ppo_update_iters, args.mini_batch_size) < 1:
         raise ValueError("PPO update/minibatch dimensions must be positive")
     args.reward_device = args.reward_device or args.device
@@ -651,7 +789,7 @@ def run_local(args, upstream, algorithm):
         optimizers["critic"] = optimizer_class(models["critic"].parameters(), lr=args.critic_learning_rate)
         total_steps = math.ceil(batches * args.epochs * args.ppo_update_iters * max(1, math.ceil(args.batch_size / args.mini_batch_size)) / args.accumulation_steps)
     else:
-        total_steps = math.ceil(batches / args.accumulation_steps) * args.epochs
+        total_steps = math.ceil(batches / args.accumulation_steps) * args.epochs * args.updates_per_rollout
     schedulers = {name: torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, T_max=total_steps, eta_min=optimizer.param_groups[0]["lr"] / 10)
         for name, optimizer in optimizers.items()}
