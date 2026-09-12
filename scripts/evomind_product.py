@@ -121,6 +121,11 @@ def selected_checkpoint():
     selected = receipt["selected_name"]
     if receipt["selected"] != candidates[selected] or state["selected_name"] != selected:
         raise ValueError("Selected checkpoint is not the accepted training artifact")
+    if receipt.get("verification_mode") == "imported_native_v1":
+        from evomind_accept_text import verify_imported_receipt
+        if state.get("status") != "text_selected":
+            raise ValueError("Imported acceptance disagrees with product state")
+        return verify_imported_receipt(receipt)
     for record in receipt["evaluation_evidence"]:
         training.verify_record(record)
     # Recheck native contracts and raw prediction hashes; a summary alone is not enough.
