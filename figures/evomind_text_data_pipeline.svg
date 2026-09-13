@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1780 980" width="1780" height="980" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="EvoMind · Data &amp; Training Pipeline">
+  <title>EvoMind · Data &amp; Training Pipeline</title><rect width="1780" height="980" fill="#FFFFFF" />
+  <defs>
+    <marker id="arrow-default" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#555555" />
+    </marker>
+    <marker id="arrow-c0" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#19191D" />
+    </marker>
+    <marker id="arrow-c1" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#626773" />
+    </marker>
+    <marker id="arrow-c2" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#477AB5" />
+    </marker>
+    <marker id="arrow-c3" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#648C45" />
+    </marker>
+    <marker id="arrow-c4" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#8355AD" />
+    </marker>
+    <marker id="arrow-c5" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#AE812D" />
+    </marker>
+    <marker id="arrow-c6" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#BA7550" />
+    </marker>
+    <marker id="arrow-c7" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#93989D" />
+    </marker>
+  <filter id="module-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#282432" flood-opacity="0.19" /></filter><filter id="panel-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#282432" flood-opacity="0.12" /></filter></defs>
+  <rect x="30" y="116" width="337" height="443" fill="#EDF3FA" rx="24" stroke="none" /><rect x="383" y="116" width="370" height="443" fill="#ECF4E5" rx="24" stroke="none" /><rect x="770" y="116" width="420" height="443" fill="#FFF4CD" rx="24" stroke="none" /><rect x="1205" y="116" width="549" height="591" fill="#FAE7D8" rx="24" stroke="none" /><path d="M 195.0,305.0 L 195.0,385.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,305.0 L 565.0,385.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 973.0,305.0 L 973.0,385.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1460.0,305.0 L 1460.0,385.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1703.0,259.0 L 1734.0,259.0 L 1734.0,645.0 L 1655.0,645.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 346.0,440.0 L 400.0,440.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 730.0,440.0 L 778.0,440.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1168.0,440.0 L 1265.0,440.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1168.0,440.0 L 1180.0,440.0 L 1180.0,645.0 L 1265.0,645.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,691.0 L 565.0,777.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1655.0,440.0 L 1690.0,440.0 L 1690.0,823.0 L 1655.0,823.0" stroke="#8355AD" stroke-width="3" fill="none" marker-end="url(#arrow-c4)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1460.0,495.0 L 1460.0,558.0 L 1220.0,558.0 L 1220.0,748.0 L 850.0,748.0 L 850.0,823.0 L 760.0,823.0" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <rect x="44.0" y="213.0" width="302.0" height="92.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-pre_data" filter="url(#module-shadow)" />
+  <text x="195.0" y="253.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="pre_data" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">pretrain_t2t_mini.jsonl</text>
+  <text x="195.0" y="280.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="pre_data" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">1,270,238 records</text>
+  <rect x="400.0" y="213.0" width="330.0" height="92.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-sft_data" filter="url(#module-shadow)" />
+  <text x="565.0" y="253.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="sft_data" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">sft_t2t_mini.jsonl</text>
+  <text x="565.0" y="280.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="sft_data" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">905,718 records</text>
+  <rect x="808.0" y="213.0" width="330.0" height="92.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-dpo_data" filter="url(#module-shadow)" />
+  <text x="973.0" y="253.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="dpo_data" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">dpo.jsonl</text>
+  <text x="973.0" y="280.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="dpo_data" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">17,166 preference pairs</text>
+  <rect x="1217.0" y="213.0" width="486.0" height="92.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-rl_data" filter="url(#module-shadow)" />
+  <text x="1460.0" y="253.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="rl_data" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">rlaif.jsonl</text>
+  <text x="1460.0" y="280.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="rl_data" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">19,502 prompts</text>
+  <rect x="44.0" y="385.0" width="302.0" height="110.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-pre" filter="url(#module-shadow)" />
+  <text x="195.0" y="421.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="pre" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Pretrain · 2 epochs</text>
+  <text x="195.0" y="448.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="pre" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Next-token CE</text>
+  <text x="195.0" y="475.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="pre" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Random initialization</text>
+  <rect x="400.0" y="385.0" width="330.0" height="110.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-sft" filter="url(#module-shadow)" />
+  <text x="565.0" y="434.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="sft" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">SFT · 2 epochs</text>
+  <text x="565.0" y="461.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="sft" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Assistant-only CE</text>
+  <rect x="778.0" y="385.0" width="390.0" height="110.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-dpo" filter="url(#module-shadow)" />
+  <text x="973.0" y="434.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="dpo" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">DPO · 1 epoch</text>
+  <text x="973.0" y="461.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="dpo" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Preference pairs + reference</text>
+  <rect x="1265.0" y="385.0" width="390.0" height="110.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-cispo" filter="url(#module-shadow)" />
+  <text x="1460.0" y="434.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="cispo" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">CISPO · 1 epoch</text>
+  <text x="1460.0" y="461.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="cispo" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Selected text base</text>
+  <rect x="1265.0" y="599.0" width="390.0" height="92.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-grpo" filter="url(#module-shadow)" />
+  <text x="1460.0" y="639.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="grpo" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">GRPO · 1 epoch</text>
+  <text x="1460.0" y="666.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="grpo" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Same-DPO comparison</text>
+  <rect x="385.0" y="599.0" width="360.0" height="92.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-agent_data" filter="url(#module-shadow)" />
+  <text x="565.0" y="639.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="agent_data" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">agent_rl.jsonl</text>
+  <text x="565.0" y="666.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="agent_data" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">39,988 tool-use records</text>
+  <rect x="370.0" y="777.0" width="390.0" height="92.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-agent" filter="url(#module-shadow)" />
+  <text x="565.0" y="817.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="agent" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Agentic-RL / CISPO</text>
+  <text x="565.0" y="844.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="agent" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Prepared · not yet trained</text>
+  <rect x="1265.0" y="777.0" width="390.0" height="92.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-vlm" filter="url(#module-shadow)" />
+  <text x="1460.0" y="817.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="vlm" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">EvoMind-V</text>
+  <text x="1460.0" y="844.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="vlm" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Dense single-image training</text>
+  <text x="42.0" y="52.0" font-size="36" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">EvoMind · Data &amp; Training Pipeline</text>
+  <text x="42.0" y="91.0" font-size="22" fill="#626773" text-anchor="start">Source: jingyaogong/minimind_dataset · pinned revision 312afb4f… · counts below are records / preference pairs.</text>
+  <text x="55.0" y="160.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(a) Pretrain</text>
+  <text x="390.0" y="160.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(b) Supervised Fine-Tuning</text>
+  <text x="795.0" y="160.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(c) Preference Optimization</text>
+  <text x="1210.0" y="160.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(d) Online RL</text>
+  <text x="865.0" y="919.0" font-size="20" fill="#626773" text-anchor="start">GRPO / CISPO: G=6 · frozen reward model + rules</text>
+  <text x="865.0" y="950.0" font-size="20" fill="#626773" text-anchor="start">Same DPO parent · 1 epoch / 9,751 updates each</text>
+  <text x="48.0" y="865.0" font-size="20" fill="#626773" text-anchor="start">Solid arrows: actual weight lineage</text>
+  <text x="48.0" y="901.0" font-size="20" fill="#626773" text-anchor="start">Dashed: data feed / planned extension</text>
+</svg>

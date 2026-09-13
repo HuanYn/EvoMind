@@ -1,0 +1,447 @@
+{
+  "title": "EvoMind · Data & Training Pipeline",
+  "canvas": {
+    "width": 1780,
+    "height": 980
+  },
+  "style": {
+    "font_family": "Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+    "font_size": 22,
+    "bg_color": "#FFFFFF",
+    "palette": [
+      "#19191D",
+      "#626773",
+      "#477AB5",
+      "#648C45",
+      "#8355AD",
+      "#AE812D",
+      "#BA7550",
+      "#93989D"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "pre_data",
+      "label": "pretrain_t2t_mini.jsonl\n1,270,238 records",
+      "x": 195,
+      "y": 259,
+      "width": 302,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "sft_data",
+      "label": "sft_t2t_mini.jsonl\n905,718 records",
+      "x": 565,
+      "y": 259,
+      "width": 330,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "dpo_data",
+      "label": "dpo.jsonl\n17,166 preference pairs",
+      "x": 973,
+      "y": 259,
+      "width": 330,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "rl_data",
+      "label": "rlaif.jsonl\n19,502 prompts",
+      "x": 1460,
+      "y": 259,
+      "width": 486,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "pre",
+      "label": "Pretrain · 2 epochs\nNext-token CE\nRandom initialization",
+      "x": 195,
+      "y": 440,
+      "width": 302,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "sft",
+      "label": "SFT · 2 epochs\nAssistant-only CE",
+      "x": 565,
+      "y": 440,
+      "width": 330,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "dpo",
+      "label": "DPO · 1 epoch\nPreference pairs + reference",
+      "x": 973,
+      "y": 440,
+      "width": 390,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "cispo",
+      "label": "CISPO · 1 epoch\nSelected text base",
+      "x": 1460,
+      "y": 440,
+      "width": 390,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "grpo",
+      "label": "GRPO · 1 epoch\nSame-DPO comparison",
+      "x": 1460,
+      "y": 645,
+      "width": 390,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "agent_data",
+      "label": "agent_rl.jsonl\n39,988 tool-use records",
+      "x": 565,
+      "y": 645,
+      "width": 360,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "agent",
+      "label": "Agentic-RL / CISPO\nPrepared · not yet trained",
+      "x": 565,
+      "y": 823,
+      "width": 390,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "vlm",
+      "label": "EvoMind-V\nDense single-image training",
+      "x": 1460,
+      "y": 823,
+      "width": 390,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "pre_data",
+      "to": "pre",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "sft_data",
+      "to": "sft",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "dpo_data",
+      "to": "dpo",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "rl_data",
+      "to": "cispo",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "rl_data",
+      "to": "grpo",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1734,
+          259
+        ],
+        [
+          1734,
+          645
+        ]
+      ]
+    },
+    {
+      "from": "pre",
+      "to": "sft",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "sft",
+      "to": "dpo",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "dpo",
+      "to": "cispo",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "dpo",
+      "to": "grpo",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1180,
+          440
+        ],
+        [
+          1180,
+          645
+        ]
+      ]
+    },
+    {
+      "from": "agent_data",
+      "to": "agent",
+      "color": "#19191D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "cispo",
+      "to": "vlm",
+      "color": "#8355AD",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1690,
+          440
+        ],
+        [
+          1690,
+          823
+        ]
+      ]
+    },
+    {
+      "from": "cispo",
+      "to": "agent",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1460,
+          558
+        ],
+        [
+          1220,
+          558
+        ],
+        [
+          1220,
+          748
+        ],
+        [
+          850,
+          748
+        ],
+        [
+          850,
+          823
+        ]
+      ]
+    }
+  ],
+  "groups": [],
+  "labels": [
+    {
+      "text": "EvoMind · Data & Training Pipeline",
+      "x": 42,
+      "y": 52,
+      "font_size": 36,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Source: jingyaogong/minimind_dataset · pinned revision 312afb4f… · counts below are records / preference pairs.",
+      "x": 42,
+      "y": 91,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(a) Pretrain",
+      "x": 55,
+      "y": 160,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "(b) Supervised Fine-Tuning",
+      "x": 390,
+      "y": 160,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "(c) Preference Optimization",
+      "x": 795,
+      "y": 160,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "(d) Online RL",
+      "x": 1210,
+      "y": 160,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "GRPO / CISPO: G=6 · frozen reward model + rules",
+      "x": 865,
+      "y": 919,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Same DPO parent · 1 epoch / 9,751 updates each",
+      "x": 865,
+      "y": 950,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Solid arrows: actual weight lineage",
+      "x": 48,
+      "y": 865,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Dashed: data feed / planned extension",
+      "x": 48,
+      "y": 901,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    }
+  ],
+  "panels": [
+    {
+      "x": 30,
+      "y": 116,
+      "width": 337,
+      "height": 443,
+      "fill": "#EDF3FA",
+      "shadow": false
+    },
+    {
+      "x": 383,
+      "y": 116,
+      "width": 370,
+      "height": 443,
+      "fill": "#ECF4E5",
+      "shadow": false
+    },
+    {
+      "x": 770,
+      "y": 116,
+      "width": 420,
+      "height": 443,
+      "fill": "#FFF4CD",
+      "shadow": false
+    },
+    {
+      "x": 1205,
+      "y": 116,
+      "width": 549,
+      "height": 591,
+      "fill": "#FAE7D8",
+      "shadow": false
+    }
+  ]
+}

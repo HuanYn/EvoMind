@@ -1,6 +1,6 @@
 # EvoMind
 
-**从文本基座到视觉理解的个人大模型实践项目**
+**从文本训练到单图理解的个人大模型实践与技术报告**
 
 中文 | [English](README_en.md)
 
@@ -8,9 +8,11 @@
 
 ## 项目介绍
 
-我希望通过 EvoMind，把一个小型语言模型从预训练、指令微调到偏好优化、在线强化学习的过程完整跑通，再把它扩展到图像和视频理解。项目由 YH 维护，使用个人电脑与单卡服务器完成训练，记录每个阶段的数据、配置、曲线、权重关系和评测结果。
+我希望通过 EvoMind，把一个小型语言模型从预训练、指令微调到偏好优化、在线强化学习的过程完整跑通，再逐步扩展到视觉理解。项目由 YH 维护，使用个人电脑与单卡服务器完成训练。这份 README 按模型结构、数据流、训练曲线和独立评测组织，记录我实际做了什么、结果支持什么，以及还需要补齐什么。
 
-当前文本模型约 **64M 参数**，已完成 Pretrain、SFT、DPO，以及从同一 DPO 权重出发的 GRPO / CISPO 对照。视觉部分在 [evomind-v 分支](https://github.com/HuanYn/evomind/tree/evomind-v)推进。
+当前文本模型约 **64M 参数，hidden size 768、8 层、6,400 词表**，已完成 Pretrain、SFT、DPO，以及从同一 DPO 权重出发的 GRPO / CISPO 对照。按既定工程筛选规则，CISPO 已被选为 Dense 单图训练的文本初始化；这一选择不表示 CISPO 显著优于 GRPO。
+
+第一版范围是 **已验收文本基座 → Dense 单图完整训练 → 原定六图评测 → 单图网页推理 → 技术报告**。截至 2026-09-12 的记录，单图正式训练仍在进行，最终权重与网页验收待完成。多图、视频和 MoE 视觉列入后续扩展。视觉代码与记录发布在 [evomind-v 分支](https://github.com/HuanYn/evomind/tree/evomind-v)，本机使用独立 Git checkout 管理。
 
 这个仓库主要包含：
 
@@ -20,7 +22,7 @@
 - 机制复现：同一 rollout 多次更新的 GRPO / CISPO 短对照，记录重要性比率与剪裁触发情况。
 - 本地体验：支持多轮对话、流式输出和思考开关的 EvoMind Studio。
 
-> 本次发布是文本阶段的代码与结果快照。模型权重和原始语料单独存放；视觉训练结果将在完成后更新。
+> 本页的实测结果来自 Dense 文本模型。MoE 架构、Agent 入口和视觉扩展各自标明完成状态；模型权重与原始语料单独存放。
 
 ## 快速复现
 
@@ -59,10 +61,10 @@ python -B scripts/evomind_prepare_assets.py text
 正式训练使用独立的阶段入口。默认只打印命令计划，添加 `--execute` 才会启动训练；传给底层 trainer 的参数写在 `--` 后。下面先查看 SFT 的运行计划：
 
 ```powershell
-python -B scripts/evomind_reproduce.py train sft --dry-run -- --device cuda --epochs 2 --batch_size 8 --accumulation_steps 2 --max_seq_len 768 --learning_rate 1e-5
+python -B scripts/evomind_reproduce.py train sft --dry-run -- --device cuda --epochs 2 --batch_size 8 --accumulation_steps 2 --max_seq_len 768 --learning_rate 1e-5 --hidden_size 768 --num_hidden_layers 8 --from_weight pretrain
 ```
 
-路径、完整五阶段命令、精度和续训参数详见[复现指南](docs/REPRODUCIBILITY.md)。
+这条计划对应从 `out/pretrain_768.pth` 初始化的完整 SFT 配方；正式执行前需先完成预训练或准备兼容的父权重。复现本页的在线 RL 对照时，GRPO 和 CISPO 都要显式使用 `--from_weight dpo` 并指向同一个 DPO 权重目录。路径、完整五阶段命令、精度和续训参数详见[复现指南](docs/REPRODUCIBILITY.md)。
 
 ### 4. 本地聊天
 
@@ -73,19 +75,15 @@ python -m pip install streamlit==1.50.0
 python -m streamlit run scripts/evomind_webui.py
 ```
 
-当前加载器对应 **768 维、8 层**模型，支持纯模型权重与含 `model` 字段的训练 checkpoint，并检查所有参数名与形状。MoE 开关需要结构匹配的 MoE 权重。页面较长上下文选项用于外推体验；当前主线 SFT 的实际长度为 768。
+当前加载器对应 **768 维、8 层、6,400 词表**模型，支持纯模型权重与含 `model` 字段的训练 checkpoint，并检查所有参数名与形状。MoE 开关需要结构匹配的 MoE 权重。页面较长上下文选项用于外推体验；当前主线 SFT 的实际长度为 768。界面用于体验多轮输入、流式输出和思考开关；页面截图或一次看起来合理的回答，不能替代后文的评测。
 
 ## 模型结构
 
-```text
-文本 → BPE Tokenizer → Embedding
-                         ↓
-      8 × Transformer Block
-      ├─ RMSNorm → Q/K/V → Q/K Norm → RoPE → GQA → 残差相加
-      └─ RMSNorm → SwiGLU FFN → 残差相加
-                         ↓
-               RMSNorm → LM Head → 下一个 token
-```
+### Dense：本轮实际训练的文本模型
+
+![EvoMind Dense 架构：8 层 Decoder、GQA 和 SwiGLU](figures/evomind_dense_architecture.svg)
+
+图中主干表示 token 从输入到输出的路径，展开部分对应一个 Decoder Block。输入先经 RMSNorm，再投影为 Q/K/V；**Q/K Norm 和 RoPE 作用于 Q、K**，V 直接参与注意力加权。注意力输出经过线性投影与第一次残差相加，随后由 RMSNorm、SwiGLU 和第二次残差完成这一层。最后的 RMSNorm 与 LM Head 把隐藏状态转换为下一 token 的词表 logits，生成时再按采样参数选出 token。
 
 | 配置 | EvoMind Dense |
 |---|---:|
@@ -100,32 +98,43 @@ python -m streamlit run scripts/evomind_webui.py
 | FFN | SwiGLU |
 | Embedding / LM Head | 共享权重 |
 
-四个 KV 头服务八个 Q 头，在每个 token 的注意力计算中共享 K/V；缓存保留四个 KV 头。Dense 与 MoE 代码使用相同的注意力结构，差异主要在 FFN。当前结果对应上述 Dense 配置，早期 19M / 16K 词表实验单独归档。
+四个 KV 头服务八个 Q 头，每两个 Q 头共享一组 K/V；缓存保留四个 KV 头。SwiGLU 的 gate 与 up 两条投影均扩展到 2,432 维，逐元素相乘后再投影回 768 维。Embedding 与 LM Head 共享同一组权重。当前结果对应上述配置，早期 hidden size 384 / 16K 词表实验单独归档。
+
+图示依据：[模型实现](model/model_minimind.py)、[本轮预训练/SFT 配置](configs/text_official_mini.json)；图中尺寸、参数统计口径与来源映射见[架构图来源说明](docs/README_DIAGRAM_SOURCES.md#dense-与-moe-架构)。
+
+### MoE：相同注意力骨干，按 token 选择 FFN 专家
+
+![EvoMind MoE 架构：4 个 SwiGLU 专家与 Top-1 路由](figures/evomind_moe_architecture.svg)
+
+MoE 保留 Dense 的 Embedding、八层注意力骨干、归一化与 LM Head，在每层 FFN 位置放入四个独立的 SwiGLU 专家。Router 对每个 token 计算专家概率，经 Top-1 选择一个专家，专家输出按路由权重汇合后回到残差主干。当前实现没有额外共享专家；归一化后的 Top-1 权重为 1，训练时另有负载均衡辅助损失。稀疏路由减少单个 token 激活的专家数，但所有专家权重仍需存储。
+
+当前结构匹配的 `full_sft_768_moe.pth` 来自上游公开 SFT 权重，已保留来源版本与 SHA256，原用于蒸馏教师和后续结构匹配准备。**本项目尚未自行完成这条 MoE 的预训练/SFT，也没有 Dense–MoE 受控质量结果。** 本页后面的训练曲线与成绩均属于 Dense。
+
+图示依据：[MiniMindConfig / MOEFeedForward](model/model_minimind.py)、[公开权重准备入口](scripts/evomind_posttrain_assets.py)；专家数、Top-1 设置与公共权重来源见[架构图来源说明](docs/README_DIAGRAM_SOURCES.md#dense-与-moe-架构)。
+
+本页三张图均提供 [SVG、PNG、PDF 与可编辑图源](figures/README.md)，可以放大查看或按相同布局重新生成。
 
 ## 训练过程
 
-### 数据
+### 数据如何进入各阶段
 
-| 阶段 | 文件 | 源文件规模 | 训练用途 |
-|---|---|---:|---|
-| Pretrain | `pretrain_t2t_mini.jsonl` | 1,270,238 条 | 文本续写 |
-| SFT | `sft_t2t_mini.jsonl` | 905,718 条 | 指令、多轮对话与模板学习 |
-| DPO | `dpo.jsonl` | 17,166 对 | chosen / rejected 偏好优化 |
-| GRPO / CISPO | `rlaif.jsonl` | 19,502 条 | 在线生成和奖励评分 |
+![EvoMind 文本数据流：固定数据版本、监督目标与真实权重关系](figures/evomind_text_data_pipeline.svg)
 
-文件来自同一公开文本数据集，下载版本固定为 `312afb4f76391145c6902f765bb51691c09a12f5`；数据与奖励模型链接列在文末。此轮使用完整源文件，具体模板处理与有效长度由各阶段 Dataset 决定，文件条数与有效监督 token 数是不同口径。
+图中数据输入与模型权重的箭头分别回答“这一阶段读什么”和“从哪组参数开始”。Pretrain 从随机初始化开始，SFT 继承 Pretrain，DPO 继承 SFT；完成 SFT/DPO 筛选后，GRPO 与 CISPO **分别从同一个 DPO checkpoint 初始化**。两条 RL 分支各自完成训练并接受评测，最终选中的 CISPO 进入 Dense 单图实验。Agent-CISPO 是选定文本基座上的后续工具能力分支，目前只完成数据与运行入口准备。
+
+| 阶段 | 文件 | 源文件规模 | 数据处理与训练用途 | 状态 |
+|---|---|---:|---|---|
+| Pretrain | `pretrain_t2t_mini.jsonl` | 1,270,238 条 | `text` → BPE、BOS/EOS、截断与 padding；预测后续 token | 已完成 2 epoch |
+| SFT | `sft_t2t_mini.jsonl` | 905,718 条 | `conversations` → 聊天模板；只监督 assistant 的有效回答 token | 已完成 2 epoch |
+| DPO | `dpo.jsonl` | 17,166 对 | chosen / rejected 分别套用模板，比较回答区间的策略/参考 log-prob | 已完成 1 epoch |
+| GRPO / CISPO | `rlaif.jsonl` | 19,502 条 | 对话前缀生成 prompt；每题在线采样 6 个回答，由奖励模型与规则评分 | 两分支各完成 1 epoch |
+| Agent-CISPO | `agent_rl.jsonl` | 39,988 条 | 对话、工具定义与 `gt`，供多轮工具调用 rollout 使用 | 配置 1 epoch；准备中，未训练 |
+
+文件来自同一公开文本数据集，下载版本固定为 `312afb4f76391145c6902f765bb51691c09a12f5`；数据与奖励模型链接列在文末。已训练阶段使用完整源文件；上表规模是源文件条数，具体截断、模板和标签由各阶段 Dataset 决定，不能换算为相同数量的有效监督 token。RLAIF 读取对话前缀，回答由当前策略在线生成；源文件最后一条回答不作为这轮 RL 的监督答案。
+
+图示依据：[Dataset 与标签实现](dataset/lm_dataset.py)、[已完成训练及父权重记录](docs/results/text_training_20260911.json)、[文本基座选择](docs/TEXT_BASE_SELECTION.md)。数据行数已与本地原文件复核，完整 SHA256、版本、阶段来源及 Agent 状态见[数据流图来源说明](docs/README_DIAGRAM_SOURCES.md#文本数据与训练关系)。
 
 ### 阶段与超参数
-
-```mermaid
-flowchart LR
-    P[Pretrain] --> S[SFT] --> D[DPO]
-    D --> C[CISPO]
-    D --> G[GRPO]
-    C --> E[统一评测与基座选择]
-    G --> E
-    E --> V[视觉扩展]
-```
 
 | 阶段 | Epoch | Micro batch × 累积 | 长度 | 学习率 |
 |---|---:|---:|---|---:|
@@ -135,7 +144,9 @@ flowchart LR
 | CISPO | 1 | 1 × 2 | prompt 768 / generation ≤1,024 | 3e-7 |
 | GRPO | 1 | 1 × 2 | prompt 768 / generation ≤1,024 | 3e-7 |
 
-DPO 共更新 4,292 步；两个在线 RL 分支各更新 9,751 步，每个问题生成 **G=6** 个回答。两者均使用 BF16 policy/reference 和同卡 FP32 奖励模型，`beta=0.1`、`epsilon=0.2`、CISPO 上限 `epsilon_high=5`。正式对照每个 rollout 更新一次；K=4 短消融单独记录。
+DPO 共更新 4,292 步，偏好损失 `beta=0.15`；两个在线 RL 分支各更新 9,751 步，每个问题生成 **G=6** 个回答。两者均使用 BF16 policy/reference 和同卡 FP32 奖励模型，RL 的 `beta=0.1`、`epsilon=0.2`、CISPO 上限 `epsilon_high=5`。正式对照每个 rollout 更新一次；K=4 短消融单独记录。
+
+这些是最终运行记录中的参数。仓库同时保留早期“各分支从 SFT 独立初始化”和奖励模型 CPU 放置的配置草案；复现本页结果应以[完成回执中的实际参数](docs/results/text_training_20260911.json)为准。LoRA、蒸馏和 Agent-CISPO 保留扩展入口，当前没有本页可报告的正式训练结果。
 
 ### 训练目标
 
@@ -304,7 +315,7 @@ GRPO 抑制率统计 `A>0 且 r>1.2` 或 `A<0 且 r<0.8` 的有效 token 比例�
 
 已按既定文本筛选规则选用 CISPO 最终权重进入 Dense 单图实验，GRPO 保留为同父权重对照。[选择依据、验收与单图训练合同](docs/TEXT_BASE_SELECTION.md)。这项选择不代表已证明视觉迁移收益。
 
-视觉部分使用冻结的 SigLIP2 视觉塔，通过可训练 Projector 将图像特征映射到语言模型隐藏空间。
+视觉部分使用冻结的 SigLIP2 视觉塔，通过可训练 Projector 将图像特征映射到 768 维语言模型隐藏空间。当前一期聚焦 Dense 单图路线：一张 256×256 图片产生 64 个视觉 token，与文本 token 一同进入语言模型。当前正式配方中的 `freeze_llm=1` 训练 Projector 和语言模型首尾两个 Decoder Block，其余语言参数冻结。
 
 ```text
 图片 → SigLIP2 视觉塔 → Projector → 视觉 token + 文本 token → LLM → 回答
@@ -312,12 +323,14 @@ GRPO 抑制率统计 `A>0 且 r>1.2` 或 `A<0 且 r<0.8` 的有效 token 比例�
 
 | 阶段 | 要完成的工作 | 当前状态 |
 |---|---|---|
-| Dense 单图 | 图文对齐、训练、生成与验收 | 2026-09-12 已启动正式训练；质量评测待补 |
-| Dense 多图 | 多图样本、输入组织、与单图受控对照 | 待正式训练 |
-| Dense 视频 | 固定抽帧、时间顺序、与单帧对照 | 待完成基线 |
-| MoE 视觉 | 结构匹配文本底座、相同视觉数据与评测 | 待 Dense 基线完成 |
+| Dense 单图（V1） | 2,544,979 条训练记录、2 epoch；最终六图评测、网页和报告 | 正式训练进行中；最终权重、评测与网页验收待完成 |
+| Dense 多图（后续） | 多张原图的输入组织、训练与受控对照 | 已有接口准备，正式训练延期 |
+| Dense 视频（后续） | 抽帧、时间顺序与单帧对照 | 基线待实现和训练 |
+| MoE 视觉（后续） | 结构匹配文本底座、相同视觉数据与评测 | 尚无正式视觉训练与对照结果 |
 
-图像数据按原始图像哈希分组划分，避免同图跨集合。特征缓存只保存冻结视觉塔的输出，Projector 保持在线训练。后续统一记录理解质量、重复/EOS、显存与推理延迟。
+图像数据按原始图像哈希分组划分；本次 native 单图只读取训练集合，既有 val/test 原图不进入这轮训练。已有 global+2×2 五裁剪准备使用的是同一张原图的多个视图，不等于真正多图或视频。特征缓存只保存冻结视觉塔的输出，Projector 保持在线训练。原定六张图用于定性检查和生成诊断，不能代替通用视觉正确率。
+
+视觉架构、数据处理、单图训练曲线与复现入口见 [evomind-v 技术报告](https://github.com/HuanYn/evomind/tree/evomind-v)。多图、视频和 MoE 的延期不影响第一版按单图范围验收。
 
 ## 代码与实验记录
 
@@ -332,6 +345,7 @@ configs/                     训练配方与实验配置
 test/                        模型、数据、恢复与损失测试
 docs/results/                可公开的指标、哈希和小型原始记录
 docs/assets/                 本项目的训练/实验曲线
+figures/                     本项目的模型架构与数据流 SVG
 ```
 
 运行产生的 `artifacts/`、数据集和 checkpoint 不进入普通 Git 提交。已有实验编排脚本保留在仓库，初次复现优先使用独立入口；每次新运行使用单独输出目录，保存配置、数据哈希和父权重哈希。更多步骤见[复现指南](docs/REPRODUCIBILITY.md)。

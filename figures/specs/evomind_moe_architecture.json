@@ -1,0 +1,491 @@
+{
+  "title": "EvoMind · Mixture-of-Experts Architecture",
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "style": {
+    "font_family": "Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+    "font_size": 22,
+    "bg_color": "#FFFFFF",
+    "palette": [
+      "#19191D",
+      "#626773",
+      "#477AB5",
+      "#648C45",
+      "#8355AD",
+      "#AE812D",
+      "#BA7550",
+      "#93989D"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "x",
+      "label": "Input x",
+      "x": 240,
+      "y": 764,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "att",
+      "label": "RMSNorm → GQA",
+      "x": 240,
+      "y": 645,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "add1",
+      "label": "+ x",
+      "x": 240,
+      "y": 533,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "norm",
+      "label": "RMSNorm",
+      "x": 240,
+      "y": 426,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "moe",
+      "label": "MoE FFN",
+      "x": 240,
+      "y": 318,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "add2",
+      "label": "+ residual",
+      "x": 240,
+      "y": 208,
+      "width": 320,
+      "height": 72,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "tokens",
+      "label": "Input token features\n[B × T, 768]",
+      "x": 1010,
+      "y": 764,
+      "width": 425,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "router",
+      "label": "Router\nLinear(768 → 4) + Softmax",
+      "x": 1010,
+      "y": 645,
+      "width": 830,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "top",
+      "label": "Top-1 selection\nnormalize selected weight",
+      "x": 1010,
+      "y": 520,
+      "width": 425,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "e0",
+      "label": "Expert 1\nSwiGLU · 2,432",
+      "x": 650,
+      "y": 370,
+      "width": 210,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "e1",
+      "label": "Expert 2\nSwiGLU · 2,432",
+      "x": 890,
+      "y": 370,
+      "width": 210,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "e2",
+      "label": "Expert 3\nSwiGLU · 2,432",
+      "x": 1130,
+      "y": 370,
+      "width": 210,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "e3",
+      "label": "Expert 4\nSwiGLU · 2,432",
+      "x": 1370,
+      "y": 370,
+      "width": 210,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "merge",
+      "label": "Weighted Scatter-Add\n[B × T, 768]",
+      "x": 1010,
+      "y": 208,
+      "width": 860,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "x",
+      "to": "att",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "att",
+      "to": "add1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "add1",
+      "to": "norm",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "norm",
+      "to": "moe",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "moe",
+      "to": "add2",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "x",
+      "to": "add1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          445,
+          764
+        ],
+        [
+          445,
+          533
+        ]
+      ]
+    },
+    {
+      "from": "add1",
+      "to": "add2",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          240,
+          480
+        ],
+        [
+          422,
+          480
+        ],
+        [
+          422,
+          208
+        ]
+      ]
+    },
+    {
+      "from": "top",
+      "to": "e0",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "top",
+      "to": "e1",
+      "color": "#477AB5",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "top",
+      "to": "e2",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "top",
+      "to": "e3",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "tokens",
+      "to": "router",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "router",
+      "to": "top",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "tokens",
+      "to": "e1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          550,
+          764
+        ],
+        [
+          550,
+          452
+        ],
+        [
+          890,
+          452
+        ]
+      ]
+    },
+    {
+      "from": "e0",
+      "to": "merge",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "e1",
+      "to": "merge",
+      "color": "#477AB5",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "e2",
+      "to": "merge",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "e3",
+      "to": "merge",
+      "color": "#93989D",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": true
+    }
+  ],
+  "groups": [
+    {
+      "node_ids": [
+        "tokens",
+        "router",
+        "top",
+        "e0",
+        "e1",
+        "e2",
+        "e3",
+        "merge"
+      ],
+      "fill": "#F2EDF8",
+      "stroke": "#F2EDF8",
+      "padding": 24
+    }
+  ],
+  "labels": [
+    {
+      "text": "EvoMind · Mixture-of-Experts Architecture",
+      "x": 42,
+      "y": 52,
+      "font_size": 36,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Four routed SwiGLU experts · Top-1 activation · same GQA attention backbone.",
+      "x": 42,
+      "y": 91,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(a) Transformer block",
+      "x": 60,
+      "y": 150,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "x",
+      "x": 456,
+      "y": 744,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "h",
+      "x": 433,
+      "y": 466,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(b) Routed Experts",
+      "x": 540,
+      "y": 150,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "token features",
+      "x": 565,
+      "y": 715,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "One token shown: Expert 2 is active; dashed routes are not selected for this token.",
+      "x": 535,
+      "y": 834,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "No shared expert. The compatible 768-dim MoE checkpoint is PUBLIC upstream SFT, not a completed EvoMind training result.",
+      "x": 42,
+      "y": 870,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    }
+  ],
+  "panels": [
+    {
+      "x": 48,
+      "y": 163,
+      "width": 425,
+      "height": 654,
+      "fill": "#F0E5F8",
+      "shadow": true
+    }
+  ]
+}

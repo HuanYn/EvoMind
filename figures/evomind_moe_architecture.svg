@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="EvoMind · Mixture-of-Experts Architecture">
+  <title>EvoMind · Mixture-of-Experts Architecture</title><rect width="1600" height="900" fill="#FFFFFF" />
+  <defs>
+    <marker id="arrow-default" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#555555" />
+    </marker>
+    <marker id="arrow-c0" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#19191D" />
+    </marker>
+    <marker id="arrow-c1" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#626773" />
+    </marker>
+    <marker id="arrow-c2" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#477AB5" />
+    </marker>
+    <marker id="arrow-c3" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#648C45" />
+    </marker>
+    <marker id="arrow-c4" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#8355AD" />
+    </marker>
+    <marker id="arrow-c5" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#AE812D" />
+    </marker>
+    <marker id="arrow-c6" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#BA7550" />
+    </marker>
+    <marker id="arrow-c7" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#93989D" />
+    </marker>
+  <filter id="module-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#282432" flood-opacity="0.19" /></filter><filter id="panel-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#282432" flood-opacity="0.12" /></filter></defs>
+  <rect x="48" y="163" width="425" height="654" fill="#F0E5F8" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="521.0" y="144.0" width="978.0" height="684.0" fill="#F2EDF8" stroke="none" stroke-width="1" rx="24" filter="url(#panel-shadow)" />
+  <path d="M 240.0,728.0 L 240.0,681.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 240.0,609.0 L 240.0,569.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 240.0,497.0 L 240.0,462.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 240.0,390.0 L 240.0,354.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 240.0,282.0 L 240.0,244.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 400.0,764.0 L 445.0,764.0 L 445.0,533.0 L 400.0,533.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 240.0,497.0 L 240.0,480.0 L 422.0,480.0 L 422.0,208.0 L 400.0,208.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 914.0,480.0 L 755.0,413.8" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 978.0,480.0 L 930.0,420.0" stroke="#477AB5" stroke-width="3" fill="none" marker-end="url(#arrow-c2)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1042.0,480.0 L 1090.0,420.0" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1106.0,480.0 L 1265.0,413.8" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1010.0,724.0 L 1010.0,685.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1010.0,605.0 L 1010.0,560.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 797.5,764.0 L 550.0,764.0 L 550.0,452.0 L 890.0,452.0 L 890.0,420.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 755.0,322.8 L 921.1,248.0" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 927.0,320.0 L 980.4,248.0" stroke="#477AB5" stroke-width="3" fill="none" marker-end="url(#arrow-c2)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1093.0,320.0 L 1039.6,248.0" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1265.0,322.8 L 1098.9,248.0" stroke="#93989D" stroke-width="3" fill="none" marker-end="url(#arrow-c7)" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <rect x="80.0" y="728.0" width="320.0" height="72.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-x" filter="url(#module-shadow)" />
+  <text x="240.0" y="772.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="x" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Input x</text>
+  <rect x="80.0" y="609.0" width="320.0" height="72.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-att" filter="url(#module-shadow)" />
+  <text x="240.0" y="653.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="att" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">RMSNorm → GQA</text>
+  <rect x="80.0" y="497.0" width="320.0" height="72.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-add1" filter="url(#module-shadow)" />
+  <text x="240.0" y="541.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="add1" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">+ x</text>
+  <rect x="80.0" y="390.0" width="320.0" height="72.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-norm" filter="url(#module-shadow)" />
+  <text x="240.0" y="434.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="norm" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">RMSNorm</text>
+  <rect x="80.0" y="282.0" width="320.0" height="72.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-moe" filter="url(#module-shadow)" />
+  <text x="240.0" y="326.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="moe" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">MoE FFN</text>
+  <rect x="80.0" y="172.0" width="320.0" height="72.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-add2" filter="url(#module-shadow)" />
+  <text x="240.0" y="216.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="add2" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">+ residual</text>
+  <rect x="797.5" y="724.0" width="425.0" height="80.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-tokens" filter="url(#module-shadow)" />
+  <text x="1010.0" y="758.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="tokens" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Input token features</text>
+  <text x="1010.0" y="785.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="tokens" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">[B × T, 768]</text>
+  <rect x="595.0" y="605.0" width="830.0" height="80.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-router" filter="url(#module-shadow)" />
+  <text x="1010.0" y="639.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="router" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Router</text>
+  <text x="1010.0" y="666.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="router" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Linear(768 → 4) + Softmax</text>
+  <rect x="797.5" y="480.0" width="425.0" height="80.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-top" filter="url(#module-shadow)" />
+  <text x="1010.0" y="514.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="top" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Top-1 selection</text>
+  <text x="1010.0" y="541.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="top" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">normalize selected weight</text>
+  <rect x="545.0" y="320.0" width="210.0" height="100.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-e0" filter="url(#module-shadow)" />
+  <text x="650.0" y="364.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="e0" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Expert 1</text>
+  <text x="650.0" y="391.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="e0" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">SwiGLU · 2,432</text>
+  <rect x="785.0" y="320.0" width="210.0" height="100.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-e1" filter="url(#module-shadow)" />
+  <text x="890.0" y="364.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="e1" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Expert 2</text>
+  <text x="890.0" y="391.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="e1" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">SwiGLU · 2,432</text>
+  <rect x="1025.0" y="320.0" width="210.0" height="100.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-e2" filter="url(#module-shadow)" />
+  <text x="1130.0" y="364.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="e2" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Expert 3</text>
+  <text x="1130.0" y="391.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="e2" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">SwiGLU · 2,432</text>
+  <rect x="1265.0" y="320.0" width="210.0" height="100.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-e3" filter="url(#module-shadow)" />
+  <text x="1370.0" y="364.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="e3" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Expert 4</text>
+  <text x="1370.0" y="391.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="e3" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">SwiGLU · 2,432</text>
+  <rect x="580.0" y="168.0" width="860.0" height="80.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-merge" filter="url(#module-shadow)" />
+  <text x="1010.0" y="202.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="merge" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Weighted Scatter-Add</text>
+  <text x="1010.0" y="229.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="merge" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">[B × T, 768]</text>
+  <text x="42.0" y="52.0" font-size="36" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">EvoMind · Mixture-of-Experts Architecture</text>
+  <text x="42.0" y="91.0" font-size="22" fill="#626773" text-anchor="start">Four routed SwiGLU experts · Top-1 activation · same GQA attention backbone.</text>
+  <text x="60.0" y="150.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(a) Transformer block</text>
+  <text x="456.0" y="744.0" font-size="20" fill="#626773" text-anchor="start">x</text>
+  <text x="433.0" y="466.0" font-size="20" fill="#626773" text-anchor="start">h</text>
+  <text x="540.0" y="150.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(b) Routed Experts</text>
+  <text x="565.0" y="715.0" font-size="20" fill="#626773" text-anchor="start">token features</text>
+  <text x="535.0" y="834.0" font-size="20" fill="#626773" text-anchor="start">One token shown: Expert 2 is active; dashed routes are not selected for this token.</text>
+  <text x="42.0" y="870.0" font-size="20" fill="#626773" text-anchor="start">No shared expert. The compatible 768-dim MoE checkpoint is PUBLIC upstream SFT, not a completed EvoMind training result.</text>
+</svg>

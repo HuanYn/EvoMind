@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1840 1160" width="1840" height="1160" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="EvoMind · Dense language model">
+  <title>EvoMind · Dense language model</title><rect width="1840" height="1160" fill="#FFFFFF" />
+  <defs>
+    <marker id="arrow-default" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#555555" />
+    </marker>
+    <marker id="arrow-c0" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#19191D" />
+    </marker>
+    <marker id="arrow-c1" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#626773" />
+    </marker>
+    <marker id="arrow-c2" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#477AB5" />
+    </marker>
+    <marker id="arrow-c3" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#648C45" />
+    </marker>
+    <marker id="arrow-c4" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#8355AD" />
+    </marker>
+    <marker id="arrow-c5" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#AE812D" />
+    </marker>
+    <marker id="arrow-c6" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#BA7550" />
+    </marker>
+    <marker id="arrow-c7" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#93989D" />
+    </marker>
+  <filter id="module-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#282432" flood-opacity="0.19" /></filter><filter id="panel-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#282432" flood-opacity="0.12" /></filter></defs>
+  <rect x="43" y="239" width="335" height="600" fill="#F5F5F5" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="416" y="160" width="345" height="880" fill="#F0E5F8" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="777.0" y="139.0" width="544.0" height="907.0" fill="#EFF6E9" stroke="none" stroke-width="1" rx="24" filter="url(#panel-shadow)" />
+  <rect x="1361.0" y="132.0" width="458.0" height="921.0" fill="#F2EDF8" stroke="none" stroke-width="1" rx="24" filter="url(#panel-shadow)" />
+  <path d="M 205.0,955.0 L 205.0,933.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,853.0 L 205.0,818.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,738.0 L 205.0,690.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,610.0 L 205.0,562.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,482.0 L 205.0,447.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,367.0 L 205.0,332.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 205.0,252.0 L 205.0,230.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 346.0,407.0 L 370.0,407.0 L 370.0,778.0 L 346.0,778.0" stroke="#626773" stroke-width="3" fill="none" stroke-dasharray="8,4" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,958.0 L 565.0,902.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,838.0 L 565.0,782.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,718.0 L 565.0,658.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,612.0 L 565.0,547.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,483.0 L 565.0,427.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,363.0 L 565.0,303.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,257.0 L 565.0,222.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 680.0,990.0 L 738.0,990.0 L 738.0,635.0 L 588.0,635.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 565.0,612.0 L 565.0,595.0 L 710.0,595.0 L 710.0,280.0 L 588.0,280.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 914.3,962.0 L 865.0,950.0 L 865.0,916.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1048.6,962.0 L 1046.7,916.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1178.3,962.0 L 1225.0,950.0 L 1225.0,916.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 865.0,834.0 L 865.0,787.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1045.0,834.0 L 1045.0,787.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1045.0,705.0 L 1045.0,661.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1225.0,834.0 L 1225.0,661.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 865.0,705.0 L 865.0,562.0 L 892.5,551.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1031.0,595.0 L 1012.4,551.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 995.0,469.0 L 995.0,422.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1012.8,356.0 L 1032.2,320.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1050.0,254.0 L 1050.0,223.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1225.0,595.0 L 1225.0,574.0 L 1282.0,574.0 L 1282.0,287.0 L 1225.0,287.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1564.7,955.0 L 1503.9,859.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1615.3,955.0 L 1676.1,859.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1702.0,777.0 L 1702.0,685.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1677.8,619.0 L 1606.5,521.6" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1590.0,471.0 L 1590.0,387.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1590.0,305.0 L 1590.0,230.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1478.0,777.0 L 1478.0,499.0 L 1562.0,499.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <rect x="64.0" y="955.0" width="282.0" height="80.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-text" filter="url(#module-shadow)" />
+  <text x="205.0" y="1003.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="text" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Input text</text>
+  <rect x="64.0" y="853.0" width="282.0" height="80.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-tok" filter="url(#module-shadow)" />
+  <text x="205.0" y="901.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="tok" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">BPE Tokenizer</text>
+  <rect x="64.0" y="738.0" width="282.0" height="80.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-emb" filter="url(#module-shadow)" />
+  <text x="205.0" y="772.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="emb" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Input Embedding</text>
+  <text x="205.0" y="799.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="emb" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">6,400 × 768</text>
+  <rect x="64.0" y="610.0" width="282.0" height="80.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-blocks" filter="url(#module-shadow)" />
+  <text x="205.0" y="644.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="blocks" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Transformer Block</text>
+  <text x="205.0" y="671.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="blocks" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">× 8</text>
+  <rect x="64.0" y="482.0" width="282.0" height="80.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-finalnorm" filter="url(#module-shadow)" />
+  <text x="205.0" y="530.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="finalnorm" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Final RMSNorm</text>
+  <rect x="64.0" y="367.0" width="282.0" height="80.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-head" filter="url(#module-shadow)" />
+  <text x="205.0" y="401.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="head" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">LM Head</text>
+  <text x="205.0" y="428.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="head" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">768 → 6,400</text>
+  <rect x="64.0" y="252.0" width="282.0" height="80.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-sample" filter="url(#module-shadow)" />
+  <text x="205.0" y="300.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="sample" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Softmax + sampling</text>
+  <rect x="64.0" y="150.0" width="282.0" height="80.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-decode" filter="url(#module-shadow)" />
+  <text x="205.0" y="198.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="decode" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Decode next token</text>
+  <rect x="450.0" y="958.0" width="230.0" height="64.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-x" filter="url(#module-shadow)" />
+  <text x="565.0" y="998.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="x" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">x</text>
+  <rect x="450.0" y="838.0" width="230.0" height="64.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-n1" filter="url(#module-shadow)" />
+  <text x="565.0" y="878.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="n1" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">RMSNorm 1</text>
+  <rect x="450.0" y="718.0" width="230.0" height="64.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-att" filter="url(#module-shadow)" />
+  <text x="565.0" y="758.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="att" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">GQA attention</text>
+  <circle cx="565.0" cy="635.0" r="23.0" fill="#FFFFFF" stroke="#19191D" stroke-width="3" id="node-a1" />
+  <text x="565.0" y="643.0" font-size="32" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="a1" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="normal">+</text>
+  <rect x="450.0" y="483.0" width="230.0" height="64.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-n2" filter="url(#module-shadow)" />
+  <text x="565.0" y="523.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="n2" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">RMSNorm 2</text>
+  <rect x="450.0" y="363.0" width="230.0" height="64.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-ffn" filter="url(#module-shadow)" />
+  <text x="565.0" y="403.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="ffn" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">SwiGLU FFN</text>
+  <circle cx="565.0" cy="280.0" r="23.0" fill="#FFFFFF" stroke="#19191D" stroke-width="3" id="node-a2" />
+  <text x="565.0" y="288.0" font-size="32" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="a2" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="normal">+</text>
+  <rect x="450.0" y="158.0" width="230.0" height="64.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-out" filter="url(#module-shadow)" />
+  <text x="565.0" y="198.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="out" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Next block</text>
+  <rect x="875.0" y="962.0" width="350.0" height="66.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-ga_in" filter="url(#module-shadow)" />
+  <text x="1050.0" y="1003.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="ga_in" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Normalized input</text>
+  <rect x="795.0" y="834.0" width="140.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-q" filter="url(#module-shadow)" />
+  <text x="865.0" y="869.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="q" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Q</text>
+  <text x="865.0" y="896.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="q" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">8 × 96</text>
+  <rect x="975.0" y="834.0" width="140.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-k" filter="url(#module-shadow)" />
+  <text x="1045.0" y="869.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="k" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">K</text>
+  <text x="1045.0" y="896.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="k" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">4 × 96</text>
+  <rect x="1155.0" y="834.0" width="140.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-v" filter="url(#module-shadow)" />
+  <text x="1225.0" y="869.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="v" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">V</text>
+  <text x="1225.0" y="896.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="v" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">4 × 96</text>
+  <rect x="795.0" y="705.0" width="140.0" height="82.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-qrope" filter="url(#module-shadow)" />
+  <text x="865.0" y="740.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="qrope" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Q Norm</text>
+  <text x="865.0" y="767.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="qrope" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">+ RoPE</text>
+  <rect x="975.0" y="705.0" width="140.0" height="82.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-krope" filter="url(#module-shadow)" />
+  <text x="1045.0" y="740.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="krope" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">K Norm</text>
+  <text x="1045.0" y="767.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="krope" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">+ RoPE</text>
+  <rect x="967.0" y="595.0" width="156.0" height="66.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-kr" filter="url(#module-shadow)" />
+  <text x="1045.0" y="636.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="kr" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Repeat K × 2</text>
+  <rect x="1147.0" y="595.0" width="156.0" height="66.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-vr" filter="url(#module-shadow)" />
+  <text x="1225.0" y="636.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="vr" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Repeat V × 2</text>
+  <rect x="860.0" y="469.0" width="270.0" height="82.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-scores" filter="url(#module-shadow)" />
+  <text x="995.0" y="504.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="scores" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">QKᵀ / √96</text>
+  <text x="995.0" y="531.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="scores" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">+ causal mask</text>
+  <rect x="860.0" y="356.0" width="270.0" height="66.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-soft" filter="url(#module-shadow)" />
+  <text x="995.0" y="397.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="soft" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Softmax over keys</text>
+  <rect x="875.0" y="254.0" width="350.0" height="66.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-av" filter="url(#module-shadow)" />
+  <text x="1050.0" y="295.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="av" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Attention weights × V</text>
+  <rect x="852.5" y="157.0" width="395.0" height="66.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-op" filter="url(#module-shadow)" />
+  <text x="1050.0" y="198.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="op" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Concat → Linear</text>
+  <rect x="1425.0" y="955.0" width="330.0" height="80.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-ff_in" filter="url(#module-shadow)" />
+  <text x="1590.0" y="989.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="ff_in" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Normalized input</text>
+  <text x="1590.0" y="1016.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="ff_in" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">768 dimensions</text>
+  <rect x="1379.0" y="777.0" width="198.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-up" filter="url(#module-shadow)" />
+  <text x="1478.0" y="812.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="up" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Up projection</text>
+  <text x="1478.0" y="839.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="up" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">768 → 2,432</text>
+  <rect x="1603.0" y="777.0" width="198.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-gate" filter="url(#module-shadow)" />
+  <text x="1702.0" y="812.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="gate" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Gate projection</text>
+  <text x="1702.0" y="839.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="gate" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">768 → 2,432</text>
+  <rect x="1603.0" y="619.0" width="198.0" height="66.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-silu" filter="url(#module-shadow)" />
+  <text x="1702.0" y="660.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="silu" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">SiLU</text>
+  <circle cx="1590.0" cy="499.0" r="28.0" fill="#FFFFFF" stroke="#19191D" stroke-width="3" id="node-multiply" />
+  <text x="1590.0" y="507.0" font-size="32" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="multiply" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="normal">⊙</text>
+  <rect x="1425.0" y="305.0" width="330.0" height="82.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-down" filter="url(#module-shadow)" />
+  <text x="1590.0" y="340.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="down" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Down projection</text>
+  <text x="1590.0" y="367.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="down" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">2,432 → 768</text>
+  <rect x="1425.0" y="150.0" width="330.0" height="80.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-ff_out" filter="url(#module-shadow)" />
+  <text x="1590.0" y="184.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="ff_out" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">FFN output</text>
+  <text x="1590.0" y="211.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="ff_out" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">768 dimensions</text>
+  <text x="42.0" y="52.0" font-size="36" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">EvoMind · Dense language model</text>
+  <text x="42.0" y="91.0" font-size="22" fill="#626773" text-anchor="start">Current model: 63.91M parameters · 8 layers · hidden 768 · vocabulary 6,400</text>
+  <text x="48.0" y="145.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(a) Autoregressive LM</text>
+  <text x="48.0" y="1068.0" font-size="20" fill="#626773" text-anchor="start">Embedding ↔ LM Head: tied weights</text>
+  <text x="435.0" y="145.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(b) Pre-Norm Block</text>
+  <text x="724.0" y="940.0" font-size="20" fill="#626773" text-anchor="end">skip x</text>
+  <text x="697.0" y="580.0" font-size="20" fill="#626773" text-anchor="end">skip h</text>
+  <text x="805.0" y="145.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(c) GQA</text>
+  <text x="803.0" y="1068.0" font-size="20" fill="#626773" text-anchor="start">Cache: 4 KV heads before repeat</text>
+  <text x="1374.0" y="145.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(d) SwiGLU FFN</text>
+  <text x="1375.0" y="1068.0" font-size="20" fill="#626773" text-anchor="start">⊙  element-wise multiplication</text>
+  <text x="42.0" y="1130.0" font-size="20" fill="#626773" text-anchor="start">Architecture schematic · training returns logits (CE applies log-softmax internally); sampling is the inference path.</text>
+</svg>

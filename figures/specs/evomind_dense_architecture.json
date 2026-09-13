@@ -1,0 +1,1000 @@
+{
+  "title": "EvoMind · Dense language model",
+  "canvas": {
+    "width": 1840,
+    "height": 1160
+  },
+  "style": {
+    "font_family": "Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+    "font_size": 22,
+    "bg_color": "#FFFFFF",
+    "palette": [
+      "#19191D",
+      "#626773",
+      "#477AB5",
+      "#648C45",
+      "#8355AD",
+      "#AE812D",
+      "#BA7550",
+      "#93989D"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "text",
+      "label": "Input text",
+      "x": 205,
+      "y": 995,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "tok",
+      "label": "BPE Tokenizer",
+      "x": 205,
+      "y": 893,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "emb",
+      "label": "Input Embedding\n6,400 × 768",
+      "x": 205,
+      "y": 778,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "blocks",
+      "label": "Transformer Block\n× 8",
+      "x": 205,
+      "y": 650,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "finalnorm",
+      "label": "Final RMSNorm",
+      "x": 205,
+      "y": 522,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "head",
+      "label": "LM Head\n768 → 6,400",
+      "x": 205,
+      "y": 407,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "sample",
+      "label": "Softmax + sampling",
+      "x": 205,
+      "y": 292,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "decode",
+      "label": "Decode next token",
+      "x": 205,
+      "y": 190,
+      "width": 282,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "x",
+      "label": "x",
+      "x": 565,
+      "y": 990,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "n1",
+      "label": "RMSNorm 1",
+      "x": 565,
+      "y": 870,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "att",
+      "label": "GQA attention",
+      "x": 565,
+      "y": 750,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "a1",
+      "label": "+",
+      "x": 565,
+      "y": 635,
+      "width": 46,
+      "height": 46,
+      "shape": "circle",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "n2",
+      "label": "RMSNorm 2",
+      "x": 565,
+      "y": 515,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "ffn",
+      "label": "SwiGLU FFN",
+      "x": 565,
+      "y": 395,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "a2",
+      "label": "+",
+      "x": 565,
+      "y": 280,
+      "width": 46,
+      "height": 46,
+      "shape": "circle",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "out",
+      "label": "Next block",
+      "x": 565,
+      "y": 190,
+      "width": 230,
+      "height": 64,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "ga_in",
+      "label": "Normalized input",
+      "x": 1050,
+      "y": 995,
+      "width": 350,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "q",
+      "label": "Q\n8 × 96",
+      "x": 865,
+      "y": 875,
+      "width": 140,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "k",
+      "label": "K\n4 × 96",
+      "x": 1045,
+      "y": 875,
+      "width": 140,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "v",
+      "label": "V\n4 × 96",
+      "x": 1225,
+      "y": 875,
+      "width": 140,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "qrope",
+      "label": "Q Norm\n+ RoPE",
+      "x": 865,
+      "y": 746,
+      "width": 140,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "krope",
+      "label": "K Norm\n+ RoPE",
+      "x": 1045,
+      "y": 746,
+      "width": 140,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "kr",
+      "label": "Repeat K × 2",
+      "x": 1045,
+      "y": 628,
+      "width": 156,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "vr",
+      "label": "Repeat V × 2",
+      "x": 1225,
+      "y": 628,
+      "width": 156,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "scores",
+      "label": "QKᵀ / √96\n+ causal mask",
+      "x": 995,
+      "y": 510,
+      "width": 270,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "soft",
+      "label": "Softmax over keys",
+      "x": 995,
+      "y": 389,
+      "width": 270,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "av",
+      "label": "Attention weights × V",
+      "x": 1050,
+      "y": 287,
+      "width": 350,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "op",
+      "label": "Concat → Linear",
+      "x": 1050,
+      "y": 190,
+      "width": 395,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "ff_in",
+      "label": "Normalized input\n768 dimensions",
+      "x": 1590,
+      "y": 995,
+      "width": 330,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "up",
+      "label": "Up projection\n768 → 2,432",
+      "x": 1478,
+      "y": 818,
+      "width": 198,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "gate",
+      "label": "Gate projection\n768 → 2,432",
+      "x": 1702,
+      "y": 818,
+      "width": 198,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "silu",
+      "label": "SiLU",
+      "x": 1702,
+      "y": 652,
+      "width": 198,
+      "height": 66,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "multiply",
+      "label": "⊙",
+      "x": 1590,
+      "y": 499,
+      "width": 56,
+      "height": 56,
+      "shape": "circle",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "down",
+      "label": "Down projection\n2,432 → 768",
+      "x": 1590,
+      "y": 346,
+      "width": 330,
+      "height": 82,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "ff_out",
+      "label": "FFN output\n768 dimensions",
+      "x": 1590,
+      "y": 190,
+      "width": 330,
+      "height": 80,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "text",
+      "to": "tok",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "tok",
+      "to": "emb",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "emb",
+      "to": "blocks",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "blocks",
+      "to": "finalnorm",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "finalnorm",
+      "to": "head",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "head",
+      "to": "sample",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "sample",
+      "to": "decode",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "head",
+      "to": "emb",
+      "color": "#626773",
+      "style": "dashed",
+      "thickness": 3,
+      "arrow": false,
+      "via": [
+        [
+          370,
+          407
+        ],
+        [
+          370,
+          778
+        ]
+      ]
+    },
+    {
+      "from": "x",
+      "to": "n1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "n1",
+      "to": "att",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "att",
+      "to": "a1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "a1",
+      "to": "n2",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "n2",
+      "to": "ffn",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "ffn",
+      "to": "a2",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "a2",
+      "to": "out",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "x",
+      "to": "a1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          738,
+          990
+        ],
+        [
+          738,
+          635
+        ]
+      ]
+    },
+    {
+      "from": "a1",
+      "to": "a2",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          565,
+          595
+        ],
+        [
+          710,
+          595
+        ],
+        [
+          710,
+          280
+        ]
+      ]
+    },
+    {
+      "from": "ga_in",
+      "to": "q",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          865,
+          950
+        ]
+      ]
+    },
+    {
+      "from": "ga_in",
+      "to": "k",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "ga_in",
+      "to": "v",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1225,
+          950
+        ]
+      ]
+    },
+    {
+      "from": "q",
+      "to": "qrope",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "k",
+      "to": "krope",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "krope",
+      "to": "kr",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "v",
+      "to": "vr",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "qrope",
+      "to": "scores",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          865,
+          562
+        ]
+      ]
+    },
+    {
+      "from": "kr",
+      "to": "scores",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "scores",
+      "to": "soft",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "soft",
+      "to": "av",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "av",
+      "to": "op",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "vr",
+      "to": "av",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1225,
+          574
+        ],
+        [
+          1282,
+          574
+        ],
+        [
+          1282,
+          287
+        ]
+      ]
+    },
+    {
+      "from": "ff_in",
+      "to": "up",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "ff_in",
+      "to": "gate",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "gate",
+      "to": "silu",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "silu",
+      "to": "multiply",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "multiply",
+      "to": "down",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "down",
+      "to": "ff_out",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "up",
+      "to": "multiply",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1478,
+          499
+        ]
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "node_ids": [
+        "ga_in",
+        "q",
+        "k",
+        "v",
+        "qrope",
+        "krope",
+        "kr",
+        "vr",
+        "scores",
+        "soft",
+        "av",
+        "op"
+      ],
+      "fill": "#EFF6E9",
+      "stroke": "#EFF6E9",
+      "padding": 18
+    },
+    {
+      "node_ids": [
+        "ff_in",
+        "up",
+        "gate",
+        "silu",
+        "multiply",
+        "down",
+        "ff_out"
+      ],
+      "fill": "#F2EDF8",
+      "stroke": "#F2EDF8",
+      "padding": 18
+    }
+  ],
+  "labels": [
+    {
+      "text": "EvoMind · Dense language model",
+      "x": 42,
+      "y": 52,
+      "font_size": 36,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Current model: 63.91M parameters · 8 layers · hidden 768 · vocabulary 6,400",
+      "x": 42,
+      "y": 91,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(a) Autoregressive LM",
+      "x": 48,
+      "y": 145,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Embedding ↔ LM Head: tied weights",
+      "x": 48,
+      "y": 1068,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(b) Pre-Norm Block",
+      "x": 435,
+      "y": 145,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "skip x",
+      "x": 724,
+      "y": 940,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "end"
+    },
+    {
+      "text": "skip h",
+      "x": 697,
+      "y": 580,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "end"
+    },
+    {
+      "text": "(c) GQA",
+      "x": 805,
+      "y": 145,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Cache: 4 KV heads before repeat",
+      "x": 803,
+      "y": 1068,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(d) SwiGLU FFN",
+      "x": 1374,
+      "y": 145,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "⊙  element-wise multiplication",
+      "x": 1375,
+      "y": 1068,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Architecture schematic · training returns logits (CE applies log-softmax internally); sampling is the inference path.",
+      "x": 42,
+      "y": 1130,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    }
+  ],
+  "panels": [
+    {
+      "x": 43,
+      "y": 239,
+      "width": 335,
+      "height": 600,
+      "fill": "#F5F5F5",
+      "shadow": true
+    },
+    {
+      "x": 416,
+      "y": 160,
+      "width": 345,
+      "height": 880,
+      "fill": "#F0E5F8",
+      "shadow": true
+    }
+  ]
+}
