@@ -1,0 +1,311 @@
+{
+  "title": "EvoMind-V · Visual Data Pipeline",
+  "canvas": {
+    "width": 1800,
+    "height": 970
+  },
+  "style": {
+    "font_family": "Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+    "font_size": 22,
+    "bg_color": "#FFFFFF",
+    "palette": [
+      "#19191D",
+      "#626773",
+      "#477AB5",
+      "#648C45",
+      "#8355AD",
+      "#AE812D",
+      "#BA7550",
+      "#93989D"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "source",
+      "label": "minimind-v_dataset\nsft_i2t.parquet\n2,904,511 source records",
+      "x": 243,
+      "y": 250,
+      "width": 395,
+      "height": 142,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "clean",
+      "label": "Validate & Filter\nImages · roles · visual markers\nRequire supervised answer",
+      "x": 735,
+      "y": 250,
+      "width": 435,
+      "height": 142,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "accepted",
+      "label": "2,654,826 accepted records\n249,685 rejected",
+      "x": 1295,
+      "y": 250,
+      "width": 570,
+      "height": 142,
+      "shape": "rounded",
+      "fill": "#DEEDCE",
+      "stroke": "#648C45",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "group",
+      "label": "Image-Level Split\nGroup by original image-byte SHA256",
+      "x": 1295,
+      "y": 455,
+      "width": 630,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "train",
+      "label": "TRAIN\n2,544,979 records",
+      "x": 740,
+      "y": 640,
+      "width": 385,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "val",
+      "label": "VALIDATION\n54,362 records",
+      "x": 1200,
+      "y": 640,
+      "width": 355,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "test",
+      "label": "TEST\n55,485 records",
+      "x": 1583,
+      "y": 640,
+      "width": 345,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "native",
+      "label": "Train-only Parquet\n2,544,979 rows",
+      "x": 265,
+      "y": 640,
+      "width": 390,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "fit",
+      "label": "Dense Visual SFT\n2 epochs · 1,272,490 updates",
+      "x": 265,
+      "y": 838,
+      "width": 445,
+      "height": 116,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "eval",
+      "label": "Final Checkpoint → Six Reference Images\nDescriptions · EOS · repetition · latency · memory\nQualitative inspection, not a benchmark score",
+      "x": 1090,
+      "y": 838,
+      "width": 1100,
+      "height": 116,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "source",
+      "to": "clean",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "clean",
+      "to": "accepted",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "accepted",
+      "to": "group",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "group",
+      "to": "train",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          740,
+          455
+        ]
+      ]
+    },
+    {
+      "from": "group",
+      "to": "val",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "group",
+      "to": "test",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "train",
+      "to": "native",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "native",
+      "to": "fit",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "fit",
+      "to": "eval",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    }
+  ],
+  "groups": [],
+  "labels": [
+    {
+      "text": "EvoMind-V · Visual Data Pipeline",
+      "x": 42,
+      "y": 52,
+      "font_size": 36,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Dataset provenance and split isolation are separate from final model-quality evaluation.",
+      "x": 42,
+      "y": 91,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Publisher-described sources: ALLaVA-4V caption / instruction (LAION + VFLAN) + supplementary examples",
+      "x": 45,
+      "y": 133,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Original image-byte groups: 645,226",
+      "x": 45,
+      "y": 500,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Only the TRAIN split enters this run.",
+      "x": 45,
+      "y": 540,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Byte-hash grouping is not semantic near-deduplication; the six evaluation images are a separate reference set, not these val/test splits.",
+      "x": 42,
+      "y": 940,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    }
+  ],
+  "panels": [
+    {
+      "x": 24,
+      "y": 160,
+      "width": 1749,
+      "height": 188,
+      "fill": "#EEF4EB",
+      "shadow": true
+    },
+    {
+      "x": 525,
+      "y": 382,
+      "width": 1248,
+      "height": 334,
+      "fill": "#FFF7DF",
+      "shadow": true
+    },
+    {
+      "x": 23,
+      "y": 757,
+      "width": 1637,
+      "height": 153,
+      "fill": "#F3EBF8",
+      "shadow": true
+    }
+  ]
+}

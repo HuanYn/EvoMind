@@ -1,0 +1,446 @@
+{
+  "title": "EvoMind-V · Single-Image Architecture",
+  "canvas": {
+    "width": 1680,
+    "height": 1080
+  },
+  "style": {
+    "font_family": "Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+    "font_size": 22,
+    "bg_color": "#FFFFFF",
+    "palette": [
+      "#19191D",
+      "#626773",
+      "#477AB5",
+      "#648C45",
+      "#8355AD",
+      "#AE812D",
+      "#BA7550",
+      "#93989D"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "image",
+      "label": "One RGB image",
+      "x": 295,
+      "y": 236,
+      "width": 455,
+      "height": 103,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "resize",
+      "label": "Resize + normalize\n256 × 256 pixels",
+      "x": 295,
+      "y": 357,
+      "width": 455,
+      "height": 103,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "patch",
+      "label": "32 × 32 patches\n8 × 8 = 64 tokens",
+      "x": 295,
+      "y": 491,
+      "width": 455,
+      "height": 103,
+      "shape": "rounded",
+      "fill": "#BDD7EC",
+      "stroke": "#477AB5",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "vit",
+      "label": "SigLIP2 vision tower\n12 layers · hidden 768\nFROZEN",
+      "x": 295,
+      "y": 636,
+      "width": 455,
+      "height": 103,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "project",
+      "label": "MLP Projector\nLayerNorm → Linear\n→ GELU → Linear\nTRAINABLE · 768 → 768 → 768",
+      "x": 295,
+      "y": 839,
+      "width": 455,
+      "height": 142,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "prompt",
+      "label": "User question + chat template\n64 image-pad positions",
+      "x": 860,
+      "y": 236,
+      "width": 422,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "token",
+      "label": "BPE Tokenizer\nText token IDs",
+      "x": 860,
+      "y": 378,
+      "width": 340,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#FFE7A1",
+      "stroke": "#AE812D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "embed",
+      "label": "Text Embedding\nFROZEN · hidden 768",
+      "x": 860,
+      "y": 519,
+      "width": 375,
+      "height": 92,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "replace",
+      "label": "Visual Token Injection\nReplace 64 image-pad embeddings",
+      "x": 860,
+      "y": 688,
+      "width": 520,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "mixed",
+      "label": "Mixed visual + text sequence\n[B, T, 768] · training T ≤ 768",
+      "x": 860,
+      "y": 870,
+      "width": 470,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "b1",
+      "label": "LLM block 1\nTRAINABLE",
+      "x": 1414,
+      "y": 236,
+      "width": 445,
+      "height": 114,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "middle",
+      "label": "LLM Blocks 2–7\nFROZEN parameters\nGradients pass through",
+      "x": 1414,
+      "y": 410,
+      "width": 445,
+      "height": 114,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "b8",
+      "label": "LLM block 8\nTRAINABLE",
+      "x": 1414,
+      "y": 587,
+      "width": 445,
+      "height": 114,
+      "shape": "rounded",
+      "fill": "#DCC8ED",
+      "stroke": "#8355AD",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "head",
+      "label": "Final RMSNorm + LM Head\nFROZEN parameters",
+      "x": 1414,
+      "y": 754,
+      "width": 445,
+      "height": 114,
+      "shape": "rounded",
+      "fill": "#DCDDDD",
+      "stroke": "#93989D",
+      "text_color": "#19191D",
+      "font_size": 22
+    },
+    {
+      "id": "loss",
+      "label": "Assistant-only CE\nIgnore prompt / image / padding",
+      "x": 1414,
+      "y": 923,
+      "width": 445,
+      "height": 114,
+      "shape": "rounded",
+      "fill": "#F5BC96",
+      "stroke": "#BA7550",
+      "text_color": "#19191D",
+      "font_size": 22
+    }
+  ],
+  "edges": [
+    {
+      "from": "image",
+      "to": "resize",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "resize",
+      "to": "patch",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "patch",
+      "to": "vit",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "vit",
+      "to": "project",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "prompt",
+      "to": "token",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "token",
+      "to": "embed",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "embed",
+      "to": "replace",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "replace",
+      "to": "mixed",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "project",
+      "to": "replace",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          565,
+          839
+        ],
+        [
+          565,
+          688
+        ]
+      ]
+    },
+    {
+      "from": "mixed",
+      "to": "b1",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true,
+      "via": [
+        [
+          1128,
+          870
+        ],
+        [
+          1128,
+          236
+        ]
+      ]
+    },
+    {
+      "from": "b1",
+      "to": "middle",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "middle",
+      "to": "b8",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "b8",
+      "to": "head",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    },
+    {
+      "from": "head",
+      "to": "loss",
+      "color": "#19191D",
+      "style": "solid",
+      "thickness": 3,
+      "arrow": true
+    }
+  ],
+  "groups": [],
+  "labels": [
+    {
+      "text": "EvoMind-V · Single-Image Architecture",
+      "x": 42,
+      "y": 52,
+      "font_size": 36,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "Frozen SigLIP2 vision tower + trainable projector + selected 768-dim CISPO text backbone.",
+      "x": 42,
+      "y": 91,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "(a) Image features",
+      "x": 45,
+      "y": 156,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "(b) Token Alignment",
+      "x": 670,
+      "y": 156,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "(c) Language Model",
+      "x": 1190,
+      "y": 156,
+      "font_size": 22,
+      "color": "#19191D",
+      "anchor": "start"
+    },
+    {
+      "text": "[B, 64, 768]",
+      "x": 325,
+      "y": 726,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Gray: frozen parameters    Purple: updated parameters / learned features",
+      "x": 45,
+      "y": 1003,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    },
+    {
+      "text": "Current training: 2 epochs · batch 4 · BF16 · LR 5e-6. No SigLIP text tower, cross-attention module or video encoder is used.",
+      "x": 42,
+      "y": 1050,
+      "font_size": 22,
+      "color": "#626773",
+      "anchor": "start"
+    }
+  ],
+  "panels": [
+    {
+      "x": 43,
+      "y": 177,
+      "width": 500,
+      "height": 757,
+      "fill": "#EDF4FA",
+      "shadow": true
+    },
+    {
+      "x": 586,
+      "y": 177,
+      "width": 550,
+      "height": 757,
+      "fill": "#FFF8E6",
+      "shadow": true
+    },
+    {
+      "x": 1168,
+      "y": 165,
+      "width": 493,
+      "height": 825,
+      "fill": "#F2EDF8",
+      "shadow": true
+    }
+  ]
+}

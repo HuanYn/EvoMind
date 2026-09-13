@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 970" width="1800" height="970" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="EvoMind-V · Visual Data Pipeline">
+  <title>EvoMind-V · Visual Data Pipeline</title><rect width="1800" height="970" fill="#FFFFFF" />
+  <defs>
+    <marker id="arrow-default" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#555555" />
+    </marker>
+    <marker id="arrow-c0" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#19191D" />
+    </marker>
+    <marker id="arrow-c1" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#626773" />
+    </marker>
+    <marker id="arrow-c2" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#477AB5" />
+    </marker>
+    <marker id="arrow-c3" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#648C45" />
+    </marker>
+    <marker id="arrow-c4" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#8355AD" />
+    </marker>
+    <marker id="arrow-c5" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#AE812D" />
+    </marker>
+    <marker id="arrow-c6" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#BA7550" />
+    </marker>
+    <marker id="arrow-c7" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#93989D" />
+    </marker>
+  <filter id="module-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#282432" flood-opacity="0.19" /></filter><filter id="panel-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#282432" flood-opacity="0.12" /></filter></defs>
+  <rect x="24" y="160" width="1749" height="188" fill="#EEF4EB" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="525" y="382" width="1248" height="334" fill="#FFF7DF" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="23" y="757" width="1637" height="153" fill="#F3EBF8" rx="24" stroke="none" filter="url(#panel-shadow)" /><path d="M 440.5,250.0 L 517.5,250.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 952.5,250.0 L 1010.0,250.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1295.0,321.0 L 1295.0,400.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 980.0,455.0 L 740.0,455.0 L 740.0,585.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1266.8,510.0 L 1228.2,585.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1380.6,510.0 L 1497.4,585.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 547.5,640.0 L 460.0,640.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 265.0,695.0 L 265.0,780.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 487.5,838.0 L 540.0,838.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <rect x="45.5" y="179.0" width="395.0" height="142.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-source" filter="url(#module-shadow)" />
+  <text x="243.0" y="231.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="source" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">minimind-v_dataset</text>
+  <text x="243.0" y="258.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="source" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">sft_i2t.parquet</text>
+  <text x="243.0" y="285.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="source" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">2,904,511 source records</text>
+  <rect x="517.5" y="179.0" width="435.0" height="142.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-clean" filter="url(#module-shadow)" />
+  <text x="735.0" y="231.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="clean" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Validate &amp; Filter</text>
+  <text x="735.0" y="258.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="clean" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Images · roles · visual markers</text>
+  <text x="735.0" y="285.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="clean" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Require supervised answer</text>
+  <rect x="1010.0" y="179.0" width="570.0" height="142.0" fill="#DEEDCE" stroke="none" stroke-width="2" rx="14" id="node-accepted" filter="url(#module-shadow)" />
+  <text x="1295.0" y="244.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="accepted" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">2,654,826 accepted records</text>
+  <text x="1295.0" y="271.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="accepted" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">249,685 rejected</text>
+  <rect x="980.0" y="400.0" width="630.0" height="110.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-group" filter="url(#module-shadow)" />
+  <text x="1295.0" y="449.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="group" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Image-Level Split</text>
+  <text x="1295.0" y="476.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="group" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Group by original image-byte SHA256</text>
+  <rect x="547.5" y="585.0" width="385.0" height="110.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-train" filter="url(#module-shadow)" />
+  <text x="740.0" y="634.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="train" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">TRAIN</text>
+  <text x="740.0" y="661.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="train" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">2,544,979 records</text>
+  <rect x="1022.5" y="585.0" width="355.0" height="110.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-val" filter="url(#module-shadow)" />
+  <text x="1200.0" y="634.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="val" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">VALIDATION</text>
+  <text x="1200.0" y="661.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="val" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">54,362 records</text>
+  <rect x="1410.5" y="585.0" width="345.0" height="110.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-test" filter="url(#module-shadow)" />
+  <text x="1583.0" y="634.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="test" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">TEST</text>
+  <text x="1583.0" y="661.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="test" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">55,485 records</text>
+  <rect x="70.0" y="585.0" width="390.0" height="110.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-native" filter="url(#module-shadow)" />
+  <text x="265.0" y="634.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="native" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Train-only Parquet</text>
+  <text x="265.0" y="661.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="native" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">2,544,979 rows</text>
+  <rect x="42.5" y="780.0" width="445.0" height="116.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-fit" filter="url(#module-shadow)" />
+  <text x="265.0" y="832.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="fit" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Dense Visual SFT</text>
+  <text x="265.0" y="859.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="fit" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">2 epochs · 1,272,490 updates</text>
+  <rect x="540.0" y="780.0" width="1100.0" height="116.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-eval" filter="url(#module-shadow)" />
+  <text x="1090.0" y="819.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="eval" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Final Checkpoint → Six Reference Images</text>
+  <text x="1090.0" y="846.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="eval" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Descriptions · EOS · repetition · latency · memory</text>
+  <text x="1090.0" y="873.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="eval" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Qualitative inspection, not a benchmark score</text>
+  <text x="42.0" y="52.0" font-size="36" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">EvoMind-V · Visual Data Pipeline</text>
+  <text x="42.0" y="91.0" font-size="22" fill="#626773" text-anchor="start">Dataset provenance and split isolation are separate from final model-quality evaluation.</text>
+  <text x="45.0" y="133.0" font-size="20" fill="#626773" text-anchor="start">Publisher-described sources: ALLaVA-4V caption / instruction (LAION + VFLAN) + supplementary examples</text>
+  <text x="45.0" y="500.0" font-size="20" fill="#626773" text-anchor="start">Original image-byte groups: 645,226</text>
+  <text x="45.0" y="540.0" font-size="20" fill="#626773" text-anchor="start">Only the TRAIN split enters this run.</text>
+  <text x="42.0" y="940.0" font-size="20" fill="#626773" text-anchor="start">Byte-hash grouping is not semantic near-deduplication; the six evaluation images are a separate reference set, not these val/test splits.</text>
+</svg>

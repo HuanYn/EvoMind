@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 1080" width="1680" height="1080" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" role="img" aria-label="EvoMind-V · Single-Image Architecture">
+  <title>EvoMind-V · Single-Image Architecture</title><rect width="1680" height="1080" fill="#FFFFFF" />
+  <defs>
+    <marker id="arrow-default" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#555555" />
+    </marker>
+    <marker id="arrow-c0" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#19191D" />
+    </marker>
+    <marker id="arrow-c1" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#626773" />
+    </marker>
+    <marker id="arrow-c2" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#477AB5" />
+    </marker>
+    <marker id="arrow-c3" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#648C45" />
+    </marker>
+    <marker id="arrow-c4" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#8355AD" />
+    </marker>
+    <marker id="arrow-c5" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#AE812D" />
+    </marker>
+    <marker id="arrow-c6" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#BA7550" />
+    </marker>
+    <marker id="arrow-c7" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 14 6, 0 12, 3 6" fill="#93989D" />
+    </marker>
+  <filter id="module-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#282432" flood-opacity="0.19" /></filter><filter id="panel-shadow" x="-25%" y="-50%" width="150%" height="210%"><feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#282432" flood-opacity="0.12" /></filter></defs>
+  <rect x="43" y="177" width="500" height="757" fill="#EDF4FA" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="586" y="177" width="550" height="757" fill="#FFF8E6" rx="24" stroke="none" filter="url(#panel-shadow)" /><rect x="1168" y="165" width="493" height="825" fill="#F2EDF8" rx="24" stroke="none" filter="url(#panel-shadow)" /><path d="M 295.0,287.5 L 295.0,305.5" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 295.0,408.5 L 295.0,439.5" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 295.0,542.5 L 295.0,584.5" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 295.0,687.5 L 295.0,768.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 860.0,286.0 L 860.0,332.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 860.0,424.0 L 860.0,473.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 860.0,565.0 L 860.0,638.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 860.0,738.0 L 860.0,820.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 522.5,839.0 L 565.0,839.0 L 565.0,688.0 L 600.0,688.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1095.0,870.0 L 1128.0,870.0 L 1128.0,236.0 L 1191.5,236.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1414.0,293.0 L 1414.0,353.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1414.0,467.0 L 1414.0,530.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1414.0,644.0 L 1414.0,697.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <path d="M 1414.0,811.0 L 1414.0,866.0" stroke="#19191D" stroke-width="3" fill="none" marker-end="url(#arrow-c0)" stroke-linejoin="round" stroke-linecap="round" />
+  <rect x="67.5" y="184.5" width="455.0" height="103.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-image" filter="url(#module-shadow)" />
+  <text x="295.0" y="244.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="image" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">One RGB image</text>
+  <rect x="67.5" y="305.5" width="455.0" height="103.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-resize" filter="url(#module-shadow)" />
+  <text x="295.0" y="351.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="resize" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Resize + normalize</text>
+  <text x="295.0" y="378.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="resize" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">256 × 256 pixels</text>
+  <rect x="67.5" y="439.5" width="455.0" height="103.0" fill="#BDD7EC" stroke="none" stroke-width="2" rx="14" id="node-patch" filter="url(#module-shadow)" />
+  <text x="295.0" y="485.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="patch" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">32 × 32 patches</text>
+  <text x="295.0" y="512.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="patch" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">8 × 8 = 64 tokens</text>
+  <rect x="67.5" y="584.5" width="455.0" height="103.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-vit" filter="url(#module-shadow)" />
+  <text x="295.0" y="617.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="vit" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">SigLIP2 vision tower</text>
+  <text x="295.0" y="644.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="vit" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">12 layers · hidden 768</text>
+  <text x="295.0" y="671.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="vit" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">FROZEN</text>
+  <rect x="67.5" y="768.0" width="455.0" height="142.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-project" filter="url(#module-shadow)" />
+  <text x="295.0" y="806.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="project" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">MLP Projector</text>
+  <text x="295.0" y="833.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="project" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">LayerNorm → Linear</text>
+  <text x="295.0" y="860.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="project" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">→ GELU → Linear</text>
+  <text x="295.0" y="887.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="project" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">TRAINABLE · 768 → 768 → 768</text>
+  <rect x="649.0" y="186.0" width="422.0" height="100.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-prompt" filter="url(#module-shadow)" />
+  <text x="860.0" y="230.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="prompt" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">User question + chat template</text>
+  <text x="860.0" y="257.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="prompt" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">64 image-pad positions</text>
+  <rect x="690.0" y="332.0" width="340.0" height="92.0" fill="#FFE7A1" stroke="none" stroke-width="2" rx="14" id="node-token" filter="url(#module-shadow)" />
+  <text x="860.0" y="372.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="token" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">BPE Tokenizer</text>
+  <text x="860.0" y="399.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="token" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Text token IDs</text>
+  <rect x="672.5" y="473.0" width="375.0" height="92.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-embed" filter="url(#module-shadow)" />
+  <text x="860.0" y="513.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="embed" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Text Embedding</text>
+  <text x="860.0" y="540.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="embed" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">FROZEN · hidden 768</text>
+  <rect x="600.0" y="638.0" width="520.0" height="100.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-replace" filter="url(#module-shadow)" />
+  <text x="860.0" y="682.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="replace" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Visual Token Injection</text>
+  <text x="860.0" y="709.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="replace" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Replace 64 image-pad embeddings</text>
+  <rect x="625.0" y="820.0" width="470.0" height="100.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-mixed" filter="url(#module-shadow)" />
+  <text x="860.0" y="864.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="mixed" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Mixed visual + text sequence</text>
+  <text x="860.0" y="891.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="mixed" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">[B, T, 768] · training T ≤ 768</text>
+  <rect x="1191.5" y="179.0" width="445.0" height="114.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-b1" filter="url(#module-shadow)" />
+  <text x="1414.0" y="230.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="b1" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">LLM block 1</text>
+  <text x="1414.0" y="257.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="b1" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">TRAINABLE</text>
+  <rect x="1191.5" y="353.0" width="445.0" height="114.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-middle" filter="url(#module-shadow)" />
+  <text x="1414.0" y="391.0" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="middle" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">LLM Blocks 2–7</text>
+  <text x="1414.0" y="418.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="middle" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">FROZEN parameters</text>
+  <text x="1414.0" y="445.0" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="middle" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Gradients pass through</text>
+  <rect x="1191.5" y="530.0" width="445.0" height="114.0" fill="#DCC8ED" stroke="none" stroke-width="2" rx="14" id="node-b8" filter="url(#module-shadow)" />
+  <text x="1414.0" y="581.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="b8" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">LLM block 8</text>
+  <text x="1414.0" y="608.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="b8" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">TRAINABLE</text>
+  <rect x="1191.5" y="697.0" width="445.0" height="114.0" fill="#DCDDDD" stroke="none" stroke-width="2" rx="14" id="node-head" filter="url(#module-shadow)" />
+  <text x="1414.0" y="748.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="head" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Final RMSNorm + LM Head</text>
+  <text x="1414.0" y="775.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="head" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">FROZEN parameters</text>
+  <rect x="1191.5" y="866.0" width="445.0" height="114.0" fill="#F5BC96" stroke="none" stroke-width="2" rx="14" id="node-loss" filter="url(#module-shadow)" />
+  <text x="1414.0" y="917.5" font-size="27" fill="#19191D" text-anchor="middle" font-weight="bold" data-node="loss" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic">Assistant-only CE</text>
+  <text x="1414.0" y="944.5" font-size="20" fill="#19191D" text-anchor="middle" font-weight="normal" data-node="loss" font-family="Arial, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-style="normal">Ignore prompt / image / padding</text>
+  <text x="42.0" y="52.0" font-size="36" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">EvoMind-V · Single-Image Architecture</text>
+  <text x="42.0" y="91.0" font-size="22" fill="#626773" text-anchor="start">Frozen SigLIP2 vision tower + trainable projector + selected 768-dim CISPO text backbone.</text>
+  <text x="45.0" y="156.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(a) Image features</text>
+  <text x="670.0" y="156.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(b) Token Alignment</text>
+  <text x="1190.0" y="156.0" font-size="27" fill="#19191D" text-anchor="start" font-family="Times New Roman, Georgia, Noto Serif, serif" font-style="italic" font-weight="bold">(c) Language Model</text>
+  <text x="325.0" y="726.0" font-size="20" fill="#626773" text-anchor="start">[B, 64, 768]</text>
+  <text x="45.0" y="1003.0" font-size="20" fill="#626773" text-anchor="start">Gray: frozen parameters    Purple: updated parameters / learned features</text>
+  <text x="42.0" y="1050.0" font-size="20" fill="#626773" text-anchor="start">Current training: 2 epochs · batch 4 · BF16 · LR 5e-6. No SigLIP text tower, cross-attention module or video encoder is used.</text>
+</svg>
